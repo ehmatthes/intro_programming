@@ -19,6 +19,6 @@ On an Ubuntu system:
 
 This will open a browser, and you can click on the notebook you'd like to edit.
 
-There may be a bit more involved in a full setup, depending on which versions of Python you have on your system, but that will get you up and running. If you have any questions about getting the project running locally, drop a note in [Issue 11](), or get in touch with me directly. I can be reached by email, ehmatthes at gmail, or on twitter [@ehmatthes](https://twitter.com/ehmatthes).
+There may be a bit more involved in a full setup, depending on which versions of Python you have on your system, but that will get you up and running. If you have any questions about getting the project running locally, drop a note in [Issue 11](https://github.com/ehmatthes/intro_programming/issues/11), or get in touch with me directly. I can be reached by email, ehmatthes at gmail, or on twitter [@ehmatthes](https://twitter.com/ehmatthes).
 
 Thanks for looking!
