@@ -1,4 +1,4 @@
-A collection of IPython notebooks and learning resources for an Introduction to Programming class, focusing on Python.
+A collection of IPython Notebooks for teaching Python.
 ---
 
 Here is the [index page](http://nbviewer.ipython.org/urls/raw.github.com/ehmatthes/intro_programming/master/notebooks/intro_programming_index.ipynb), as students see the notebooks, and the [course syllabus](http://nbviewer.ipython.org/urls/raw.github.com/ehmatthes/intro_programming/master/notebooks/syllabus.ipynb).
