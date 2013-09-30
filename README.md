@@ -9,6 +9,8 @@ Goals:
 
 Contributing - Brief:
 ---
+If you would like to start contributing and aren't sure what to do, there is a list of places to start in [Issue 17](https://github.com/ehmatthes/intro_programming/issues/17).
+
 On an Ubuntu system:
 ### Clone this repository into a local directory
     $ git clone https://github.com/ehmatthes/intro_programming
