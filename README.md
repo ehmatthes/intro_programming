@@ -20,7 +20,12 @@ On an Ubuntu system:
 
 This will open a browser, and you can click on the notebook you'd like to edit.
 
-There may be a bit more involved in a full setup, depending on which versions of Python you have on your system, but that will get you up and running. If you have any questions about getting the project running locally, drop a note in [Issue 11](https://github.com/ehmatthes/intro_programming/issues/11), or get in touch with me directly. I can be reached by email, ehmatthes at gmail, or on twitter [@ehmatthes](https://twitter.com/ehmatthes).
+If you see the list of notebooks, but the notebooks are blank when you click on them, you will need a newer version of ipython and ipython-notebook. On Ubuntu 12.04, the following commands will let you work with these notebooks:
+
+    $ sudo apt-get install ipython=0.13.2-1~ubuntu12.04.1
+    $ sudo apt-get install ipython-notebook=0.13.2-1~ubuntu12.04.1
+
+There may be a bit more involved in a full setup, depending on which versions of Python you have on your system, but that should get you up and running. If you have any questions about getting the project running locally, drop a note in [Issue 11](https://github.com/ehmatthes/intro_programming/issues/11), or get in touch with me directly. I can be reached by email, ehmatthes at gmail, or on twitter [@ehmatthes](https://twitter.com/ehmatthes).
 
 Thanks for looking!
 
