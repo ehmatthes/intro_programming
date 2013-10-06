@@ -21,3 +21,8 @@ print "\nConverting links to html..."
 os.system("find ../notebooks -iname '*.html' | xargs sed -i 's/http:\/\/nbviewer.ipython.org\/urls\/raw.github.com\/ehmatthes\/intro_programming\/master\/notebooks\///g'")
 os.system("find ../notebooks -iname '*.html' | xargs sed -i 's/.ipynb/.html/g'")
 print "\nFinished converting links."
+
+# Temporary fix, until intro_programming_index renamed, and links updated.
+print "\nCopying intro_programming_index.html to index.html..."
+os.system("cp ../notebooks/intro_programming_index.html ../notebooks/index.html")
+print "\nCopied file."
