@@ -1,7 +1,7 @@
 A collection of IPython Notebooks for teaching Python.
 ---
 
-Here is the [index page](http://www.introtopython.org), as students see the notebooks, and the [course syllabus](http://www.introtopython.org/syllabus). These are all static versions of the notebooks which have been converted to html, which are hosted at [introtopython.org](http://www.introtopython.org).
+Here is the [index page](http://www.introtopython.org), as students see the notebooks, and the [course syllabus](http://www.introtopython.org/syllabus.html). These are all static versions of the notebooks which have been converted to html, which are hosted at [introtopython.org](http://www.introtopython.org).
 
 You can also view the raw notebooks using the IPython Notebook Viewer. The  [index page](http://nbviewer.ipython.org/urls/raw.github.com/ehmatthes/intro_programming/master/notebooks/intro_programming_index.ipynb) and the [course syllabus](http://nbviewer.ipython.org/urls/raw.github.com/ehmatthes/intro_programming/master/notebooks/syllabus.ipynb) look pretty much the same on both places for now, but they will start to differ.
 
