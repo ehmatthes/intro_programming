@@ -12,6 +12,8 @@ Goals:
 
 Contributing - Brief:
 ---
+I am updating the project to facilitate generating static html files from the raw notebooks. This work requires IPython version 1.1.0, which has a slightly different installation process. I will be updating the readme shortly to reflect this different process. If you are eager to get the newer version of IPython installed, feel free to drop a note in [Issue 11](https://github.com/ehmatthes/intro_programming/issues/11), or get in touch with me directly. I can be reached by email, ehmatthes at gmail, or on twitter [@ehmatthes](https://twitter.com/ehmatthes).
+
 If you would like to start contributing and aren't sure what to do, there is a list of places to start in [Issue 17](https://github.com/ehmatthes/intro_programming/issues/17).
 
 On an Ubuntu system:
