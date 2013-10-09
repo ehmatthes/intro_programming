@@ -32,6 +32,12 @@ On an Ubuntu system:
 
 This will open a browser, and you can click on the notebook you'd like to edit.
 
+If you want to create html versions of the notebooks:
+    $ cd /srv/intro_programming/intro_programming/scripts
+    $ ./create_common_html.sh
+
+After this, you should see a .html file for each .ipynb file in the `notebooks` directory. These html files are ignored by git for this project. If you want to build your own custom site based off of this project, see /scripts/modify_custom_html.sh as well.
+
 There may be a bit more involved in a full setup, depending on which versions of Python you have on your system, but that should get you up and running. If you have any questions about getting the project running locally, drop a note in [Issue 11](https://github.com/ehmatthes/intro_programming/issues/11), or get in touch with me directly. I can be reached by email, ehmatthes at gmail, or on twitter [@ehmatthes](https://twitter.com/ehmatthes).
 
 Thanks for looking!
