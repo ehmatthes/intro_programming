@@ -25,7 +25,7 @@ On an Ubuntu system:
 ### Install pandoc, if you don't already have it installed:
     $ sudo apt-get install pandoc
 ### Clone this repository:
-    $ git clone https://github/ehmatthes/intro_programming
+    $ git clone https://github.com/ehmatthes/intro_programming
 ### Open the notebooks:
     $ cd intro_programming/notebooks
     $ ipython notebook
