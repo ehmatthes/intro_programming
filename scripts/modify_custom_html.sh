@@ -23,5 +23,7 @@ if [ -e "../ignored_resources/ga_code.txt" ] ; then
     find ../notebooks -iname '*.html' | xargs sed -i "s#<\/head>#$ga_code\n<\/head>#g"
     printf "\nInserted analytics code.\n"
 else
-    printf "\nERROR - Couldn't find analytics code.\n"
+    ga_code=$(<ignored_resources/ga_code.txt)
+    find ../notebooks -iname '*.html' | xargs sed -i "s#<\/head>#$ga_code\n<\/head>#g"
+    printf "\nInserted analytics code.\n"
 fi
