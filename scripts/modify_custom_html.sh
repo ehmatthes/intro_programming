@@ -4,7 +4,11 @@
 # For now this is focused on inserting analytics code, but it will also be about
 #  adding headers, footers, and any other custom html desired.
 #
-# This is meant to be run through a post-commit-hook.
+# This is meant to work well through a post-commit-hook, although you can also
+#  run the script manually when you want a snapshot of the notebooks in html
+#  format.
+#
+# All html files are ignored by git.
 
 
 # To insert Google Analytics code,

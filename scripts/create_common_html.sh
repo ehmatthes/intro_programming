@@ -14,11 +14,15 @@
 # This is meant to make it easy for anyone to build a simple static site
 #  focused on helping people learn to use Python.
 #
-# This code is meant to work well as a pre-commit hook. That way the html files
-#  are kept up to date with the raw notebooks.
+# This code is meant to work well as a post-commit hook. That way the html files
+#  are kept up to date with the raw notebooks. However, this script can be run
+#  manually when you want an html snapshot of the notebooks.
+#
+# All html files are ignored by git.
 
 
-# Sometimes this file is run on its own, sometimes from a pre-commit hook.
+# Sometimes this file is run on its own (from this directory),
+#  sometimes from a post-commit hook (from another directory).
 #  The if structure lets it run either way.
 # This could be cleaned up, perhaps by setting the correct path to notebooks in
 #  an if clause, and then running the code.
