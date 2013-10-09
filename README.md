@@ -32,11 +32,12 @@ On an Ubuntu system:
 
 This will open a browser, and you can click on the notebook you'd like to edit.
 
-If you want to create html versions of the notebooks:
+### Creating html versions of the notebooks:
+
     $ cd /srv/intro_programming/intro_programming/scripts
     $ ./create_common_html.sh
 
-After this, you should see a .html file for each .ipynb file in the `notebooks` directory. These html files are ignored by git for this project. If you want to build your own custom site based off of this project, see /scripts/modify_custom_html.sh as well.
+After this, you should see a .html file for each .ipynb file in the `notebooks` directory. These html files are ignored by git for this project. If you want to build your own custom site based off of this project, see `/scripts/modify_custom_html.sh` as well.
 
 There may be a bit more involved in a full setup, depending on which versions of Python you have on your system, but that should get you up and running. If you have any questions about getting the project running locally, drop a note in [Issue 11](https://github.com/ehmatthes/intro_programming/issues/11), or get in touch with me directly. I can be reached by email, ehmatthes at gmail, or on twitter [@ehmatthes](https://twitter.com/ehmatthes).
 
@@ -53,7 +54,7 @@ Add a ppa that has old and new versions of Python, and use the ppa to install Py
     sudo apt-get update    
     sudo apt-get install python3.3
 
-[This is outdated - I will update this shortly with more up-to-date instructions.]
+[The rest of this is outdated - I will update this shortly with more up-to-date instructions.]
 Install the correct versions of ipython, ipython-notebook, ipython3, and ipython3-notebook:
 
     sudo apt-get install ipython=0.13.2-1~ubuntu12.04.1
