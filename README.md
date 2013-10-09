@@ -17,20 +17,22 @@ I am updating the project to facilitate generating static html files from the ra
 If you would like to start contributing and aren't sure what to do, there is a list of places to start in [Issue 17](https://github.com/ehmatthes/intro_programming/issues/17).
 
 On an Ubuntu system:
-### Clone this repository into a local directory
-    $ git clone https://github.com/ehmatthes/intro_programming
-### Install IPython Notebook
-    $ sudo apt-get install ipython-notebook
-### Open the notebooks locally:
+### Make a virtualenv with IPython for this project:
+    $ mkdir srv/intro_programming && cd intro_programming
+    $ virtualenv --distribute venv
+    $ source venv/bin/activate
+    $ pip install ipython[all]
+### Install pandoc, if you don't already have it installed:
+    $ sudo apt-get install pandoc
+### Clone this repository:
+    $ git clone https://github/ehmatthes/intro_programming
+### Open the notebooks:
     $ cd intro_programming/notebooks
     $ ipython notebook
 
 This will open a browser, and you can click on the notebook you'd like to edit.
 
 If you see the list of notebooks, but the notebooks are blank when you click on them, you will need a newer version of ipython and ipython-notebook. On Ubuntu 12.04, the following commands will let you work with these notebooks:
-
-    $ sudo apt-get install ipython=0.13.2-1~ubuntu12.04.1
-    $ sudo apt-get install ipython-notebook=0.13.2-1~ubuntu12.04.1
 
 There may be a bit more involved in a full setup, depending on which versions of Python you have on your system, but that should get you up and running. If you have any questions about getting the project running locally, drop a note in [Issue 11](https://github.com/ehmatthes/intro_programming/issues/11), or get in touch with me directly. I can be reached by email, ehmatthes at gmail, or on twitter [@ehmatthes](https://twitter.com/ehmatthes).
 
@@ -47,6 +49,7 @@ Add a ppa that has old and new versions of Python, and use the ppa to install Py
     sudo apt-get update    
     sudo apt-get install python3.3
 
+[This is outdated - I will update this shortly with more up-to-date instructions.]
 Install the correct versions of ipython, ipython-notebook, ipython3, and ipython3-notebook:
 
     sudo apt-get install ipython=0.13.2-1~ubuntu12.04.1
