@@ -33,44 +33,49 @@ if [ -e ../notebooks ] ; then
     # Must be running directly, use ../notebooks path.
     printf "\nUsing ../notebooks path.\n"
 
+    # Remove old html files.
+    printf "\nRemoving old html files..."
+    rm ../notebooks/*.html
+    printf "\n  Removed files."
+
     # Convert raw .ipynb files to raw .html files.
     printf "\nConverting raw .ipynb files to raw .html files..."
     cd ../notebooks && ipython nbconvert *.ipynb
-    printf "\nFinished converting files.\n"
+    printf "\n  Converted files.\n"
 
     # Go through each html file, changing all internal links so they point to these
     #  raw html files, rather than IPython Notebook Viewer files.
     printf "\nConverting internal links to point to html files..."
     find ../notebooks -iname '*.html' | xargs sed -i 's/http:\/\/nbviewer.ipython.org\/urls\/raw.github.com\/ehmatthes\/intro_programming\/master\/notebooks\///g'
     find ../notebooks -iname '*.html' | xargs sed -i 's/.ipynb/.html/g'
-    printf "\nFinished converting links.\n"
-
-    # Temporary fix, until intro_programming_index renamed, and links updated.
-    printf "\nCopying intro_programming_index.html to index.html..."
-    cp ../notebooks/intro_programming_index.html ../notebooks/index.html
-    printf "\nCopied file.\n"
+    printf "\n  Converted links.\n"
 
 else
 
-    # Must be running from a pre-commit hook, which has a different path
+    # Must be running from a post-commit hook, which has a different path
     #  to the notebooks directory for some commands.
     printf "\nUsing notebooks path.\n"
+
+    # Remove old html versions
+    printf "\nRemoving old html files..."
+    rm notebooks/*.html
+    printf "\n  Removed files.\n."
 
     # Convert raw .ipynb files to raw .html files.
     printf "\nConverting raw .ipynb files to raw .html files..."
     cd notebooks && ipython nbconvert *.ipynb
-    printf "\nFinished converting files.\n"
+    printf "\n  Converted files.\n"
 
     # Go through each html file, changing all internal links so they point to these
     #  raw html files, rather than IPython Notebook Viewer files.
     printf "\nConverting internal links to point to html files..."
     find ../notebooks -iname '*.html' | xargs sed -i 's/http:\/\/nbviewer.ipython.org\/urls\/raw.github.com\/ehmatthes\/intro_programming\/master\/notebooks\///g'
     find ../notebooks -iname '*.html' | xargs sed -i 's/.ipynb/.html/g'
-    printf "\nFinished converting links.\n"
+    printf "\n  Converted links.\n"
 
     # Temporary fix, until intro_programming_index renamed, and links updated.
     printf "\nCopying intro_programming_index.html to index.html..."
     cp ../notebooks/intro_programming_index.html ../notebooks/index.html
-    printf "\nCopied file.\n"
+    printf "\n  Copied file.\n"
 
 fi
