@@ -73,9 +73,4 @@ else
     find ../notebooks -iname '*.html' | xargs sed -i 's/.ipynb/.html/g'
     printf "\n  Converted links.\n"
 
-    # Temporary fix, until intro_programming_index renamed, and links updated.
-    printf "\nCopying intro_programming_index.html to index.html..."
-    cp ../notebooks/intro_programming_index.html ../notebooks/index.html
-    printf "\n  Copied file.\n"
-
 fi
