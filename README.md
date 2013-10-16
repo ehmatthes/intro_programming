@@ -18,7 +18,7 @@ If you would like to start contributing and aren't sure what to do, there is a l
 
 On an Ubuntu system:
 ### Make a virtualenv with IPython for this project:
-    $ mkdir srv/intro_programming && cd intro_programming
+    $ mkdir /srv/intro_programming && cd intro_programming
     $ virtualenv --distribute venv
     $ source venv/bin/activate
     $ pip install ipython[all]
@@ -42,6 +42,13 @@ After this, you should see a .html file for each .ipynb file in the `notebooks` 
 There may be a bit more involved in a full setup, depending on which versions of Python you have on your system, but that should get you up and running. If you have any questions about getting the project running locally, drop a note in [Issue 11](https://github.com/ehmatthes/intro_programming/issues/11), or get in touch with me directly. I can be reached by email, ehmatthes at gmail, or on twitter [@ehmatthes](https://twitter.com/ehmatthes).
 
 Thanks for looking!
+
+#### Chrome spacing bug
+If you are seeing a bug when editing longer markdown cells, you may need to update your version of Chrome. There was a bug that caused extra spaces to build up behind the cursor when lines are wrapped in long markdown cells. A new version of Chrome fixed this issue. The default version of Chrome on 12.04 is 28 at this writing, so this is how I updated `chromium-browser` to version 29:
+
+    sudo add-apt-repository ppa:chromium-daily/stable
+    sudo apt-get update
+    sudo apt-get dist-upgrade
 
 Contributing - Detailed
 ---
