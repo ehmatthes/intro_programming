@@ -13,6 +13,18 @@ import re
 #      output ongoing
 #      final report of error links
 
+# Issues:
+#  (high priority) Should run through all html files, not just the one specified.
+#  Should check anchor tags.
+#  Should check locally, rather than deployed.
+#    Need to be serving files locally first.
+#    Start a simple server from this test to do so.
+#    Lower priority; if working deployed, should work locally.
+#  Should have option to test deployed files.
+#    Separate test, or flag for this test?
+#  Make sure file name accurately reflects what's being tested.
+
+
 filename = '/srv/projects/intro_programming/intro_programming/notebooks/index.html'
 f = open(filename, 'r')
 lines = f.readlines()
