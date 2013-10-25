@@ -27,6 +27,33 @@
 # This could be cleaned up, perhaps by setting the correct path to notebooks in
 #  an if clause, and then running the code.
 #
+
+# Arguments
+#  --full, -f
+#      The script assumes you have the css files pulled out separately,
+#        so that it can just write out basic html files.
+#      This flag makes the script write out the full html file using
+#        nbconvert. The first time you run this file, use this flag.
+#        Then pull the css into a separate folder, and run the
+#        modify_custom_html.sh script, so that it writes a header that 
+#        includes a link to your css file.
+
+for var in $@
+do
+    if [ $var == '--full' ] || [ $var == '-f' ]
+    then
+		  run_full_conversion=true
+    fi
+done
+
+if [ $run_full_conversion ]
+then
+	 printf "\nRunning full conversion to html...\n"
+else
+	 printf "\nRunning basic conversion to html...\n"
+fi
+
+
 printf "\nConverting internal links to html..."
 if [ -e ../notebooks ] ; then
 
@@ -40,7 +67,13 @@ if [ -e ../notebooks ] ; then
 
     # Convert raw .ipynb files to raw .html files.
     printf "\nConverting raw .ipynb files to raw .html files..."
-    cd ../notebooks && ipython nbconvert *.ipynb
+	 if [ $run_full_conversion ]
+		  then
+		      cd ../notebooks && ipython nbconvert *.ipynb
+		  else
+		      cd ../notebooks && ipython nbconvert --template basic *.ipynb
+	 fi
+
     printf "\n  Converted files.\n"
 
     # Go through each html file, changing all internal links so they point to these
@@ -63,7 +96,13 @@ else
 
     # Convert raw .ipynb files to raw .html files.
     printf "\nConverting raw .ipynb files to raw .html files..."
-    cd notebooks && ipython nbconvert *.ipynb
+	 if [ $run_full_conversion ]
+		  then
+		      cd notebooks && ipython nbconvert *.ipynb
+		  else
+		      cd notebooks && ipython nbconvert --template basic *.ipynb
+	 fi
+
     printf "\n  Converted files.\n"
 
     # Go through each html file, changing all internal links so they point to these
