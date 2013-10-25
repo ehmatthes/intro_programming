@@ -6,64 +6,74 @@ import signal
 from time import sleep
 
 # This test runs through all html files in /notebooks,
-#  and verifies that internal links are working.
+#  and verifies that links are working.
 
-# for html_file in html_files
-#  for line in html_file
-#   if <a href
-#    request page locally
-#     assert result 200
-#      except log page, link, result
-#      output ongoing
-#      final report of error links
+# to do
+#  check all html files
+#  check anchor tags as well
+#  accept flag to check deployed pages
+#  should I be using beautifulsoup to parse html?
 
-# Issues:
-#  (high priority) Should run through all html files, not just the one specified.
-#  Should check anchor tags.
-#  Should check locally, rather than deployed.
-#    Need to be serving files locally first.
-#    Start a simple server from this test to do so.
-#    Lower priority; if working deployed, should work locally.
-#    Local is default behavior, flag for deployed?
-#      Separate script for deployed?
-#  Should have option to test deployed files.
-#    Separate test, or flag for this test?
-#  Make sure file name accurately reflects what's being tested.
-
-# Where are the html files we want to test?
-root_dir = '/srv/projects/intro_programming/intro_programming/notebooks/'
-
-filename = 'index.html'
-f = open(root_dir + filename, 'r')
-lines = f.readlines()
-f.close()
-
-
-def get_links(line):
-    # Returns a list of links contained in a line of code
+def get_links_in_line(line):
+    # Returns a list of links contained in a line of code.
     links = []
-    link_re = '=(")(.*)(".*)'
-    p = re.compile(link_re)
 
     # Split lines so they start with links.
     #  ie, segments will be ~ ="hello_world.html">blah
+    # (misses links with single quote)
+    link_re = """=(["'])(.*)(["'].*)"""
+    p = re.compile(link_re)
     for segment in line.split('a href'):
         m = p.match(segment)
         if m:
             #print 'match: ', m.group(2)
             links.append(m.group(2))
-
     return links
 
+def get_links_in_file(root_dir, filename):
+    # Returns a list of all the links in a file.
+    f = open(root_dir + filename, 'r')
+    lines = f.readlines()
+    f.close()
 
-# Store all links to check.
-links_to_check = []
-for line in lines:
-    if 'a href' in line:
-        for link in get_links(line):
-            # Ignore anchor tags for now
-            if 'html' in link:
-                links_to_check.append(link)
+    links_to_check = []
+    for line in lines:
+        if 'a href' in line:
+            for link in get_links_in_line(line):
+                # Ignore anchor tags for now
+                if 'html' in link:
+                    links_to_check.append(link)
+    return links_to_check
+
+def check_links(filename, links, bad_links):
+    # Checks all links given, and adds bad links to bad_links.
+    print "links to check: ", links
+    for link in links:
+        print "Checking link: %s..." % link
+        #root = 'http://introtopython.org/'
+        root = 'http://localhost:8000/'
+        # External links don't need local root.
+        if 'http' in link:
+            url = link
+        else:
+            url = root + link
+        print 'checking url: ', url
+        r = requests.get(url)
+        print 'Status code: ', r.status_code
+        if r.status_code != 200:
+            bad_links[filename + '---' + link] = r.status_code
+
+
+# Location of html files
+#  Assume all files in this directory, no nesting
+root_dir = '/srv/projects/intro_programming/intro_programming/notebooks/'
+
+# Get all html filenames in this directory.
+#  Use os.walk if files end up nested.
+filenames = []
+for filename in os.listdir(root_dir):
+    if 'html' in filename:
+        filenames.append(filename)
 
 
 # Start a server locally, in the notebooks directory.
@@ -77,20 +87,14 @@ print("SLEEPING...")
 sleep(1)
 
 # Report on progress as test runs, but store bad links for final report.
-#  dict: {link: status_code}
+#  dict: {page---link: status_code}
 bad_links = {}
-print "links to check: ", links_to_check
-for link in links_to_check:
-    print "Checking link: %s..." % link
-    #root = 'http://introtopython.org/'
-    root = 'http://localhost:8000/'
-    url = root + link
-    print 'checking url: ', url
-    r = requests.get(url)
-    print 'Status code: ', r.status_code
-    if r.status_code != 200:
-        bad_links[link] = r.status_code
 
+# Check links in all files.
+#filenames = ['var_string_num.html']
+for filename in filenames:
+    links_to_check = get_links_in_file(root_dir, filename)
+    check_links(filename, links_to_check, bad_links)
 
 # Kill the server process
 os.killpg(pro.pid, signal.SIGTERM)
@@ -99,7 +103,7 @@ os.killpg(pro.pid, signal.SIGTERM)
 print "\n\n*** Bad Links ***"
 if bad_links:
     for link in bad_links:
-        print bad_links[link], link
+        print '\n', bad_links[link], link
 else:
     print "Congratulations, all links are working."
 print "\n"
