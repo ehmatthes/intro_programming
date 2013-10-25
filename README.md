@@ -73,3 +73,11 @@ Install the correct versions of ipython, ipython-notebook, ipython3, and ipython
 - The command `ipython3-notebook` should start an IPython Notebook session using Python 3.3.
 - I like to test which version of Python is being used with `print(3/2)`. If you Python 3.3 is being used, you will see `1.5`, and if Python 2.7 is being used you will see `1`.
 - Again, if you are having trouble with any of this drop a note in [Issue 11](https://github.com/ehmatthes/intro_programming/issues/11), or feel free to get in touch directly.
+
+Testing
+---
+(This part is current.) If you want to run tests on your deployed html files, you will need to install requests in your virtualenv.
+
+    pip install requests
+
+As of right now, you will also need to specify the root host where you want to run your tests.
