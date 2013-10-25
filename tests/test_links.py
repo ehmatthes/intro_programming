@@ -1,18 +1,33 @@
 import requests
 import re
-import os
-import subprocess
-import signal
+import os, subprocess, signal, sys
+from getopt import getopt
 from time import sleep
 
 # This test runs through all html files in /notebooks,
 #  and verifies that links are working.
 
 # to do
-#  check all html files
 #  check anchor tags as well
 #  accept flag to check deployed pages
 #  should I be using beautifulsoup to parse html?
+
+# Get command-line arguments
+#  -r --root: The root directory that files are served from
+#  (not yet implemented) -d --directory: The directory where files are stored locally
+#  Should clarify that this test currently pulls links from local files,
+#   but can test deployed version of files. That only makes sense
+#   if deployed version matches current local version.
+#  Should either pull links locally, and test locally, or
+#   pull from deployed site, and test deployed site.
+
+root = 'http://localhost:8000/'
+opts, args = getopt(sys.argv[1:], "r:", ["root=",])
+for opt, arg in opts:
+    if opt in ('--root', '-r'):
+        root = arg + '/'
+print "Using root: ", root
+
 
 def get_links_in_line(line):
     # Returns a list of links contained in a line of code.
@@ -50,9 +65,7 @@ def check_links(filename, links, bad_links):
     print "links to check: ", links
     for link in links:
         print "Checking link: %s..." % link
-        #root = 'http://introtopython.org/'
-        root = 'http://localhost:8000/'
-        # External links don't need local root.
+        # External links don't need our root.
         if 'http' in link:
             url = link
         else:
