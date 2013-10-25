@@ -68,13 +68,12 @@ for line in lines:
 
 # Start a server locally, in the notebooks directory.
 print "Starting server..."
-cmd = 'chdir /srv/projects/intro_programming/intro_programming/notebooks/ && '
-cmd += 'python -m SimpleHTTPServer'
+cmd = 'python -m SimpleHTTPServer'
 pro = subprocess.Popen(cmd, shell=True, preexec_fn=os.setsid)
 
 # Make sure server has a chance to start before making request.
 print("SLEEPING...")
-sleep(1)
+sleep(10)
 
 # Report on progress as test runs, but store bad links for final report.
 #  dict: {link: status_code}
@@ -93,7 +92,7 @@ for link in links_to_check:
 
 
 # Kill the server process
-os.killpg(pro.pid, signal.SIGTERM)
+os.kill(pro.pid, signal.SIGTERM)
 
 # Report on bad links.
 print "\n\n*** Bad Links ***"
