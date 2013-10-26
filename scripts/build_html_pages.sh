@@ -29,6 +29,10 @@ then
     source scripts/create_common_html.sh
     wait
 
+    # Add opening tags
+    source scripts/add_opening_tags.sh
+    wait
+
     # Insert Google Analytics code.
     source scripts/insert_google_analytics.sh
 
@@ -39,6 +43,8 @@ else
     source create_common_html.sh
     wait
 
+    # Add opening tags
+    source add_opening_tags.sh
 
     # Insert Google Analytics code.
     source insert_google_analytics.sh
