@@ -54,6 +54,10 @@ else
 fi
 
 
+# Store current path, to return to at end of script
+execution_path=$PWD
+
+
 printf "\nConverting internal links to html..."
 if [ -e ../notebooks ] ; then
 
@@ -113,3 +117,7 @@ else
     printf "\n  Converted links.\n"
 
 fi
+
+
+# Return to original directory, so calling script's working dir does not change.
+cd $execution_path
