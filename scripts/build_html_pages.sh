@@ -20,12 +20,30 @@
 # All html files are ignored by git.
 
 
-# Build basic pages.
-source create_common_html.sh
-wait
+if [ -e scripts/ ]
+
+then
+    # Probably running from a post-commit hook.
+
+    # Build basic pages.
+    source scripts/create_common_html.sh
+    wait
+
+    # Insert Google Analytics code.
+    source scripts/insert_google_analytics.sh
+
+else
+    # Probably running this script directly, from scripts/ dir.
+
+    # Build basic pages.
+    source create_common_html.sh
+    wait
 
 
-# Insert Google Analytics code.
-source insert_google_analytics.sh
+    # Insert Google Analytics code.
+    source insert_google_analytics.sh
+
+fi
+
 
 printf "\n\n"
