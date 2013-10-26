@@ -1,8 +1,23 @@
 #!/bin/bash
 
 # This script builds the entire html page.
-#  Assumes need to build from basic html, and construct
-#  custom-defined pages.
+#  Assumes need to build from basic html, and construct custom-defined pages.
+#
+# When starting out, need to run a full nbconvert, and then pull out css and js
+#  files into 'css' and 'js' directories, in the 'notebooks' dir. This is manual
+#  right now, but it would be good to automate this and create a flag such as 
+#  '--initial'.
+#
+# Starts by running 'ipython nbconver --template basic'.
+#   Then adds header sections and appropriate html page tags.
+#   Script is meant to be fairly straightforward to modify, so users can 
+#   build the static pages they care to make from the core notebooks.
+#
+# This is meant to work well through a post-commit-hook, although you can also
+#  run the script manually when you want a snapshot of the notebooks in html
+#  format.
+#
+# All html files are ignored by git.
 
 
 # Build basic pages.
@@ -10,7 +25,7 @@ source create_common_html.sh
 wait
 
 
-# Modify html
-source modify_custom_html.sh
+# Insert Google Analytics code.
+source insert_google_analytics.sh
 
 printf "\n\n"
