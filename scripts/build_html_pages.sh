@@ -33,6 +33,10 @@ then
     source scripts/add_opening_tags.sh
     wait
 
+    # Add title tag
+    source scripts/add_title.sh
+    wait
+
     # Insert Google Analytics code.
     source scripts/insert_google_analytics.sh
 
@@ -45,6 +49,11 @@ else
 
     # Add opening tags
     source add_opening_tags.sh
+    wait
+
+    # Add title tag
+    source add_title.sh
+    wait
 
     # Insert Google Analytics code.
     source insert_google_analytics.sh
