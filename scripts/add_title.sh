@@ -9,7 +9,7 @@ printf "\nAdding titles to html files..."
 
 # String right before where the title should be
 before_string='<meta charset="UTF-8">'
-title_string='<title>Introduction to Python<title>\n'
+title_string='<title>Introduction to Python<\/title>\n'
 
 if [ -e "../notebooks/" ]
 then

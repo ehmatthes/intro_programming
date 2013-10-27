@@ -37,6 +37,10 @@ then
     source scripts/add_title.sh
     wait
 
+    # Add css and js links
+    source scripts/add_css_js_links.sh
+    wait
+
     # Insert Google Analytics code.
     source scripts/insert_google_analytics.sh
 
@@ -53,6 +57,10 @@ else
 
     # Add title tag
     source add_title.sh
+    wait
+
+    # Add css and js links
+    source add_css_js_links.sh
     wait
 
     # Insert Google Analytics code.
