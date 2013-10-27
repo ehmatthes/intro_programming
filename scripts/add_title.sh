@@ -8,14 +8,14 @@
 printf "\nAdding titles to html files..."
 
 # String right before where the title should be
-before_string='<meta charset="UTF-8">'
+before_string="<meta charset='UTF-8'>\n"
 title_string='<title>Introduction to Python<\/title>\n'
 
 if [ -e "../notebooks/" ]
 then
-    find ../notebooks -iname '*.html' | xargs sed -i "s/$before_string/$before_string\n$title_string/"
+    find ../notebooks -iname '*.html' | xargs sed -i "s/$before_string/$before_string\n\n$title_string/"
 else
-    find notebooks -iname '*.html' | xargs sed -i "s/$before_string/$before_string\n$title_string/"
+    find notebooks -iname '*.html' | xargs sed -i "s/$before_string/$before_string\n\n$title_string/"
 fi
 
 printf "\nAdded titles.\n\n"

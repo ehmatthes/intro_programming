@@ -28,19 +28,15 @@ then
     # Build basic pages.
     source scripts/create_common_html.sh
     wait
-
     # Add opening tags
     source scripts/add_opening_tags.sh
     wait
-
     # Add title tag
     source scripts/add_title.sh
     wait
-
     # Add css and js links
     source scripts/add_css_js_links.sh
     wait
-
     # Insert Google Analytics code.
     source scripts/insert_google_analytics.sh
 
@@ -50,19 +46,18 @@ else
     # Build basic pages.
     source create_common_html.sh
     wait
-
     # Add opening tags
     source add_opening_tags.sh
     wait
-
     # Add title tag
     source add_title.sh
     wait
-
     # Add css and js links
     source add_css_js_links.sh
     wait
-
+    # Close head and open body
+    source close_head_open_body.sh
+    wait
     # Insert Google Analytics code.
     source insert_google_analytics.sh
 

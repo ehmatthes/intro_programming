@@ -17,9 +17,9 @@ css_js_link_string="$css_js_link_string<link rel='stylesheet' href='custom.css'>
 
 if [ -e "../notebooks/" ]
 then
-    find ../notebooks -iname '*.html' | xargs sed -i "s/$before_string/$before_string\n$css_js_link_string\n/"
+    find ../notebooks -iname '*.html' | xargs sed -i "s/$before_string/$before_string\n\n$css_js_link_string\n/"
 else
-    find notebooks -iname '*.html' | xargs sed -i "s/$before_string/$before_string\n$css_js_link_string\n/"
+    find notebooks -iname '*.html' | xargs sed -i "s/$before_string/$before_string\n\n$css_js_link_string\n/"
 fi
 
 printf "\nAdded css and js links.\n\n"

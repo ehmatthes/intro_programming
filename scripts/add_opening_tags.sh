@@ -5,7 +5,7 @@
 # opens head tag
 # meta charset tag
 
-opening_tags='<!DOCTYPE html>\n<html>\n<head>\n<meta charset="UTF-8">\n'
+opening_tags="<!DOCTYPE html>\n<html>\n<head>\n<meta charset='UTF-8'>\n"
 
 printf "\nAdding opening tags to html files..."
 
