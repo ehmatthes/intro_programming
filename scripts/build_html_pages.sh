@@ -39,6 +39,9 @@ then
     wait
     # Insert Google Analytics code.
     source scripts/insert_google_analytics.sh
+    wait
+    # Close body and html tags.
+    source scripts/close_body_html.sh
 
 else
     # Probably running this script directly, from scripts/ dir.
@@ -60,6 +63,9 @@ else
     wait
     # Insert Google Analytics code.
     source insert_google_analytics.sh
+    wait
+    # Close body and html tags.
+    source close_body_html.sh
 
 fi
 
