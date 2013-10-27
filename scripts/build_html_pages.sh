@@ -37,6 +37,9 @@ then
     # Add css and js links
     source scripts/add_css_js_links.sh
     wait
+    # Close head and open body
+    source close_head_open_body.sh
+    wait
     # Insert Google Analytics code.
     source scripts/insert_google_analytics.sh
     wait
