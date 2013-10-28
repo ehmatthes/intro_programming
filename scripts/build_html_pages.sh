@@ -40,13 +40,13 @@ then
     # Close head and open body
     source scripts/close_head_open_body.sh
     wait
-    # Insert Google Analytics code.
-    source scripts/insert_google_analytics.sh
-    wait
     # Close body and html tags.
     source scripts/close_body_html.sh
     # Add bootstrap.
     source scripts/add_bootstrap.sh
+    wait
+    # Insert Google Analytics code.
+    source scripts/insert_google_analytics.sh
 
 else
     # Probably running this script directly, from scripts/ dir.
@@ -66,14 +66,14 @@ else
     # Close head and open body
     source close_head_open_body.sh
     wait
-    # Insert Google Analytics code.
-    source insert_google_analytics.sh
-    wait
     # Close body and html tags.
     source close_body_html.sh
     wait
     # Add bootstrap.
     source add_bootstrap.sh
+    wait
+    # Insert Google Analytics code.
+    source insert_google_analytics.sh
    
 
 fi

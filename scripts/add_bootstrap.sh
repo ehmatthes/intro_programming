@@ -26,7 +26,7 @@ fi
 printf "\nAdded link to bootsrap resources."
 
 
-
+# ----- Add overall bootstrap container to page -----
 printf "\nAdding bootstrap to html files..."
 
 # String right before where the new element should go.
