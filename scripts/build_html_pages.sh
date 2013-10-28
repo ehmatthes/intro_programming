@@ -45,6 +45,8 @@ then
     wait
     # Close body and html tags.
     source scripts/close_body_html.sh
+    # Add bootstrap.
+    source scripts/add_bootstrap.sh
 
 else
     # Probably running this script directly, from scripts/ dir.
@@ -69,6 +71,10 @@ else
     wait
     # Close body and html tags.
     source close_body_html.sh
+    wait
+    # Add bootstrap.
+    source add_bootstrap.sh
+   
 
 fi
 
