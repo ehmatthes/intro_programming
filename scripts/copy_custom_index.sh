@@ -8,7 +8,7 @@ if [ -e "../notebooks/" ]
 then
 	 cp ../ignored_resources/index.html ../notebooks/index.html
 else
-	 cp ../ignored_resources/index.html index.html
+	 cp ignored_resources/index.html index.html
 fi
 
 if [ $? == 0 ]
