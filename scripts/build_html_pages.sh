@@ -45,8 +45,16 @@ then
     # Add bootstrap.
     source scripts/add_bootstrap.sh
     wait
+
+	 # If custom index file exists, overwrite index just created.
+	 source scripts/copy_custom_index.sh
+	 wait
+
     # Insert Google Analytics code.
+	 #  This should happen last, so that ga code is just before
+	 #  closing head tag.
     source scripts/insert_google_analytics.sh
+	 wait
 
 else
     # Probably running this script directly, from scripts/ dir.
@@ -72,9 +80,16 @@ else
     # Add bootstrap.
     source add_bootstrap.sh
     wait
+
+	 # If custom index file exists, overwrite index just created.
+	 source copy_custom_index.sh
+	 wait
+
     # Insert Google Analytics code.
+	 #  This should happen last, so that ga code is just before
+	 #  closing head tag.
     source insert_google_analytics.sh
-   
+	 wait
 
 fi
 
