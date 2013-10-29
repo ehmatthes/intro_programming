@@ -11,7 +11,7 @@ after_string="<\/head>"
 # String that should be added in.
 new_string="<link href='css\/bootstrap.css' rel='stylesheet' media='screen'>\n"
 #new_string+="<link href='jumbotron-narrow.css' rel='stylesheet'>\n"
-new_string+="<link href='css\/starter-template.css' rel='stylesheet'>\n"
+new_string+="<link href='css\/non-responsive.css' rel='stylesheet'>\n"
 
 # Leaving this line in makes for responsive site, but then code blocks get mangled on mobile.
 #  May put this back in if just code blocks can be made non-responsive.
