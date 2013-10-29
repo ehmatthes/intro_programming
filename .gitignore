@@ -3,4 +3,4 @@ notes/*
 ignored_resources/*
 *.html*
 *.ipynb_checkpoints
-
+*#
