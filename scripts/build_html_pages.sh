@@ -50,6 +50,12 @@ then
 	 source scripts/copy_custom_index.sh
 	 wait
 
+	 # Customize all pages to use bootstrap
+	 printf "Customizing all styles to use bootstrap...\n"
+	 python scripts/add_bootstrap.py
+	 wait
+	 printf "Customized styles.\n"
+
     # Insert Google Analytics code.
 	 #  This should happen last, so that ga code is just before
 	 #  closing head tag.
@@ -84,6 +90,12 @@ else
 	 # If custom index file exists, overwrite index just created.
 	 source copy_custom_index.sh
 	 wait
+
+	 # Customize all pages to use bootstrap
+	 printf "Customizing all styles to use bootstrap...\n"
+	 python add_bootstrap.py
+	 wait
+	 printf "Customized styles.\n"
 
     # Insert Google Analytics code.
 	 #  This should happen last, so that ga code is just before

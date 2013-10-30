@@ -31,7 +31,6 @@ for line in lines:
         in_navbar = False
         break
 
-#print navbar_string
 
 final_js_string = """
     <!-- Bootstrap core JavaScript
@@ -46,62 +45,28 @@ final_js_string = """
 path_to_notebooks = '/srv/projects/intro_programming/intro_programming/notebooks/'
 filenames = []
 for filename in os.listdir(path_to_notebooks):
-    if '.html' in filename:
+    if '.html' in filename and filename != 'index.html':
         filenames.append(filename)
 
-
-
-
 # Insert navbar into each file, right after opening body tag.
-#  How deal with newlines in this???
-filename = '/srv/projects/intro_programming/intro_programming/notebooks/hello_world.html'
-cmd = "sed -i s/%s/%s%s/ %s" % ('<body>', '<body>\n', navbar_string, filename)
-#print cmd
+for filename in filenames:
 
-f = open(filename, 'r')
-lines = f.readlines()
-f.close()
+    f = open(path_to_notebooks + filename, 'r')
+    lines = f.readlines()
+    f.close()
 
-f = open(filename, 'wb')
-for line in lines: 
-   if '<body>' in line:
-        f.write(line)
-        f.write(navbar_string)
-        f.write("\n\n\n\n")
-        #print "--- WRITING NAVBAR LINE ---"
-   elif '</body>' in line:
-       f.write(final_js_string)
-       f.write(line)
-       #print "--- WRITING FINAL JS STRING ---"
-   else:
-        f.write(line)
-        #print "writing hello line..."
-
-f.close()
-
-
-
-
-sys.exit()
-
-
-
-
-
-
-
-
-
-
-
-
-filename = 'hello_world.html'
-
-f = open(path_to_notebooks + filename, 'r')
-lines = f.readlines()
-f.close()
-
-f = open(path_to_notebooks, 'wb')
+    f = open(path_to_notebooks + filename, 'wb')
+    for line in lines: 
+       if '<body>' in line:
+            f.write(line)
+            f.write(navbar_string)
+            f.write("\n\n")
+       elif '</body>' in line:
+           f.write(final_js_string)
+           f.write(line)
+       else:
+            f.write(line)
+    f.close()
 
 
 
