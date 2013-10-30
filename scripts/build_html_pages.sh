@@ -8,7 +8,7 @@
 #  right now, but it would be good to automate this and create a flag such as 
 #  '--initial'.
 #
-# Starts by running 'ipython nbconver --template basic'.
+# Starts by running 'ipython nbconvert --template basic'.
 #   Then adds header sections and appropriate html page tags.
 #   Script is meant to be fairly straightforward to modify, so users can 
 #   build the static pages they care to make from the core notebooks.

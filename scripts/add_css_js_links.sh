@@ -9,6 +9,7 @@ printf "\nAdding css and js links to html files..."
 before_string='<\/title>'
 
 css_js_link_string="<link rel='stylesheet' href='css\/nbconvert_styles.css'>\n"
+css_js_link_string="$css_js_link_string<link rel='stylesheet' href='css\/nb_overrides.css'>\n"
 css_js_link_string="$css_js_link_string<script type='text\/javascript' src='js\/nbconvert_js.js'><\/script>\n"
 
 # Not using this at this point, just leads to unfound resource.

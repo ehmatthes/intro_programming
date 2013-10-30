@@ -2,3 +2,13 @@ pre {
     border: 0px solid #999;
     background-color: #f7f7f7;
 }
+
+ul.navbar-nav {
+    border: 0px solid #333;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+.navbar-default .navbar-nav > .active > a {
+    background-color: #f8f8f8;
+}
