@@ -1,14 +1,25 @@
+/* Prevent double-highlighting of code cells. */
 pre {
     border: 0px solid #999;
     background-color: #f7f7f7;
 }
 
+/* Probably unnecessary; was helping highlight active elements. */
 ul.navbar-nav {
     border: 0px solid #333;
     padding-top: 7px;
     padding-bottom: 7px;
 }
 
+/* Disable highlighting of navbar elements for active sections. */
 .navbar-default .navbar-nav > .active > a {
     background-color: #f8f8f8;
 }
+
+/* For now, I like the fixed navbar. Will re-evaluate.
+/* Don't fix the navbar to the top of the screen.
+.navbar.navbar-default.navbar-fixed-top {
+    position: static;
+    margin-top: -70px;
+}
+*/
