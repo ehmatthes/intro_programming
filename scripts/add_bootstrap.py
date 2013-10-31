@@ -6,7 +6,7 @@ import subprocess
 import sys
 
 # Pull out navbar from custom index.html page
-f = open('/srv/projects/intro_programming/intro_programming/ignored_resources/index.html', 'r')
+f = open('/srv/projects/intro_programming/intro_programming/html_resources/index.html', 'r')
 lines = f.readlines()
 f.close()
 

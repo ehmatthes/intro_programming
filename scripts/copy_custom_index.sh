@@ -6,9 +6,9 @@ printf "\nCopying custom index.html page..."
 
 if [ -e "../notebooks/" ]
 then
-	 cp ../ignored_resources/index.html ../notebooks/index.html
+	 cp ../html_resources/index.html ../notebooks/index.html
 else
-	 cp ignored_resources/index.html notebooks/index.html
+	 cp html_resources/index.html notebooks/index.html
 fi
 
 if [ $? == 0 ]
