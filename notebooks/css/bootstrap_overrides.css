@@ -23,3 +23,10 @@ ul.navbar-nav {
     margin-top: -70px;
 }
 */
+
+/* a sub-hero unit, for sections lower on the page */
+.my_hero_unit_2 {
+	 padding: 15px;
+	 border: 0px solid #333;
+	 margin-bottom: 15px;
+}
