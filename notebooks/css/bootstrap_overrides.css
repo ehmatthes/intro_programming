@@ -47,3 +47,16 @@ hr {
     margin-bottom: 5px;
     border-top: 1px solid #999;
 }
+
+.section_button {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    width: 400px;
+}
+
+.btn_home_action {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-size: 14px;
+    width: 200px;
+}
