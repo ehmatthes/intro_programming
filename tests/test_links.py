@@ -35,8 +35,7 @@ def get_links_in_line(line):
 
     # Split lines so they start with links.
     #  ie, segments will be ~ ="hello_world.html">blah
-    # (misses links with single quote)
-    link_re = """=(["'])(.*)(["'].*)"""
+    link_re = """=(["'])(.*?)(["'].*)"""
     p = re.compile(link_re)
     for segment in line.split('a href'):
         m = p.match(segment)
