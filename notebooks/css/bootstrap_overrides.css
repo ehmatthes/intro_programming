@@ -24,9 +24,26 @@ ul.navbar-nav {
 }
 */
 
+/* --- INDEX PAGE STYLES --- */
 /* a sub-hero unit, for sections lower on the page */
 .my_hero_unit_2 {
 	 padding: 15px;
+     padding-bottom: 5px;
 	 border: 0px solid #333;
-	 margin-bottom: 15px;
+	 margin-bottom: 10px;
+}
+
+/* Headers for the main sections on the index page. */
+.section_label {
+	 font-size: 24px;
+}
+
+p.lead {
+    margin-bottom: 0px;
+}
+
+hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-top: 1px solid #999;
 }
