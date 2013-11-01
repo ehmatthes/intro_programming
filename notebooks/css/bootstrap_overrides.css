@@ -60,3 +60,9 @@ hr {
     font-size: 14px;
     width: 200px;
 }
+
+.dropdown-menu .divider {
+    margin-left: 10px;
+    margin-right: 10px;
+    border-bottom: 1px solid #ddd;
+}
