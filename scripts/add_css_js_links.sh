@@ -12,6 +12,9 @@ before_string='<\/title>'
 css_js_link_string="<link rel='stylesheet' href='css\/nbconvert_styles.css'>\n"
 css_js_link_string="$css_js_link_string<link rel='stylesheet' href='css\/nb_overrides.css'>\n"
 
+# custom site styles
+css_js_link_string="$css_js_link_string<link rel='stylesheet' href='css\/site_styles.css'>\n"
+
 # jquery, included here rather than at end of page ala bootstrap,
 #  so I can access it for toggling elements.
 css_js_link_string="$css_js_link_string<script src='js\/jquery.js'><\/script>"
