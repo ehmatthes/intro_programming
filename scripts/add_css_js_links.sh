@@ -8,8 +8,16 @@ printf "\nAdding css and js links to html files..."
 # String right before where the title should be
 before_string='<\/title>'
 
+# ipynb styles, and my overrides
 css_js_link_string="<link rel='stylesheet' href='css\/nbconvert_styles.css'>\n"
 css_js_link_string="$css_js_link_string<link rel='stylesheet' href='css\/nb_overrides.css'>\n"
+
+# jquery, included here rather than at end of page ala bootstrap,
+#  so I can access it for toggling elements.
+css_js_link_string="$css_js_link_string<script src='js\/jquery.js'><\/script>"
+
+# mathjax, and ipynb js
+css_js_link_string="$css_js_link_string<script src='https:\/\/c328740.ssl.cf1.rackcdn.com\/mathjax\/latest\/MathJax.js?config=TeX-AMS_HTML' type='text\/javascript'><\/script>\n"
 css_js_link_string="$css_js_link_string<script type='text\/javascript' src='js\/nbconvert_js.js'><\/script>\n"
 
 # Not using this at this point, just leads to unfound resource.

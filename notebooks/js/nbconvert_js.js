@@ -1,5 +1,3 @@
-<script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
-<script type="text/javascript">
 init_mathjax = function() {
     if (window.MathJax) {
         // MathJax loaded
@@ -17,4 +15,3 @@ init_mathjax = function() {
     }
 }
 init_mathjax();
-</script>

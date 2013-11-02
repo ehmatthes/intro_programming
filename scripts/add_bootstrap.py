@@ -31,12 +31,13 @@ for line in lines:
         in_navbar = False
         break
 
-
+# jquery is included in the header of each page, so I can use it elsewhere
+#  ie for toggling output and exercises.
+#    <script src="js/jquery.js"></script>
 final_js_string = """
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
 """
 
@@ -49,6 +50,7 @@ for filename in os.listdir(path_to_notebooks):
         filenames.append(filename)
 
 # Insert navbar into each file, right after opening body tag.
+#  Then insert required js library at end of file.
 for filename in filenames:
 
     f = open(path_to_notebooks + filename, 'r')
