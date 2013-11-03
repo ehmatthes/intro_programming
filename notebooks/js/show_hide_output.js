@@ -14,19 +14,22 @@ $(document).ready(function(){
   });
 });
 
-
+// Show single output
 $(document).ready(function(){
-  $("button#hide_output_0").click(function(){
-    $("div#output_0").hide();
-    $("button#show_output_0").show();
-    $("button#hide_output_0").hide();
-  });
+	 $("button.show_output").click(function(){
+		  var id_num = $(this).attr('target')
+		  $("#output_"+id_num).show();
+		  $("button#show_output_"+id_num).hide();
+		  $("button#hide_output_"+id_num).show();
+	 });
 });
 
+// Hide single output
 $(document).ready(function(){
-  $("button#show_output_0").click(function(){
-    $("div#output_0").show();
-    $("button#show_output_0").hide();
-    $("button#hide_output_0").show();
-  });
+	 $("button.hide_output").click(function(){
+		  var id_num = $(this).attr('target')
+		  $("#output_"+id_num).hide();
+		  $("button#hide_output_"+id_num).hide();
+		  $("button#show_output_"+id_num).show();
+	 });
 });

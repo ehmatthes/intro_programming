@@ -20,13 +20,12 @@ for filename in os.listdir(path_to_notebooks):
 def generate_button(id_number):
     # Generate the button code to place before each div.output
     button_string =  "<div class='text-right'>\n"
-    button_string += "    <button id='show_output_%d' class='btn btn-success btn-xs show_output'>show output</button>\n" % id_number
-    button_string += "    <button id='hide_output_%d' class='btn btn-success btn-xs hide_output'>hide output</button>\n" % id_number
+    button_string += "    <button id='show_output_%d' class='btn btn-success btn-xs show_output' target='%d'>show output</button>\n" % (id_number, id_number)
+    button_string += "    <button id='hide_output_%d' class='btn btn-success btn-xs hide_output' target='%d'>hide output</button>\n" % (id_number, id_number)
     button_string += "</div>\n"
     return button_string
 
 
-replacement_num = 0
 # Find all div.output, and add an id to each.
 for filename in filenames:
 
@@ -36,6 +35,7 @@ for filename in filenames:
 
     target_string = '<div class="output '
     f = open(path_to_notebooks + filename, 'wb')
+    replacement_num = 0
     for line in lines:
         if target_string in line:
             # If this line has a div.output, add an id
