@@ -13,7 +13,18 @@ for filename in os.listdir(path_to_notebooks):
         filenames.append(filename)
 
 # Test with one simple file.
-filenames = ['hello_world.html']
+#filenames = ['hello_world.html']
+
+
+
+def generate_button(id_number):
+    # Generate the button code to place before each div.output
+    button_string =  "<div class='text-right'>\n"
+    button_string += "    <button id='show_output_%d' class='btn btn-success btn-xs show_output'>show output</button>\n" % id_number
+    button_string += "    <button id='hide_output_%d' class='btn btn-success btn-xs hide_output'>hide output</button>\n" % id_number
+    button_string += "</div>\n"
+    return button_string
+
 
 replacement_num = 0
 # Find all div.output, and add an id to each.
@@ -29,6 +40,9 @@ for filename in filenames:
         if target_string in line:
             # If this line has a div.output, add an id
             replacement_string = '<div id="output_%d" class="output ' % replacement_num
+            
+            # Add a pair of show/ hide buttons right before div.output
+            f.write(generate_button(replacement_num))
             f.write(line.replace(target_string, replacement_string))
             replacement_num += 1
         else:
