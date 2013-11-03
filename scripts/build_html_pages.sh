@@ -56,6 +56,12 @@ then
 	 wait
 	 printf "Customized styles.\n"
 
+	 # Add elements to toggle output on each page.
+	 printf "Adding ability to toggle output on each page...\n"
+	 python scripts/show_hide_output.py
+	 wait
+	 printf "Added toggling ability.\n"
+
     # Insert Google Analytics code.
 	 #  This should happen last, so that ga code is just before
 	 #  closing head tag.
@@ -96,6 +102,12 @@ else
 	 python add_bootstrap.py
 	 wait
 	 printf "Customized styles.\n"
+
+	 # Add elements to toggle output on each page.
+	 printf "Adding ability to toggle output on each page...\n"
+	 python show_hide_output.py
+	 wait
+	 printf "Added toggling ability.\n"
 
     # Insert Google Analytics code.
 	 #  This should happen last, so that ga code is just before

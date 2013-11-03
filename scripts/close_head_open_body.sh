@@ -4,8 +4,8 @@
 printf "\nAdding closing head tag and opening body tag..."
 
 # String right before where the title should be
-before_string="<script type='text\/javascript' src='js\/nbconvert_js.js'><\/script>"
-
+#before_string="<script type='text\/javascript' src='js\/nbconvert_js.js'><\/script>"
+before_string="<script type='text\/javascript' src='js\/show_hide_output.js'><\/script>"
 head_body_tags_string="<\/head>\n<body>"
 
 

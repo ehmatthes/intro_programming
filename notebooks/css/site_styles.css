@@ -1,0 +1,21 @@
+/* Styles for the overall site.
+	These styles are unrelated to bootstrap, etc. */
+
+/* --- Show/ Hide output --- */
+/* Start out with hide buttons not displayed. */
+button.hide_output {
+	 display: none;
+}
+
+button.hide_output, button.show_output {
+	 width: 100px;
+}
+
+button.show_output_all {
+	 margin-right: 10px;
+}
+
+/* Start out with output hidden. */
+div.output {
+	 display: none;
+}
