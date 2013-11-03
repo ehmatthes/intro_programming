@@ -1,17 +1,23 @@
+// Show all output
 $(document).ready(function(){
-  $("button.hide_output_all").click(function(){
-    $("div.output").hide();
-    $("button.show_output_all").show();
-    $("button.hide_output_all").hide();
-  });
+	 $("button.show_output_all").click(function(){
+		  // Make all output visible
+		  $("div.output").show();
+		  // Make sure all buttons toggled to 'hide output'
+		  $("button.show_output").hide();
+		  $("button.hide_output").show();
+	 });
 });
 
+// Hide all output
 $(document).ready(function(){
-  $("button.show_output_all").click(function(){
-    $("div.output").show();
-    $("button.show_output_all").hide();
-    $("button.hide_output_all").show();
-  });
+	 $("button.hide_output_all").click(function(){
+		  // Hide all output
+		  $("div.output").hide();
+		  // Make sure all buttons toggled to 'show output'
+		  $("button.show_output").show();
+		  $("button.hide_output").hide();
+	 });
 });
 
 // Show single output

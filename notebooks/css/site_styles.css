@@ -11,6 +11,10 @@ button.hide_output, button.show_output {
 	 width: 100px;
 }
 
+button.show_output_all {
+	 margin-right: 10px;
+}
+
 /* Start out with output hidden. */
 div.output {
 	 display: none;

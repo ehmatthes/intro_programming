@@ -25,8 +25,6 @@ css_js_link_string="$css_js_link_string<script type='text\/javascript' src='js\/
 
 # js file to show/ hide output
 css_js_link_string="$css_js_link_string<script type='text\/javascript' src='js\/show_hide_output.js'><\/script>\n"
-printf "HERE HERE HERE\n"
-printf "css_js $css_js_link_string\n"
 
 # Not using this at this point, just leads to unfound resource.
 #css_js_link_string="$css_js_link_string<!-- Custom stylesheet, it must be in the same directory as the html file -->\n"
