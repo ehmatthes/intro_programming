@@ -33,12 +33,25 @@ def generate_show_hide_all_buttons():
     button_string += "</div>\n"
     return button_string
 
+# Determine which files have output. Only add buttons to files with output.
+files_with_output = []
+for filename in filenames:
+    f = open(path_to_notebooks + filename, 'r')
+    lines = f.readlines()
+    f.close()
+
+    target_string = '<div class="output '
+    for line in lines:
+        if target_string in line:
+            files_with_output.append(filename)
+            break
+
 
 # Find all div.output, and add an id to each.
 #  Add show/ hide buttons to each output
 #  For each file, add show_all, hide_all buttons just under navbar
 #    This is after second div.container element
-for filename in filenames:
+for filename in files_with_output:
     container_number = 0
     f = open(path_to_notebooks + filename, 'r')
     lines = f.readlines()
