@@ -19,3 +19,11 @@ button.show_output_all {
 div.output {
 	 display: none;
 }
+
+
+/* Twitter button */
+div.twitter-share-button {
+	 float: right;
+	 margin-top: 14px;
+	 margin-right: -40px;
+}
