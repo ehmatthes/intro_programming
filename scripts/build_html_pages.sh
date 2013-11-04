@@ -62,6 +62,10 @@ then
 	 wait
 	 printf "Added toggling ability.\n"
 
+	 # Convert index.html links to ./
+    source scripts/convert_home_links.sh
+    wait
+
     # Insert Google Analytics code.
 	 #  This should happen last, so that ga code is just before
 	 #  closing head tag.
@@ -108,6 +112,10 @@ else
 	 python show_hide_output.py
 	 wait
 	 printf "Added toggling ability.\n"
+
+	 # Convert index.html links to ./
+    source convert_home_links.sh
+    wait
 
     # Insert Google Analytics code.
 	 #  This should happen last, so that ga code is just before
