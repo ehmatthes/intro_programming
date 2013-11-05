@@ -51,19 +51,26 @@ then
 	 wait
 
 	 # Customize all pages to use bootstrap
+     #  Also adds navbar from index to all pages
 	 printf "Customizing all styles to use bootstrap...\n"
 	 python scripts/add_bootstrap.py
 	 wait
-	 printf "Customized styles.\n"
+	 printf "Customized styles.\n\n"
 
 	 # Add elements to toggle output on each page.
 	 printf "Adding ability to toggle output on each page...\n"
 	 python scripts/show_hide_output.py
 	 wait
-	 printf "Added toggling ability.\n"
+	 printf "Added toggling ability.\n\n"
 
 	 # Convert index.html links to ./
     source scripts/convert_home_links.sh
+    wait
+
+    # Add fb button.
+    source scripts/add_facebook.sh
+    wait
+    python scripts/modify_facebook_urls.py
     wait
 
     # Insert Google Analytics code.
@@ -102,19 +109,26 @@ else
 	 wait
 
 	 # Customize all pages to use bootstrap
+     #  Also adds navbar from index to all pages
 	 printf "Customizing all styles to use bootstrap...\n"
 	 python add_bootstrap.py
 	 wait
-	 printf "Customized styles.\n"
+	 printf "Customized styles.\n\n"
 
 	 # Add elements to toggle output on each page.
 	 printf "Adding ability to toggle output on each page...\n"
 	 python show_hide_output.py
 	 wait
-	 printf "Added toggling ability.\n"
+	 printf "Added toggling ability.\n\n"
 
 	 # Convert index.html links to ./
     source convert_home_links.sh
+    wait
+
+    # Add fb button.
+    source add_facebook.sh
+    wait
+    python modify_facebook_urls.py
     wait
 
     # Insert Google Analytics code.

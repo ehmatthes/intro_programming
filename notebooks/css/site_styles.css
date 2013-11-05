@@ -27,3 +27,10 @@ div.twitter-share-button {
 	 margin-top: 14px;
 	 margin-right: -40px;
 }
+
+/* Twitter button */
+div.fb-like {
+	 float: right;
+	 margin-top: 12px;
+	 margin-right: 15px;
+}

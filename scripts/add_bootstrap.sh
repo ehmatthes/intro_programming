@@ -26,7 +26,7 @@ else
     find notebooks -iname '*.html' | xargs sed -i "s/$after_string/$new_string\n$after_string\n/"
 fi
 
-printf "\nAdded link to bootsrap resources."
+printf "\nAdded link to bootsrap resources.\n"
 
 
 # ----- Add overall bootstrap container to page -----

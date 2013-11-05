@@ -114,7 +114,7 @@ else
     printf "\nConverting internal links to point to html files..."
     find ../notebooks -iname '*.html' | xargs sed -i 's/http:\/\/nbviewer.ipython.org\/urls\/raw.github.com\/ehmatthes\/intro_programming\/master\/notebooks\///g'
     find ../notebooks -iname '*.html' | xargs sed -i 's/.ipynb/.html/g'
-    printf "\n  Converted links.\n"
+    printf "\nConverted links.\n"
 
 fi
 
