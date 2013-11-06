@@ -73,6 +73,10 @@ then
     python scripts/modify_facebook_urls.py
     wait
 
+	 # Convert image links from ipynb format to html.
+	 source scripts/convert_image_links.sh
+	 wait
+
     # Insert Google Analytics code.
 	 #  This should happen last, so that ga code is just before
 	 #  closing head tag.
@@ -130,6 +134,10 @@ else
     wait
     python modify_facebook_urls.py
     wait
+
+	 # Convert image links from ipynb format to html.
+	 source convert_image_links.sh
+	 wait
 
     # Insert Google Analytics code.
 	 #  This should happen last, so that ga code is just before
