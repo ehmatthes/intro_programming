@@ -76,8 +76,6 @@ Install the correct versions of ipython, ipython-notebook, ipython3, and ipython
 
 Testing
 ---
-(This part is current.) If you want to run tests on your deployed html files, you will need to install requests in your virtualenv.
+(This part is current.) If you want to run test whether links in the notebooks are correct, you will need to install requests in your virtualenv.
 
     pip install requests
-
-As of right now, you will also need to specify the root host where you want to run your tests.
