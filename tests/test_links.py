@@ -59,11 +59,16 @@ def get_links_in_file(root_dir, filename):
                     links_to_check.append(link)
     return links_to_check
 
-def check_links(filename, links, bad_links):
+def check_links(filename, links, bad_links, links_tested):
     # Checks all links given, and adds bad links to bad_links.
     print "links to check: ", links
     for link in links:
         print "Checking link: %s..." % link
+
+        # Only check links that haven't already been checked:
+        if link in links_tested:
+            continue
+        
         # External links don't need our root.
         if 'http' in link:
             url = link
@@ -74,7 +79,8 @@ def check_links(filename, links, bad_links):
         print 'Status code: ', r.status_code
         if r.status_code != 200:
             bad_links[filename + '---' + link] = r.status_code
-
+        else:
+            links_tested.append(link)
 
 # Location of html files
 #  Assume all files in this directory, no nesting
@@ -102,11 +108,14 @@ sleep(1)
 #  dict: {page---link: status_code}
 bad_links = {}
 
+# Only test each unique link once.
+links_tested = []
+
 # Check links in all files.
 #filenames = ['var_string_num.html']
 for filename in filenames:
     links_to_check = get_links_in_file(root_dir, filename)
-    check_links(filename, links_to_check, bad_links)
+    check_links(filename, links_to_check, bad_links, links_tested)
 
 # Kill the server process
 os.killpg(pro.pid, signal.SIGTERM)
@@ -119,3 +128,5 @@ if bad_links:
 else:
     print "Congratulations, all links are working."
 print "\n"
+
+print "Tested %d unique links." % len(links_tested)
