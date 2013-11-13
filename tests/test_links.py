@@ -110,12 +110,14 @@ bad_links = {}
 
 # Only test each unique link once.
 links_tested = []
+num_links_checked = 0
 
 # Check links in all files.
 #filenames = ['var_string_num.html']
 for filename in filenames:
     links_to_check = get_links_in_file(root_dir, filename)
     check_links(filename, links_to_check, bad_links, links_tested)
+    num_links_checked += len(links_to_check)
 
 # Kill the server process
 os.killpg(pro.pid, signal.SIGTERM)
@@ -129,4 +131,5 @@ else:
     print "Congratulations, all links are working."
 print "\n"
 
+print "Checked %d links." % num_links_checked
 print "Tested %d unique links." % len(links_tested)
