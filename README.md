@@ -71,6 +71,14 @@ This will open a browser, and you can click on the notebook you'd like to edit.
 
 After this, you should see a .html file for each .ipynb file in the `notebooks` directory. These html files are ignored by git for this project. If you want to build your own custom site based off of this project, look at the source for `/scripts/build_html_pages.sh`. It should be fairly straightforward to see how the html pages are built, and you should be able to customize your own html output.
 
+#### View your html pages
+To view your html pages, you need to start a server in the intro_programming/notebooks directory, and then access the pages locally:
+
+    $ cd /srv/intro_programming/intro_programming/notebooks
+    $ python -m SimpleHTTPServer
+
+Then go to [http://localhost:8000](http://localhost:8000), and you should see the index page. By the way, if you are using an index page with social plugins, you can see all the people who have accidentally tweeted or shared a local development version of their project. :)
+
 ### Editing Python 2.7 examples
 
 To edit the Python 2 examples in some of the notebooks, it is helpful to have a separate virtualenv that is built using Python 2.7. The steps to set up this virtualenv are identical to the steps above, except
