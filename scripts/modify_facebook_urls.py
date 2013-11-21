@@ -5,7 +5,7 @@
 import os
 import sys
 
-print "Modifying facebook urls..."
+print("Modifying facebook urls...")
 
 # Find all files to work with.
 path_to_notebooks = '/srv/projects/intro_programming/intro_programming/notebooks/'
@@ -31,12 +31,12 @@ for filename in filenames:
     for line in lines: 
        if old_fb_url in line:
             new_line = line.replace(old_fb_url, new_fb_url)
-            f.write(new_line)
+            f.write(new_line.encode('utf-8'))
        else:
-            f.write(line)
+            f.write(line.encode('utf-8'))
     f.close()
 
 
-print "Modified facebook urls.\n"
+print("Modified facebook urls.\n")
 
 

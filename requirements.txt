@@ -1,0 +1,3 @@
+ipython[all]==1.1.0
+requests==2.0.0
+matplotlib==1.3.1

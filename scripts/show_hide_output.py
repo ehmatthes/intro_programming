@@ -65,20 +65,20 @@ for filename in files_with_output:
         if "<div class='container'>" in line or '<div class="container">' in line:
             # Add show_all hide_all buttons in second container.
             container_number += 1
-            f.write(line)
+            f.write(line.encode('utf-8'))
             if container_number == 2:
-                f.write(generate_show_hide_all_buttons())
+                f.write(generate_show_hide_all_buttons().encode('utf-8'))
         elif target_string in line:
             # If this line has a div.output, add an id
             replacement_string = '<div id="output_%d" class="output ' % replacement_num
             
             # Add a pair of show/ hide buttons right before div.output
-            f.write(generate_button(replacement_num))
-            f.write(line.replace(target_string, replacement_string))
+            f.write(generate_button(replacement_num).encode('utf-8'))
+            f.write(line.replace(target_string, replacement_string).encode('utf-8'))
             replacement_num += 1
         else:
             # Otherwise, rewrite the line.
-            f.write(line)
+            f.write(line.encode('utf-8'))
 
 
 
