@@ -60,15 +60,12 @@ for filename in filenames:
     f = open(path_to_notebooks + filename, 'wb')
     for line in lines: 
        if '<body>' in line:
-            f.write(line)
-            f.write(navbar_string)
-            f.write("\n\n")
+            f.write(line.encode('utf-8'))
+            f.write(navbar_string.encode('utf-8'))
+            f.write("\n\n".encode('utf-8'))
        elif '</body>' in line:
-           f.write(final_js_string)
-           f.write(line)
+           f.write(final_js_string.encode('utf-8'))
+           f.write(line.encode('utf-8'))
        else:
-            f.write(line)
+            f.write(line.encode('utf-8'))
     f.close()
-
-
-

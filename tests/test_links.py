@@ -26,7 +26,7 @@ opts, args = getopt(sys.argv[1:], "r:", ["root=",])
 for opt, arg in opts:
     if opt in ('--root', '-r'):
         root = arg + '/'
-print "Using root: ", root
+print("Using root: ", root)
 
 
 def get_links_in_line(line):
@@ -61,9 +61,9 @@ def get_links_in_file(root_dir, filename):
 
 def check_links(filename, links, bad_links, links_tested):
     # Checks all links given, and adds bad links to bad_links.
-    print "links to check: ", links
+    print("links to check: ", links)
     for link in links:
-        print "Checking link: %s..." % link
+        print("Checking link: %s..." % link)
 
         # Only check links that haven't already been checked:
         if link in links_tested:
@@ -74,9 +74,9 @@ def check_links(filename, links, bad_links, links_tested):
             url = link
         else:
             url = root + link
-        print 'checking url: ', url
+        print('checking url: ', url)
         r = requests.get(url)
-        print 'Status code: ', r.status_code
+        print('Status code: ', r.status_code)
         if r.status_code != 200:
             bad_links[filename + '---' + link] = r.status_code
         else:
@@ -95,7 +95,7 @@ for filename in os.listdir(root_dir):
 
 
 # Start a server locally, in the notebooks directory.
-print "Starting server..."
+print("Starting server...")
 cmd = 'chdir /srv/projects/intro_programming/intro_programming/notebooks/ && '
 cmd += 'python -m SimpleHTTPServer'
 pro = subprocess.Popen(cmd, shell=True, preexec_fn=os.setsid)
@@ -123,13 +123,13 @@ for filename in filenames:
 os.killpg(pro.pid, signal.SIGTERM)
 
 # Report on bad links.
-print "\n\n*** Bad Links ***"
+print("\n\n*** Bad Links ***")
 if bad_links:
     for link in bad_links:
-        print '\n', bad_links[link], link
+        print('\n', bad_links[link], link)
 else:
-    print "Congratulations, all links are working."
-print "\n"
+    print("Congratulations, all links are working.")
+print("\n")
 
-print "Checked %d links." % num_links_checked
-print "Tested %d unique links." % len(links_tested)
+print("Checked %d links." % num_links_checked)
+print("Tested %d unique links." % len(links_tested))
