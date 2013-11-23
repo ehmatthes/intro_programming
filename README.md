@@ -5,12 +5,24 @@ Here is the [index page](http://www.introtopython.org), as students see the note
 
 You can also view the raw notebooks using the IPython Notebook Viewer ([index page](http://nbviewer.ipython.org/urls/raw.github.com/ehmatthes/intro_programming/master/notebooks/index.ipynb), [course syllabus](http://nbviewer.ipython.org/urls/raw.github.com/ehmatthes/intro_programming/master/notebooks/syllabus.ipynb)). The content is almost identical on both sites, but the [introtopython.org](http://introtopython.org) version is easier to navigate, and has some dynamic js features such as collapsible output.
 
-Goals:
+Contents
+---
+- [Goals](#goals)
+- [Contributing - Brief](#contributing)
+    - [Installing Python 3 on Ubuntu 12.04](#python3)
+    - [Make a virtualenv with IPython](#virtualenv)
+        - [Using requirements.txt](#requirements)
+        - [Without using requirements.txt](#without_requirements)
+    - [Creating html versions of the notebooks](#html)
+    - [Editing Python 2.7 examples](#python2.7)
+- [Contributing - Other](#contributing_other)
+
+<a name='goals'></a>Goals:
 ---
 - Introduce students as quickly as possible to the basics of programming, and then help them choose an interesting project that they are capable of completing.
 - Introduce best practice as early as possible, while remaining accessible to students with no background in programming at all.
 
-Contributing - Brief:
+<a name='contributing'></a>Contributing - Brief:
 ---
 Contributing to this project requires IPython version 1.1.0 or greater. These instructions are written based on setting up a development environment on Ubuntu 12.04, but they should be fairly adaptable to any modern system with a Python environment already set up. If you have any questions about getting your development environment set up for contributing to this project, please drop a note in [Issue 11](https://github.com/ehmatthes/intro_programming/issues/11), or get in touch with me directly. I can be reached by email, ehmatthes at gmail, or on twitter [@ehmatthes](https://twitter.com/ehmatthes).
 
@@ -18,7 +30,7 @@ If you would like to start contributing and aren't sure what to do, there is a l
 
 These notebooks are written primarily in Python 3. If the default Python on your system is Python 3, then you will have a simpler time contributing to the project. If you only have Python 2, you might want to consider adding Python 3 to your system. You can contribute to the project using Python 2, since there is so much overlap between the two versions of Python, especially when working on the more basic notebooks. To fully contribute to the project, you will need to have both Python 2 and Python 3 available.
 
-### Installing Python 3 on Ubuntu 12.04:
+### <a name='python3'></a>Installing Python 3 on Ubuntu 12.04:
     $ sudo apt-get install python3.2
     $ sudo apt-get install python3.2-dev
 
@@ -32,7 +44,7 @@ One of the simplest differences between Python 2 and Python 3 is integer divisio
     >>> 3/2
     1
 
-### Make a virtualenv with IPython for this project
+### <a name='virtualenv'></a>Make a virtualenv with IPython for this project
 The project includes a skeleton *requirements.txt* file to help you set up a virtualenv dedicated to this project. Using this file will install matplotlib, which is a fairly significant installation. If you want the full environment, use the *requirements.txt* file when you set up your virtualenv. If you don't want the full environment, you can set up your virtualenv manually. Both ways of setting up the project are included here.
 
 #### Install pandoc
@@ -40,7 +52,7 @@ Pandoc is used by IPython Notebook to convert from the *.ipynb* format to *.html
 
     $ sudo apt-get install pandoc
 
-#### Using *requirements.txt*:
+#### <a name='requirements'></a>Using *requirements.txt*:
     $ mkdir /srv/intro_programming && cd intro_programming
     $ virtualenv -p python3.2 venv
     $ source venv/bin/activate
@@ -49,7 +61,7 @@ Pandoc is used by IPython Notebook to convert from the *.ipynb* format to *.html
 
 This could easily fail to fully install, because there are a lot of requirements for IPython and matplotlib. If you have any questions about the installation process, [please ask](https://github.com/ehmatthes/intro_programming/issues/11). I would like to help people get set up to contribute, so I will be happy to help troubleshoot setup issues.
 
-#### Without using *requirements.txt*:
+#### <a name='without_requirements'></a>Without using *requirements.txt*:
     $ mkdir /srv/intro_programming && cd intro_programming
     $ virtualenv -p python3.2 venv
     $ source venv/bin/activate
@@ -64,7 +76,7 @@ This could easily fail to fully install, because there are a lot of requirements
 
 This will open a browser, and you can click on the notebook you'd like to edit.
 
-### Creating html versions of the notebooks:
+### <a name='html'></a>Creating html versions of the notebooks:
 
     $ cd /srv/intro_programming/intro_programming/scripts
     $ ./build_html_pages
@@ -79,7 +91,7 @@ To view your html pages, you need to start a server in the intro_programming/not
 
 Then go to [http://localhost:8000](http://localhost:8000), and you should see the index page. By the way, if you are using an index page with social plugins, you can see all the people who have accidentally tweeted or shared a local development version of their project. :)
 
-### Editing Python 2.7 examples
+### <a name='python2.7'></a>Editing Python 2.7 examples
 
 To edit the Python 2 examples in some of the notebooks, it is helpful to have a separate virtualenv that is built using Python 2.7. The steps to set up this virtualenv are identical to the steps above, except
 
@@ -102,7 +114,7 @@ If you are seeing a bug when editing longer markdown cells, you may need to upda
     sudo apt-get update
     sudo apt-get dist-upgrade
 
-Contributing - Other
+<a name='contributing_other'></a>Contributing - Other
 ---
 Ubuntu 12.04 has Python 2.7 and Python 3.2 available through the default repositories. If you want versions of Python that are not available through the default repositories, you can use the *deadsnakes* repository to install other versions:
 
