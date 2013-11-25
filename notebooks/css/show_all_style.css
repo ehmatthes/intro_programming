@@ -1,0 +1,17 @@
+/* Style sheet for pages that should start out with all output
+     displayed, such as Mapping Global Earthquake Activity. */
+
+/* --- Show/ Hide output --- */
+/* Start out with show buttons not displayed. */
+button.show_output {
+	 display: none;
+}
+
+button.hide_output {
+	 display: inline;
+}
+
+/* Start out with output shown. */
+div.output {
+	 display: inline;
+}

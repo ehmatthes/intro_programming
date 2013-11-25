@@ -39,4 +39,20 @@ else
     find notebooks -iname '*.html' | xargs sed -i "s/$before_string/$before_string\n\n$css_js_link_string\n/"
 fi
 
+
+# Add stylesheet to make output display initially on Mapping Global Earthquake Activity.
+before_string="<link rel='stylesheet' href='css\/site_styles.css'>"
+css_js_link_string="<link rel='stylesheet' href='css\/show_all_style.css'>\n"
+
+printf "\n\nbefore string: $before_string"
+
+if [ -e "../notebooks/" ]
+then
+	 echo "a"
+    sed -i "s/$before_string/$before_string\n\n$css_js_link_string\n/" "../notebooks/visualization_earthquakes.html"
+else
+	 echo "b"
+    sed -i "s/$before_string/$before_string\n\n$css_js_link_string\n/" "notebooks/visualization_earthquakes.html"
+fi
+
 printf "\nAdded css and js links.\n\n"
