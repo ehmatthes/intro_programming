@@ -53,55 +53,61 @@ Pandoc is used by IPython Notebook to convert from the *.ipynb* format to *.html
     $ sudo apt-get install pandoc
 
 #### <a name='requirements'></a>Using *requirements.txt*:
-    $ mkdir /srv/intro_programming && cd intro_programming
-    $ virtualenv -p python3.2 venv
-    $ source venv/bin/activate
-    $ git clone https://github.com/ehmatthes/intro_programming
-    $ pip install -r intro_programming/requirements.txt
+    $ mkdir /srv/intro_programming && cd /srv/intro_programming
+    /srv/intro_programming$ virtualenv -p python3.2 venv
+    /srv/intro_programming$ source venv/bin/activate
+    (venv)/srv/intro_programming$ git clone https://github.com/ehmatthes/intro_programming
+    (venv)/srv/intro_programming$ pip install -r intro_programming/requirements.txt
 
 This could easily fail to fully install, because there are a lot of requirements for IPython and matplotlib. If you have any questions about the installation process, [please ask](https://github.com/ehmatthes/intro_programming/issues/11). I would like to help people get set up to contribute, so I will be happy to help troubleshoot setup issues.
 
 #### <a name='without_requirements'></a>Without using *requirements.txt*:
-    $ mkdir /srv/intro_programming && cd intro_programming
-    $ virtualenv -p python3.2 venv
-    $ source venv/bin/activate
-    $ git clone https://github.com/ehmatthes/intro_programming
-    $ pip install ipython[all]==1.1.0 # required to access the notebooks
-    $ pip install requests==2.0.0 # required for testing links within the project
-    $ pip install matplotlib==1.3.1 # only required for some notebooks
+    $ mkdir /srv/intro_programming && cd /srv/intro_programming
+    /srv/intro_programming$ virtualenv -p python3.2 venv
+    /srv/intro_programming$ source venv/bin/activate
+    (venv)/srv/intro_programming$ git clone https://github.com/ehmatthes/intro_programming
+
+    # Required to access the notebooks:
+    (venv)/srv/intro_programming$ pip install ipython[all]==1.1.0
+
+    # Required for testing links within the project:
+    (venv)/srv/intro_programming$ pip install requests==2.0.0
+
+    # Only required for some notebooks, such as visualization_earthquakes:
+    (venv)/srv/intro_programming$ pip install matplotlib==1.3.1
 
 ### Open the notebooks:
-    $ cd intro_programming/notebooks
-    $ ipython notebook
+    (venv)/srv/intro_programming$ cd intro_programming/notebooks
+    (venv)/srv/intro_programming/intro_programming/notebooks$ ipython notebook
 
 This will open a browser, and you can click on the notebook you'd like to edit.
 
 ### <a name='html'></a>Creating html versions of the notebooks:
 
-    $ cd /srv/intro_programming/intro_programming/scripts
-    $ ./build_html_pages
+    (venv)/srv/intro_programming$ cd /intro_programming/scripts
+    (venv)/srv/intro_programming/intro_programming/scripts$ ./build_html_pages
 
 After this, you should see a .html file for each .ipynb file in the `notebooks` directory. These html files are ignored by git for this project. If you want to build your own custom site based off of this project, look at the source for `/scripts/build_html_pages.sh`. It should be fairly straightforward to see how the html pages are built, and you should be able to customize your own html output.
 
 #### View your html pages
 To view your html pages, you need to start a server in the intro_programming/notebooks directory, and then access the pages locally:
 
-    $ cd /srv/intro_programming/intro_programming/notebooks
-    $ python -m SimpleHTTPServer
+    (venv)/srv/intro_programming$ cd intro_programming/notebooks
+    (venv)/srv/intro_programming/intro_programming/notebooks$ python -m SimpleHTTPServer
 
-Then go to [http://localhost:8000](http://localhost:8000), and you should see the index page. By the way, if you are using an index page with social plugins, you can see all the people who have accidentally tweeted or shared a local development version of their project. :)
+Then go to [http://localhost:8000](http://localhost:8000), and you should see the index page. (By the way, if you are using an index page with social plugins, you can see all the people who have accidentally tweeted or shared a local development version of their project. :)
 
 ### <a name='python2.7'></a>Editing Python 2.7 examples
 
 To edit the Python 2 examples in some of the notebooks, it is helpful to have a separate virtualenv that is built using Python 2.7. The steps to set up this virtualenv are identical to the steps above, except
 
-    $ mkdir /srv/intro_programming && cd intro_programming
-    $ virtualenv -p python3.2 venv
+    $ mkdir /srv/intro_programming && cd /srv/intro_programming
+    /srv/intro_programming$ virtualenv -p python3.2 venv
 
 becomes
 
-    $ mkdir /srv/intro_programming2.7 && cd intro_programming2.7
-    $ virtualenv -p python2.7 venv
+    $ mkdir /srv/intro_programming2.7 && cd /srv/intro_programming2.7
+    /srv/intro_programming2.7$ virtualenv -p python2.7 venv
 
 There may be a bit more involved in a full setup, depending on which versions of Python you have on your system, but that should get you up and running. If you have any questions about getting the project running locally, drop a note in [Issue 11](https://github.com/ehmatthes/intro_programming/issues/11), or get in touch with me directly. I can be reached by email, ehmatthes at gmail, or on twitter [@ehmatthes](https://twitter.com/ehmatthes).
 
