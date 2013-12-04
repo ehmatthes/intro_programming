@@ -73,7 +73,10 @@ for filename in filenames:
         if '###highlight' in line:
             # Get lines to highlight, stored as a list.
             #  Lines are in a list, after the equals sign.
-            highlight_lines = ast.literal_eval(line[line.index('highlight=')+10:line.index(']')+1])
+            try:
+                highlight_lines = ast.literal_eval(line[line.index('highlight=')+10:line.index(']')+1])
+            except:
+                print(filename, lines.index(line))
             
             # We have some lines to highlight. Start tracking lines,
             #  and highlight appropriate lines.
