@@ -56,7 +56,9 @@ for filename in filenames:
                 f.write(line[:span_index].encode('utf-8'))
                 line_number += 1
                 # Next line to highlight:
-                highlight_line = highlight_lines.pop(0)
+                #  Minus 1 accounts for initial comment line ###highlight=...,
+                #  which will be removed.
+                highlight_line = highlight_lines.pop(0)-1
             elif line_number == highlight_line:
                 print('here, ln=%d, hl_act, ln==hl' % line_number)
                 # Change style so line is highlighted.
@@ -64,7 +66,7 @@ for filename in filenames:
                 f.write(line.encode('utf-8'))
                 line_number += 1
                 try:
-                    highlight_line = highlight_lines.pop(0)
+                    highlight_line = highlight_lines.pop(0)-1
                     print('popped')
                 except:
                     highlight_line = None

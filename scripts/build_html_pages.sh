@@ -77,6 +77,10 @@ then
 	 source scripts/convert_image_links.sh
 	 wait
 
+	 # Highlight lines of code.
+	 python scripts/highlight_code.py
+	 wait
+
     # Insert Google Analytics code.
 	 #  This should happen last, so that ga code is just before
 	 #  closing head tag.
@@ -137,6 +141,10 @@ else
 
 	 # Convert image links from ipynb format to html.
 	 source convert_image_links.sh
+	 wait
+
+	 # Highlight lines of code.
+	 python highlight_code.py
 	 wait
 
     # Insert Google Analytics code.
