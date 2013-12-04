@@ -60,7 +60,7 @@ for filename in filenames:
             elif line_number == highlight_line:
                 print('here, ln=%d, hl_act, ln==hl' % line_number)
                 # Change style so line is highlighted.
-
+                line = "<div class='highlighted_code_line'>%s</div>" % line
                 f.write(line.encode('utf-8'))
                 line_number += 1
                 try:
