@@ -76,7 +76,7 @@ for filename in filenames:
             try:
                 highlight_lines = ast.literal_eval(line[line.index('highlight=')+10:line.index(']')+1])
             except:
-                print(filename, lines.index(line))
+                print("Problem finding lines to highlight in %s near line %d" % (filename, lines.index(line)))
             
             # We have some lines to highlight. Start tracking lines,
             #  and highlight appropriate lines.
