@@ -26,6 +26,10 @@ for filename in filenames:
     f.close()
 
     f = open(path_to_notebooks + filename, 'wb')
+    highlight_lines = []
+    highlighting_active = False
+    # Next line to highlight:
+    highlight_line = None
     for line in lines: 
         if '###highlight' in line:
             print('here')
@@ -34,7 +38,47 @@ for filename in filenames:
             print(line[line.index('highlight=')+10:line.index(']')+1])
             highlight_lines = ast.literal_eval(line[line.index('highlight=')+10:line.index(']')+1])
             print(highlight_lines)
-        f.write(line.encode('utf-8'))
+            
+            # We have some lines to highlight. Start tracking lines,
+            #  and highlight appropriate lines.
+            line_number = 0
+            highlighting_active = True
+
+        if highlighting_active:
+            # We are in a code block, with some lines to highlight.
+            if line_number == 0:
+                # We are on the highlight line, and we don't need this entire line.
+                # sample line: <div class="highlight"><pre><span class="c">###highlight=[2,3]</span>
+                # becomes: <div class="highlight"><pre>
+                # keep until start of '<span'
+                span_index = line.index('<span')
+                print("here, ln=0, Keeping:", line[:span_index])
+                f.write(line[:span_index].encode('utf-8'))
+                line_number += 1
+                # Next line to highlight:
+                highlight_line = highlight_lines.pop(0)
+            elif line_number == highlight_line:
+                print('here, ln=%d, hl_act, ln==hl' % line_number)
+                # Change style so line is highlighted.
+
+                f.write(line.encode('utf-8'))
+                line_number += 1
+                try:
+                    highlight_line = highlight_lines.pop(0)
+                    print('popped')
+                except:
+                    highlight_line = None
+                    highlighting_active = False
+                    print('pop except')
+            else:
+                print('here, ln=%d, hl_act, ln!=hl' % line_number)
+                # Write line of code as is.
+                f.write(line.encode('utf-8'))
+                line_number += 1
+        else:
+            # Not in a code block that has highlighting,
+            #  write line as is.
+            f.write(line.encode('utf-8'))
 
 
         #if old_fb_url in line:
