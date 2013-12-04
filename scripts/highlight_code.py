@@ -32,12 +32,9 @@ for filename in filenames:
     highlight_line = None
     for line in lines: 
         if '###highlight' in line:
-            print('here')
             # Get lines to highlight, stored as a list.
             #  Lines are in a list, after the equals sign.
-            print(line[line.index('highlight=')+10:line.index(']')+1])
             highlight_lines = ast.literal_eval(line[line.index('highlight=')+10:line.index(']')+1])
-            print(highlight_lines)
             
             # We have some lines to highlight. Start tracking lines,
             #  and highlight appropriate lines.
@@ -52,7 +49,6 @@ for filename in filenames:
                 # becomes: <div class="highlight"><pre>
                 # keep until start of '<span'
                 span_index = line.index('<span')
-                print("here, ln=0, Keeping:", line[:span_index])
                 f.write(line[:span_index].encode('utf-8'))
                 line_number += 1
                 # Next line to highlight:
@@ -60,20 +56,16 @@ for filename in filenames:
                 #  which will be removed.
                 highlight_line = highlight_lines.pop(0)-1
             elif line_number == highlight_line:
-                print('here, ln=%d, hl_act, ln==hl' % line_number)
                 # Change style so line is highlighted.
                 line = "<div class='highlighted_code_line'>%s</div>" % line
                 f.write(line.encode('utf-8'))
                 line_number += 1
                 try:
                     highlight_line = highlight_lines.pop(0)-1
-                    print('popped')
                 except:
                     highlight_line = None
                     highlighting_active = False
-                    print('pop except')
             else:
-                print('here, ln=%d, hl_act, ln!=hl' % line_number)
                 # Write line of code as is.
                 f.write(line.encode('utf-8'))
                 line_number += 1
@@ -82,15 +74,6 @@ for filename in filenames:
             #  write line as is.
             f.write(line.encode('utf-8'))
 
-
-        #if old_fb_url in line:
-            #new_line = line.replace(old_fb_url, new_fb_url)
-            #f.write(new_line.encode('utf-8'))
-        #else:
-            #f.write(line.encode('utf-8'))
     f.close()
 
-
 print("Highlighted code.\n")
-
-
