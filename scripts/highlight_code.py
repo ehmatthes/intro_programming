@@ -33,7 +33,7 @@
 import os, sys
 import ast
 
-print("Highlighting code...")
+print("\nHighlighting code...")
 
 # Find all files to work with.
 #  Replace with your path.
