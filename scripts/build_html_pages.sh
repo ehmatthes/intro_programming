@@ -34,7 +34,7 @@ then
     # Add title tag
     source scripts/add_title.sh
     wait
-    # Add css and js links
+    # Add css and js links, and favicon link
     source scripts/add_css_js_links.sh
     wait
     # Close head and open body
@@ -99,7 +99,7 @@ else
     # Add title tag
     source add_title.sh
     wait
-    # Add css and js links
+    # Add css and js links, and favicon link
     source add_css_js_links.sh
     wait
     # Close head and open body

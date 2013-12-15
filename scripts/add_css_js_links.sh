@@ -1,15 +1,19 @@
 # This file adds necessary css and js links to each page.
+#  Also adds link to favicon.
 #
 # Should be the collection of links that are needed.
 
 
-printf "\nAdding css and js links to html files..."
+printf "\nAdding css and js links to html files, and favicon link..."
 
 # String right before where the title should be
 before_string='<\/title>'
 
+# favicon link
+css_js_link_string="<link rel='shortcut icon' href='images\/favicon.png'>\n\n"
+
 # ipynb styles, and my overrides
-css_js_link_string="<link rel='stylesheet' href='css\/nbconvert_styles.css'>\n"
+css_js_link_string="$css_js_link_string<link rel='stylesheet' href='css\/nbconvert_styles.css'>\n"
 css_js_link_string="$css_js_link_string<link rel='stylesheet' href='css\/nb_overrides.css'>\n"
 
 # custom site styles
