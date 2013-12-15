@@ -28,11 +28,19 @@ div.twitter-share-button {
 	 margin-right: -40px;
 }
 
-/* Twitter button */
+/* Facebook button */
 div.fb-like {
 	 float: right;
 	 margin-top: 12px;
 	 margin-right: 15px;
+}
+
+/* Twitter follow button */
+div.twitter-follow-button {
+    float: right;
+    margin-top: 14px;
+    margin-right: -335px;
+    border: solid 0px black;
 }
 
 
