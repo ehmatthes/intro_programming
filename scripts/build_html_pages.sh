@@ -28,6 +28,13 @@ then
     # Build basic pages.
     source scripts/create_common_html.sh
     wait
+
+	 # Create empty all_exercises_challenges page.
+	 touch notebooks/all_exercises_challenges.html
+	 echo "\n" > all_exercises_challenges.html
+    echo "Created empty all_exercises_challenges.html file."
+	 wait
+
     # Add opening tags
     source scripts/add_opening_tags.sh
     wait
@@ -81,6 +88,10 @@ then
 	 python scripts/highlight_code.py
 	 wait
 
+	 # Create page containing all exercises and challenges.
+	 python scripts/build_all_exercises_page.py
+	 wait
+
     # Insert Google Analytics code.
 	 #  This should happen last, so that ga code is just before
 	 #  closing head tag.
@@ -93,6 +104,13 @@ else
     # Build basic pages.
     source create_common_html.sh
     wait
+
+	 # Create empty all_exercises_challenges page.
+	 touch ../notebooks/all_exercises_challenges.html
+	 echo "Hello" > all_exercises_challenges.html
+    echo "Created empty all_exercises_challenges.html file."
+	 wait
+
     # Add opening tags
     source add_opening_tags.sh
     wait
@@ -145,6 +163,10 @@ else
 
 	 # Highlight lines of code.
 	 python highlight_code.py
+	 wait
+
+	 # Create page containing all exercises and challenges.
+	 python build_all_exercises_page.py
 	 wait
 
     # Insert Google Analytics code.
