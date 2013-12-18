@@ -32,7 +32,8 @@ then
 	 # Create empty all_exercises_challenges page.
 	 echo "Creating empty all_exercises_challenges.html file..."
 	 touch notebooks/all_exercises_challenges.html
-	 echo "\n" > notebooks/all_exercises_challenges.html
+	 # Next scripts require a non-empty file at this point.
+	 echo "<br>" > notebooks/all_exercises_challenges.html
     echo "Created empty all_exercises_challenges.html file."
 	 wait
 
@@ -109,7 +110,8 @@ else
 	 # Create empty all_exercises_challenges page.
 	 echo "Creating empty all_exercises_challenges.html file..."
 	 touch ../notebooks/all_exercises_challenges.html
-	 echo "\n" > ../notebooks/all_exercises_challenges.html
+	 # Next scripts require a non-empty file at this point.
+	 echo "<br>" > ../notebooks/all_exercises_challenges.html
     echo "Created empty all_exercises_challenges.html file."
 	 wait
 
