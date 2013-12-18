@@ -30,8 +30,9 @@ then
     wait
 
 	 # Create empty all_exercises_challenges page.
+	 echo "Creating empty all_exercises_challenges.html file..."
 	 touch notebooks/all_exercises_challenges.html
-	 echo "\n" > all_exercises_challenges.html
+	 echo "\n" > notebooks/all_exercises_challenges.html
     echo "Created empty all_exercises_challenges.html file."
 	 wait
 
@@ -106,8 +107,9 @@ else
     wait
 
 	 # Create empty all_exercises_challenges page.
+	 echo "Creating empty all_exercises_challenges.html file..."
 	 touch ../notebooks/all_exercises_challenges.html
-	 echo "Hello" > all_exercises_challenges.html
+	 echo "\n" > ../notebooks/all_exercises_challenges.html
     echo "Created empty all_exercises_challenges.html file."
 	 wait
 
