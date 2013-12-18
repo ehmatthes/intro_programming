@@ -27,8 +27,11 @@ for filename in filenames:
     lines = f.readlines()
     f.close()
 
-
-
+    for index, line in enumerate(lines):
+        # Probably need the line immediately before this!
+        if '<h2 id="exercises' in line:
+            print('line:', line)
+            print('line before:', lines[index-1])
 
 
 
@@ -47,7 +50,7 @@ for line in lines:
     if 'div' in line and 'class=' in line and 'container' in line:
         containers_found += 1
         if containers_found == 2:
-            print("containers found: %d" % containers_found)
+            f.write(html_string.encode('utf-8'))
 
         #new_line = line.replace(old_fb_url, new_fb_url)
         #f.write(new_line.encode('utf-8'))
