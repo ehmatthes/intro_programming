@@ -40,8 +40,8 @@ for filename in filenames:
             html_string += lines[index-1]
             num_open_divs = 1
 
-            print('line before:', lines[index-1])
-            print('line:', line)
+            #print('line before:', lines[index-1])
+            #print('line:', line)
 
         if in_exercises:
             # Keep adding to html_string, until matching div closed.

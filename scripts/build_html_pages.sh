@@ -90,6 +90,10 @@ then
 	 python scripts/highlight_code.py
 	 wait
 
+	 # Strip input references from code cells.
+	 python scripts/remove_input_references.py
+	 wait
+
 	 # Create page containing all exercises and challenges.
 	 python scripts/build_all_exercises_page.py
 	 wait
@@ -167,6 +171,10 @@ else
 
 	 # Highlight lines of code.
 	 python highlight_code.py
+	 wait
+
+	 # Strip input references from code cells.
+	 python remove_input_references.py
 	 wait
 
 	 # Create page containing all exercises and challenges.
