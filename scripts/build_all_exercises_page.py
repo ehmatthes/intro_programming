@@ -32,7 +32,12 @@ for filename in filenames:
         if '<h2 id="exercises' in line:
             print('line:', line)
             print('line before:', lines[index-1])
+            # Capture starting from the line before,
+            #   which opens the div for the exercises.
+            html_string += lines[index-1]
+            html_string += line
 
+            # Keep adding to html_string, until matching div closed.
 
 
 # Read in all_exercises_challenges.html
