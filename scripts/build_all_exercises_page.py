@@ -27,17 +27,40 @@ for filename in filenames:
     lines = f.readlines()
     f.close()
 
+    in_exercises = False
+    num_open_divs = 0
+    num_closed_divs = 0
     for index, line in enumerate(lines):
-        # Probably need the line immediately before this!
         if '<h2 id="exercises' in line:
-            print('line:', line)
-            print('line before:', lines[index-1])
-            # Capture starting from the line before,
-            #   which opens the div for the exercises.
+            # This is the signature of an exercise block.
+            in_exercises = True
+
+            # Capture the previous line, which opens the div for the exercises.
+            #  Current line will be captured in "if in_exercises" block.
             html_string += lines[index-1]
+            num_open_divs = 1
+
+            print('line before:', lines[index-1])
+            print('line:', line)
+
+        if in_exercises:
+            # Keep adding to html_string, until matching div closed.
+            # 1 open div now, count new opens, count new closes, 
+            # stop adding when opens == closes
+
+            # Store the current line
             html_string += line
 
-            # Keep adding to html_string, until matching div closed.
+            # Check to see if this is the last line
+            # Currently assumes only one div or closing div per line.
+            if '<div' in line:
+                num_open_divs += 1
+            if '</div' in line:
+                num_closed_divs += 1
+            if num_open_divs == num_closed_divs:
+                in_exercises = False
+                num_open_divs = 0
+                num_closed_divs = 0
 
 
 # Read in all_exercises_challenges.html
@@ -57,9 +80,6 @@ for line in lines:
         if containers_found == 2:
             f.write(html_string.encode('utf-8'))
 
-        #new_line = line.replace(old_fb_url, new_fb_url)
-        #f.write(new_line.encode('utf-8'))
-    
     # Need to write each line back to the file.
     f.write(line.encode('utf-8'))
 
