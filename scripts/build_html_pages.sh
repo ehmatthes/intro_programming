@@ -68,6 +68,12 @@ wait
 source "$prefix"close_body_html.sh
 wait
 
+# Create page containing all exercises and challenges.
+python "$prefix"build_all_exercises_page.py
+wait
+
+#exit
+
 # Add bootstrap.
 source "$prefix"add_bootstrap.sh
 wait
@@ -109,10 +115,6 @@ wait
 
 # Strip input references from code cells.
 python "$prefix"remove_input_references.py
-wait
-
-# Create page containing all exercises and challenges.
-python "$prefix"build_all_exercises_page.py
 wait
 
 # Insert Google Analytics code.
