@@ -16,7 +16,7 @@ filenames = ['var_string_num.html', 'lists_tuples.html',
              ]
 
 # one file for testing:
-filenames = ['var_string_num.html']
+#filenames = ['var_string_num.html']
 
 
 # Grab all exercises and challenges:
