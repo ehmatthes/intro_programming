@@ -33,7 +33,6 @@ for filename in filenames:
     num_closed_divs = 0
     for index, line in enumerate(lines):
         if '<h2 id="exercises' in line:
-            print("here")
             # This is the signature of an exercise block.
             in_exercises = True
 
@@ -46,8 +45,6 @@ for filename in filenames:
             #print('line:', line)
 
         if in_exercises:
-            #print("here2")
-
             # Keep adding to html_string, until matching div closed.
             # 1 open div now, count new opens, count new closes, 
             # stop adding when opens == closes
@@ -90,25 +87,3 @@ f.close()
 
 
 print("Built all_exercises_challenges.html...")
-
-sys.exit()
-
-
-# Want to start writing this after the second <div class=container>
-#  Could be "container" or 'container'?
-containers_found = 0    
-for line in lines: 
-    if 'div' in line and 'class=' in line and 'container' in line:
-        containers_found += 1
-        if containers_found == 2:
-            f.write(html_string.encode('utf-8'))
-
-    # Need to write each line back to the file.
-    f.write(line.encode('utf-8'))
-
-f.close()
-
-
-print("Built all_exercises_challenges.html...")
-
-

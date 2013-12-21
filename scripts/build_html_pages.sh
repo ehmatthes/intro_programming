@@ -69,10 +69,9 @@ source "$prefix"close_body_html.sh
 wait
 
 # Create page containing all exercises and challenges.
+#  This page needs to be created before bootstrap is added.
 python "$prefix"build_all_exercises_page.py
 wait
-
-#exit
 
 # Add bootstrap.
 source "$prefix"add_bootstrap.sh
