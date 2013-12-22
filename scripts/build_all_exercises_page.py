@@ -2,9 +2,7 @@
 #  and challenges, and copies them to the all_exercises_challenges.html
 #  page.
 
-import os
-import sys
-import re
+import os, sys, re
 
 print("Building all_exercises_challenges.html...")
 
@@ -41,11 +39,13 @@ for filename in filenames:
     num_open_divs = 0
     num_closed_divs = 0
     # Will need to keep track of section that the exercises are part of.
-    current_h1_line = ''
+    current_h1_label = ''
+
     for index, line in enumerate(lines):
         if '<h1' in line:
-            h1_label = get_h1_label(line)
-            print('h1_label:', h1_label)
+            current_h1_label = get_h1_label(line)
+            #print('current_h1_label:', current_h1_label)
+
         if '<h2 id="exercises' in line:
             #print(current_h1_line)
             # This is the signature of an exercise block.
@@ -58,6 +58,10 @@ for filename in filenames:
 
             #print('line before:', lines[index-1])
             #print('line:', line)
+
+            # Add the most recent h1 label to this line.
+            line = line.replace('Exercises', 'Exercises - %s' % current_h1_label)
+            #print("line: ", line)
 
         if in_exercises:
             # Keep adding to html_string, until matching div closed.
