@@ -25,6 +25,18 @@ def get_h1_label(line):
     if m:
         return m.group(2)
 
+def get_h1_link(filename, line):
+    # Pulls the anchor link from the h1 line, and builds a link to
+    #  the anchor on that page.
+    link_re = """(.*)(<a name=['"])(.*)(['"].*)"""
+    p = re.compile(link_re)
+    m = p.match(line)
+    if m:
+        link = "http://introtopython.org/%s#%s" % (filename, m.group(3))
+        print('link: ', link)
+        return link
+
+
 
 # Grab all exercises and challenges:
 html_string = ""
@@ -46,6 +58,8 @@ for filename in filenames:
             current_h1_label = get_h1_label(line)
             #print('current_h1_label:', current_h1_label)
 
+            get_h1_link(filename, line)
+
         if '<h2 id="exercises' in line:
             #print(current_h1_line)
             # This is the signature of an exercise block.
@@ -62,6 +76,7 @@ for filename in filenames:
             # Add the most recent h1 label to this line.
             line = line.replace('Exercises', 'Exercises - %s' % current_h1_label)
             #print("line: ", line)
+            
 
         if in_exercises:
             # Keep adding to html_string, until matching div closed.
