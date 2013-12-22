@@ -2,10 +2,9 @@
 #  and challenges, and copies them to the all_exercises_challenges.html
 #  page.
 
-
-
 import os
 import sys
+import re
 
 print("Building all_exercises_challenges.html...")
 
@@ -17,6 +16,16 @@ filenames = ['var_string_num.html', 'lists_tuples.html',
 
 # one file for testing:
 #filenames = ['var_string_num.html']
+
+
+def get_h1_label(line):
+    # Pulls the label out of an h1 header line.
+    #  This should be the label for what a set of exercises relates to.
+    label_re = "(<h1.*>)(.*)(</h1)"
+    p = re.compile(label_re)
+    m = p.match(line)
+    if m:
+        return m.group(2)
 
 
 # Grab all exercises and challenges:
@@ -31,8 +40,14 @@ for filename in filenames:
     in_exercises = False
     num_open_divs = 0
     num_closed_divs = 0
+    # Will need to keep track of section that the exercises are part of.
+    current_h1_line = ''
     for index, line in enumerate(lines):
+        if '<h1' in line:
+            h1_label = get_h1_label(line)
+            print('h1_label:', h1_label)
         if '<h2 id="exercises' in line:
+            #print(current_h1_line)
             # This is the signature of an exercise block.
             in_exercises = True
 
