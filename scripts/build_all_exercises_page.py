@@ -33,7 +33,7 @@ def get_h1_link(filename, line):
     m = p.match(line)
     if m:
         link = "http://introtopython.org/%s#%s" % (filename, m.group(3))
-        print('link: ', link)
+        #print('link: ', link)
         return link
 
 
@@ -52,13 +52,17 @@ for filename in filenames:
     num_closed_divs = 0
     # Will need to keep track of section that the exercises are part of.
     current_h1_label = ''
+    h1_label_linked = ''
 
     for index, line in enumerate(lines):
         if '<h1' in line:
             current_h1_label = get_h1_label(line)
             #print('current_h1_label:', current_h1_label)
 
-            get_h1_link(filename, line)
+            current_h1_link = get_h1_link(filename, line)
+
+            h1_label_linked = "<a href='%s'>%s</a>" % (current_h1_link, current_h1_label)
+            #print('ll:', h1_label_linked)
 
         if '<h2 id="exercises' in line:
             #print(current_h1_line)
@@ -74,8 +78,9 @@ for filename in filenames:
             #print('line:', line)
 
             # Add the most recent h1 label to this line.
-            line = line.replace('Exercises', 'Exercises - %s' % current_h1_label)
+            line = line.replace('Exercises', 'Exercises - %s' % h1_label_linked)
             #print("line: ", line)
+            #print("linked label: ", h1_label_linked)
             
 
         if in_exercises:
