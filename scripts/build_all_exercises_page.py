@@ -37,6 +37,21 @@ def get_h1_link(filename, line):
         return link
 
 
+def get_new_notebook_header(filename, lines):
+    # Pulls the page title from the notebook. It's in the first <h1>
+    #  block in each notebook.
+    for line in lines:
+        if '<h1' in line:
+            title_re = """(<h1.*>)(.*)(</h1)"""
+            p = re.compile(title_re)
+            m = p.match(line)
+            if m:
+                link = "http://introtopython.org/%s" % filename
+                header_html = '<div class="text_cell_render border-box-sizing rendered_html">\n'
+                header_html += "<h1><a href='%s'>%s</a></h1>\n" % (link, m.group(2))
+                header_html += "</div>\n"
+                #print('hh:', header_html)
+                return header_html
 
 # Grab all exercises and challenges:
 html_string = ""
@@ -53,6 +68,9 @@ for filename in filenames:
     # Will need to keep track of section that the exercises are part of.
     current_h1_label = ''
     h1_label_linked = ''
+
+    # Add a header for each notebook that has exercises.
+    html_string += get_new_notebook_header(filename, lines)
 
     for index, line in enumerate(lines):
         if '<h1' in line:
