@@ -10,6 +10,9 @@ path_to_notebooks = '/srv/projects/intro_programming/intro_programming/notebooks
 
 # Work through notebooks in the order listed here.
 filenames = ['var_string_num.html', 'lists_tuples.html',
+             'introducing_functions.html', 'if_statements.html',
+             'while_input.html', 'terminal_apps.html',
+             'dictionaries.html', 
              ]
 
 # one file for testing:
