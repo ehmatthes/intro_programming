@@ -56,8 +56,26 @@ def get_new_notebook_header(filename, lines):
                 #print('hh:', header_html)
                 return header_html
 
-# Grab all exercises and challenges:
+
+def add_intro():
+    # Add an intro to html_string, before adding any exercises.
+    intro_string  = '<div class="text_cell_render border-box-sizing rendered_html">\n'
+    intro_string += '<h1>All Exercises and Challenges</h1>'
+    intro_string += '<p>This page pulls together all of the exercises and challenges from throughout <a href="http://introtopython.org">introtopython.org</a>.</p>'
+    intro_string += '<p>Each set of exercises has a link to the relevant section that explains what you need to know to complete those exercises. If you are struggling with an exercise, try reading through the linked material, and see if it helps you solve the exercise you are working on.</p>'
+    intro_string += '<p>Exercises are short, specific tasks that ask you to apply a certain concept in a specific way. Challenges are longer, and they ask you to combine different ideas you have been working with. Challenges also ask you to be a little more creative in the programs you are starting to write.</p>'
+
+
+    intro_string += '</div>'
+
+    return intro_string
+
+
+# Grab all exercises and challenges.
+#  Start building html string.
 html_string = ""
+# Add an intro.
+html_string += add_intro()
 for filename in filenames:
 
     # Grab entire page
