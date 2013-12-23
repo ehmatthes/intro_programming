@@ -28,6 +28,7 @@ def get_h1_label(line):
     if m:
         return m.group(2)
 
+
 def get_h1_link(filename, line):
     # Pulls the anchor link from the h1 line, and builds a link to
     #  the anchor on that page.
@@ -36,7 +37,6 @@ def get_h1_link(filename, line):
     m = p.match(line)
     if m:
         link = "http://introtopython.org/%s#%s" % (filename, m.group(3))
-        #print('link: ', link)
         return link
 
 
@@ -53,7 +53,6 @@ def get_new_notebook_header(filename, lines):
                 header_html = '<div class="text_cell_render border-box-sizing rendered_html">\n'
                 header_html += "<h1><a href='%s'>%s</a></h1>\n" % (link, m.group(2))
                 header_html += "</div>\n"
-                #print('hh:', header_html)
                 return header_html
 
 
@@ -79,10 +78,6 @@ def rebuild_anchor_links(filename, line):
     if m:
         anchor_link = m.group(1)
         new_link = "http://introtopython.org/%s%s" % (filename, anchor_link)
-        print("\nline:", line.rstrip())
-        print("anchor:", anchor_link)
-        print("nl:  ", new_link)
-        print("new line:", line.replace(anchor_link, new_link))
         return line.replace(anchor_link, new_link)
     else:
         return line
@@ -119,15 +114,10 @@ for filename in filenames:
 
         if '<h1' in line:
             current_h1_label = get_h1_label(line)
-            #print('current_h1_label:', current_h1_label)
-
             current_h1_link = get_h1_link(filename, line)
-
             h1_label_linked = "<a href='%s'>%s</a>" % (current_h1_link, current_h1_label)
-            #print('ll:', h1_label_linked)
 
         if '<h2 id="exercises' in line:
-            #print(current_h1_line)
             # This is the signature of an exercise block.
             in_exercises = True
 
@@ -136,14 +126,8 @@ for filename in filenames:
             html_string += lines[index-1]
             num_open_divs = 1
 
-            #print('line before:', lines[index-1])
-            #print('line:', line)
-
             # Add the most recent h1 label to this line.
             line = line.replace('Exercises', 'Exercises - %s' % h1_label_linked)
-            #print("line: ", line)
-            #print("linked label: ", h1_label_linked)
-            
 
         if in_exercises:
             # Keep adding to html_string, until matching div closed.
@@ -163,8 +147,6 @@ for filename in filenames:
                 in_exercises = False
                 num_open_divs = 0
                 num_closed_divs = 0
-
-#print("html_string: \n%s" % html_string)
 
 # Read in all_exercises_challenges.html
 f = open(path_to_notebooks + 'all_exercises_challenges.html', 'r')
