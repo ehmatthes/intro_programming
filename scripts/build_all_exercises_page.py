@@ -65,10 +65,27 @@ def add_intro():
     intro_string += '<p>Each set of exercises has a link to the relevant section that explains what you need to know to complete those exercises. If you are struggling with an exercise, try reading through the linked material, and see if it helps you solve the exercise you are working on.</p>'
     intro_string += '<p>Exercises are short, specific tasks that ask you to apply a certain concept in a specific way. Challenges are longer, and they ask you to combine different ideas you have been working with. Challenges also ask you to be a little more creative in the programs you are starting to write.</p>'
 
-
     intro_string += '</div>'
-
     return intro_string
+
+
+def rebuild_anchor_links(filename, line):
+    # Looks for an anchor tag. If present, rebuilds link to link
+    #  back to place on page being scraped.
+    anchor_re = """.*(<a href=['"]#(.*))['"].*"""
+    anchor_re = """.*<a href=['"](#.*)['"].*"""
+    p = re.compile(anchor_re)
+    m = p.match(line)
+    if m:
+        anchor_link = m.group(1)
+        new_link = "http://introtopython.org/%s%s" % (filename, anchor_link)
+        print("\nline:", line.rstrip())
+        print("anchor:", anchor_link)
+        print("nl:  ", new_link)
+        print("new line:", line.replace(anchor_link, new_link))
+        return line.replace(anchor_link, new_link)
+    else:
+        return line
 
 
 # Grab all exercises and challenges.
@@ -94,6 +111,12 @@ for filename in filenames:
     html_string += get_new_notebook_header(filename, lines)
 
     for index, line in enumerate(lines):
+        # Anchor links need to be rebuilt.
+        #  Inefficient, runs for every line. Could be moved to just
+        #  before a line is being written to html_string, 
+        #  but not significant.
+        line = rebuild_anchor_links(filename, line)
+
         if '<h1' in line:
             current_h1_label = get_h1_label(line)
             #print('current_h1_label:', current_h1_label)
