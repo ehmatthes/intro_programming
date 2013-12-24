@@ -25,10 +25,35 @@ def add_contents(html_string):
     toc_string = '<div class="text_cell_render border-box-sizing rendered_html">\n'
     toc_string += "<h1>Contents</h1>\n"
 
+    new_html_string = ''
+    anchor_num = 0
+    for line in html_string.split("\n"):
+        if ('id="exercises' in line 
+            or 'id="challenges' in line
+            or 'id="overall-exercises' in line
+            or 'id="overall-challenges' in line):
+
+            # Rewrite the html_string line to have id that I want.
+            #  Pull out page title from line.
+            anchor_string = '<a name="ex_ch_%d"></a>' % anchor_num
+            new_line = re.sub(r"""<a name=['"].*['"]></a>""", anchor_string, line)
+            new_html_string += line
+
+        else:
+            new_html_string += line
 
     toc_string += "</div>\n"
     toc_string += "<hr />\n"
-    return toc_string + html_string
+
+    # SHOULD RETURN NEW_HTML_STRING
+    #return toc_string + new_html_string
+
+    new_html_string = ''
+    for line in html_string.split("\n"):
+        new_html_string += line
+
+    #return new_html_string
+    return html_string
 
 
 def get_h1_label(line):
@@ -210,7 +235,8 @@ for line in lines:
         # Write line, then html_string
         f.write(line.encode('utf-8'))
         f.write(html_string.encode('utf-8'))
-
+        # Don't write this line twice.
+        continue
     # Need to write each line back to the file.
     f.write(line.encode('utf-8'))
 
