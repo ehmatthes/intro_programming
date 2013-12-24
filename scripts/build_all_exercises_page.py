@@ -133,7 +133,10 @@ for filename in filenames:
                 h1_label_linked = "<a href='%s'>%s</a>" % (current_h1_link, current_h1_label)
 
 
-        if '<h2 id="exercises' in line or '<h2 id="challenges' in line or '<h1 id="overall-challenges' in line:
+        if ('<h2 id="exercises' in line 
+            or '<h2 id="challenges' in line
+            or '<h1 id="overall-challenges' in line
+            or '<h1 id="overall-exercises' in line):
             # This is the signature of an exercise block.
             in_exercises_challenges = True
 
