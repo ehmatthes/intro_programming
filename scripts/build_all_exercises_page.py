@@ -110,8 +110,6 @@ for filename in filenames:
     f.close()
 
     in_exercises_challenges = False
-    num_open_divs = 0
-    num_closed_divs = 0
     # Will need to keep track of section that the exercises are part of.
     current_h1_label = ''
     h1_label_linked = ''
@@ -145,12 +143,15 @@ for filename in filenames:
             or '<h1 id="overall-challenges' in line
             or '<h1 id="overall-exercises' in line):
             # This is the signature of an exercise block.
-            in_exercises_challenges = True
 
             # Capture the previous line, which opens the div for the exercises.
             #  Current line will be captured in "if in_exercises" block.
-            html_string += lines[index-1]
-            num_open_divs = 1
+            # Only do this if in_exercises_challenges currently False.
+            if not in_exercises_challenges:
+                html_string += lines[index-1]
+
+            in_exercises_challenges = True
+            html_string += "\n"
 
             # Add the most recent h1 label to this line.
             if 'Exercises' in line:
@@ -158,25 +159,25 @@ for filename in filenames:
             elif 'Challenges' in line:
                 line = line.replace('Challenges', 'Challenges - %s' % h1_label_linked)
 
+            # Make sure these elements are all written at the h2 level:
+            line = line.replace('h1', 'h2')
+
         if in_exercises_challenges:
-            # Keep adding to html_string, until matching div closed.
-            # 1 open div now, count new opens, count new closes, 
-            # stop adding when opens == closes
+            # Stop adding lines when reach next 'top'.
+            #  Remove div that was opened for the top line.
+            #  This approach allows multiple cells to be part of
+            #   exercises and challenges, but still be scraped.
+            if '<div class="text_cell_render border-box-sizing rendered_html">' in line:
+                # If next line has a link to top, stop here.
+                if '<a href="#">top</a>' in lines[index+1]:
+                    in_exercises_challenges = False
+                    html_string += "\n"
+                    continue
 
             # Store the current line
             html_string += line
 
-            # Check to see if this is the last line
-            # Currently assumes only one div or closing div per line.
-            if '<div' in line:
-                num_open_divs += 1
-            if '</div' in line:
-                num_closed_divs += 1
-            if num_open_divs == num_closed_divs:
-                in_exercises_challenges = False
-                num_open_divs = 0
-                num_closed_divs = 0
-
+    # Finished scraping a notebook, add a link to top of this page.
     html_string += top_html()
 
 # Read in all_exercises_challenges.html
