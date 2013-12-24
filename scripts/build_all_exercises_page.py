@@ -95,7 +95,7 @@ for filename in filenames:
     lines = f.readlines()
     f.close()
 
-    in_exercises = False
+    in_exercises_challenges = False
     num_open_divs = 0
     num_closed_divs = 0
     # Will need to keep track of section that the exercises are part of.
@@ -117,9 +117,9 @@ for filename in filenames:
             current_h1_link = get_h1_link(filename, line)
             h1_label_linked = "<a href='%s'>%s</a>" % (current_h1_link, current_h1_label)
 
-        if '<h2 id="exercises' in line:
+        if '<h2 id="exercises' in line or '<h2 id="challenges' in line or '<h2 id="overall-challenges' in line:
             # This is the signature of an exercise block.
-            in_exercises = True
+            in_exercises_challenges = True
 
             # Capture the previous line, which opens the div for the exercises.
             #  Current line will be captured in "if in_exercises" block.
@@ -127,9 +127,12 @@ for filename in filenames:
             num_open_divs = 1
 
             # Add the most recent h1 label to this line.
-            line = line.replace('Exercises', 'Exercises - %s' % h1_label_linked)
+            if 'Exercises' in line:
+                line = line.replace('Exercises', 'Exercises - %s' % h1_label_linked)
+            elif 'Challenges' in line:
+                line = line.replace('Challenges', 'Challenges - %s' % h1_label_linked)
 
-        if in_exercises:
+        if in_exercises_challenges:
             # Keep adding to html_string, until matching div closed.
             # 1 open div now, count new opens, count new closes, 
             # stop adding when opens == closes
@@ -144,7 +147,7 @@ for filename in filenames:
             if '</div' in line:
                 num_closed_divs += 1
             if num_open_divs == num_closed_divs:
-                in_exercises = False
+                in_exercises_challenges = False
                 num_open_divs = 0
                 num_closed_divs = 0
 
