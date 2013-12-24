@@ -159,6 +159,9 @@ for filename in filenames:
             elif 'Challenges' in line:
                 line = line.replace('Challenges', 'Challenges - %s' % h1_label_linked)
 
+            # Make sure these elements are all written at the h2 level:
+            line = line.replace('h1', 'h2')
+
         if in_exercises_challenges:
             # Stop adding lines when reach next 'top'.
             #  Remove div that was opened for the top line.
