@@ -40,6 +40,19 @@ def get_h1_link(filename, line):
         return link
 
 
+def get_page_title(filename):
+    # Pulls the page title from the notebook. It's in the first <h1>
+    #  block in each notebook.
+    for line in lines:
+        if '<h1' in line:
+            title_re = """(<h1.*>)(.*)(</h1)"""
+            p = re.compile(title_re)
+            m = p.match(line)
+            if m:
+                print('page title:', m.group(2))
+                return m.group(2)
+
+
 def get_new_notebook_header(filename, lines):
     # Pulls the page title from the notebook. It's in the first <h1>
     #  block in each notebook.
@@ -116,6 +129,15 @@ for filename in filenames:
             current_h1_label = get_h1_label(line)
             current_h1_link = get_h1_link(filename, line)
             h1_label_linked = "<a href='%s'>%s</a>" % (current_h1_link, current_h1_label)
+
+            # If this is Overall Exercises or Overall Challenges,
+            #  link to the notebook not the last h1 section.
+            # Naming inconsistency; still calling these pieces ...h1...
+            if 'verall' in line:
+                current_h1_link = "http://introtopython.org/%s" % filename
+                current_h1_label = get_page_title(filename)
+                h1_label_linked = "<a href='%s'>%s</a>" % (current_h1_link, current_h1_label)
+
 
         if '<h2 id="exercises' in line or '<h2 id="challenges' in line or '<h1 id="overall-challenges' in line:
             # This is the signature of an exercise block.
