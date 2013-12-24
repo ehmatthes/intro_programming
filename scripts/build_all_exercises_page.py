@@ -19,6 +19,18 @@ filenames = ['var_string_num.html', 'lists_tuples.html',
 #filenames = ['var_string_num.html']
 
 
+def add_contents(html_string):
+    # Once all pages have been scraped, parse html_string and 
+    #  build contents.
+    toc_string = '<div class="text_cell_render border-box-sizing rendered_html">\n'
+    toc_string += "<h1>Contents</h1>\n"
+
+
+    toc_string += "</div>\n"
+    toc_string += "<hr />\n"
+    return toc_string + html_string
+
+
 def get_h1_label(line):
     # Pulls the label out of an h1 header line.
     #  This should be the label for what a set of exercises relates to.
@@ -63,16 +75,17 @@ def get_new_notebook_header(filename, lines):
     return header_html
 
 
-def add_intro():
+def add_intro(html_string):
     # Add an intro to html_string, before adding any exercises.
     intro_string  = '<div class="text_cell_render border-box-sizing rendered_html">\n'
-    intro_string += '<h1>All Exercises and Challenges</h1>'
-    intro_string += '<p>This page pulls together all of the exercises and challenges from throughout <a href="http://introtopython.org">introtopython.org</a>.</p>'
-    intro_string += '<p>Each set of exercises has a link to the relevant section that explains what you need to know to complete those exercises. If you are struggling with an exercise, try reading through the linked material, and see if it helps you solve the exercise you are working on.</p>'
-    intro_string += '<p>Exercises are short, specific tasks that ask you to apply a certain concept in a specific way. Challenges are longer, and they ask you to combine different ideas you have been working with. Challenges also ask you to be a little more creative in the programs you are starting to write.</p>'
+    intro_string += '<h1>All Exercises and Challenges</h1>\n'
+    intro_string += '<p>This page pulls together all of the exercises and challenges from throughout <a href="http://introtopython.org">introtopython.org</a>.</p>\n'
+    intro_string += '<p>Each set of exercises has a link to the relevant section that explains what you need to know to complete those exercises. If you are struggling with an exercise, try reading through the linked material, and see if it helps you solve the exercise you are working on.</p>\n'
+    intro_string += '<p>Exercises are short, specific tasks that ask you to apply a certain concept in a specific way. Challenges are longer, and they ask you to combine different ideas you have been working with. Challenges also ask you to be a little more creative in the programs you are starting to write.</p>\n'
 
-    intro_string += '</div>'
-    return intro_string
+    intro_string += '</div>\n'
+    intro_string += '<hr />\n'
+    return intro_string + html_string
 
 
 def rebuild_anchor_links(filename, line):
@@ -100,8 +113,6 @@ def top_html():
 # Grab all exercises and challenges.
 #  Start building html string.
 html_string = ""
-# Add an intro.
-html_string += add_intro()
 for filename in filenames:
 
     # Grab entire page
@@ -179,6 +190,11 @@ for filename in filenames:
 
     # Finished scraping a notebook, add a link to top of this page.
     html_string += top_html()
+
+# Pages have been scraped; build contents from html_string.
+html_string = add_contents(html_string)
+# Add an intro.
+html_string = add_intro(html_string)
 
 # Read in all_exercises_challenges.html
 f = open(path_to_notebooks + 'all_exercises_challenges.html', 'r')
