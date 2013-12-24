@@ -163,6 +163,19 @@ for filename in filenames:
             # 1 open div now, count new opens, count new closes, 
             # stop adding when opens == closes
 
+
+            # Stop adding lines when reach next 'top'.
+            #  Remove div that was opened for the top line.
+            #  This approach allows multiple cells to be part of
+            #   exercises and challenges, but still be scraped.
+            if '<div class="text_cell_render border-box-sizing rendered_html">' in line:
+                # If next line has a link to top, stop here.
+                if '<a href="#">top</a>' in lines[index+1]:
+                    in_exercises_challenges = False
+                    continue
+            
+
+
             # Store the current line
             html_string += line
 
@@ -173,10 +186,11 @@ for filename in filenames:
             if '</div' in line:
                 num_closed_divs += 1
             if num_open_divs == num_closed_divs:
-                in_exercises_challenges = False
+                #in_exercises_challenges = False
                 num_open_divs = 0
                 num_closed_divs = 0
 
+    # Finished scraping a notebook, add a link to top of this page.
     html_string += top_html()
 
 # Read in all_exercises_challenges.html
