@@ -40,7 +40,7 @@ def get_h1_link(filename, line):
         return link
 
 
-def get_new_notebook_header(filename, lines):
+def get_page_title(filename):
     # Pulls the page title from the notebook. It's in the first <h1>
     #  block in each notebook.
     for line in lines:
@@ -49,11 +49,18 @@ def get_new_notebook_header(filename, lines):
             p = re.compile(title_re)
             m = p.match(line)
             if m:
-                link = "http://introtopython.org/%s" % filename
-                header_html = '<div class="text_cell_render border-box-sizing rendered_html">\n'
-                header_html += "<h1><a href='%s'>%s</a></h1>\n" % (link, m.group(2))
-                header_html += "</div>\n"
-                return header_html
+                return m.group(2)
+
+
+def get_new_notebook_header(filename, lines):
+    # Creates an html string for a header for each notebook
+    #  being scraped.
+    page_title = get_page_title(filename)
+    link = "http://introtopython.org/%s" % filename
+    header_html = '<div class="text_cell_render border-box-sizing rendered_html">\n'
+    header_html += "<h1><a href='%s'>%s</a></h1>\n" % (link, page_title)
+    header_html += "</div>\n"
+    return header_html
 
 
 def add_intro():
@@ -82,6 +89,13 @@ def rebuild_anchor_links(filename, line):
     else:
         return line
 
+def top_html():
+    # Returns html for a link to top of page.
+    top_string = '<div class="text_cell_render border-box-sizing rendered_html">\n'
+    top_string += '<p><a href="#">top</a></p>\n'
+    top_string += '</div>\n'
+    top_string += '<hr />\n'
+    return top_string
 
 # Grab all exercises and challenges.
 #  Start building html string.
@@ -95,7 +109,7 @@ for filename in filenames:
     lines = f.readlines()
     f.close()
 
-    in_exercises = False
+    in_exercises_challenges = False
     num_open_divs = 0
     num_closed_divs = 0
     # Will need to keep track of section that the exercises are part of.
@@ -117,9 +131,21 @@ for filename in filenames:
             current_h1_link = get_h1_link(filename, line)
             h1_label_linked = "<a href='%s'>%s</a>" % (current_h1_link, current_h1_label)
 
-        if '<h2 id="exercises' in line:
+            # If this is Overall Exercises or Overall Challenges,
+            #  link to the notebook not the last h1 section.
+            # Naming inconsistency; still calling these pieces ...h1...
+            if 'verall' in line:
+                current_h1_link = "http://introtopython.org/%s" % filename
+                current_h1_label = get_page_title(filename)
+                h1_label_linked = "<a href='%s'>%s</a>" % (current_h1_link, current_h1_label)
+
+
+        if ('<h2 id="exercises' in line 
+            or '<h2 id="challenges' in line
+            or '<h1 id="overall-challenges' in line
+            or '<h1 id="overall-exercises' in line):
             # This is the signature of an exercise block.
-            in_exercises = True
+            in_exercises_challenges = True
 
             # Capture the previous line, which opens the div for the exercises.
             #  Current line will be captured in "if in_exercises" block.
@@ -127,9 +153,12 @@ for filename in filenames:
             num_open_divs = 1
 
             # Add the most recent h1 label to this line.
-            line = line.replace('Exercises', 'Exercises - %s' % h1_label_linked)
+            if 'Exercises' in line:
+                line = line.replace('Exercises', 'Exercises - %s' % h1_label_linked)
+            elif 'Challenges' in line:
+                line = line.replace('Challenges', 'Challenges - %s' % h1_label_linked)
 
-        if in_exercises:
+        if in_exercises_challenges:
             # Keep adding to html_string, until matching div closed.
             # 1 open div now, count new opens, count new closes, 
             # stop adding when opens == closes
@@ -144,9 +173,11 @@ for filename in filenames:
             if '</div' in line:
                 num_closed_divs += 1
             if num_open_divs == num_closed_divs:
-                in_exercises = False
+                in_exercises_challenges = False
                 num_open_divs = 0
                 num_closed_divs = 0
+
+    html_string += top_html()
 
 # Read in all_exercises_challenges.html
 f = open(path_to_notebooks + 'all_exercises_challenges.html', 'r')
