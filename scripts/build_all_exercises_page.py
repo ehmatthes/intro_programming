@@ -89,6 +89,13 @@ def rebuild_anchor_links(filename, line):
     else:
         return line
 
+def top_html():
+    # Returns html for a link to top of page.
+    top_string = '<div class="text_cell_render border-box-sizing rendered_html">\n'
+    top_string += '<p><a href="#">top</a></p>\n'
+    top_string += '</div>\n'
+    top_string += '<hr />\n'
+    return top_string
 
 # Grab all exercises and challenges.
 #  Start building html string.
@@ -169,6 +176,8 @@ for filename in filenames:
                 in_exercises_challenges = False
                 num_open_divs = 0
                 num_closed_divs = 0
+
+    html_string += top_html()
 
 # Read in all_exercises_challenges.html
 f = open(path_to_notebooks + 'all_exercises_challenges.html', 'r')
