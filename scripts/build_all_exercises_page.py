@@ -49,24 +49,18 @@ def get_page_title(filename):
             p = re.compile(title_re)
             m = p.match(line)
             if m:
-                print('page title:', m.group(2))
                 return m.group(2)
 
 
 def get_new_notebook_header(filename, lines):
-    # Pulls the page title from the notebook. It's in the first <h1>
-    #  block in each notebook.
-    for line in lines:
-        if '<h1' in line:
-            title_re = """(<h1.*>)(.*)(</h1)"""
-            p = re.compile(title_re)
-            m = p.match(line)
-            if m:
-                link = "http://introtopython.org/%s" % filename
-                header_html = '<div class="text_cell_render border-box-sizing rendered_html">\n'
-                header_html += "<h1><a href='%s'>%s</a></h1>\n" % (link, m.group(2))
-                header_html += "</div>\n"
-                return header_html
+    # Creates an html string for a header for each notebook
+    #  being scraped.
+    page_title = get_page_title(filename)
+    link = "http://introtopython.org/%s" % filename
+    header_html = '<div class="text_cell_render border-box-sizing rendered_html">\n'
+    header_html += "<h1><a href='%s'>%s</a></h1>\n" % (link, page_title)
+    header_html += "</div>\n"
+    return header_html
 
 
 def add_intro():
