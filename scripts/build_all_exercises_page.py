@@ -25,6 +25,8 @@ def add_contents(html_string):
     toc_string = '<div class="text_cell_render border-box-sizing rendered_html">\n'
     toc_string += "<h1>Contents</h1>\n"
 
+    print("len html_string: ", len(html_string))
+
     new_html_string = ''
     anchor_num = 0
     for line in html_string.split("\n"):
@@ -36,17 +38,26 @@ def add_contents(html_string):
             # Rewrite the html_string line to have id that I want.
             #  Pull out page title from line.
             anchor_string = '<a name="ex_ch_%d"></a>' % anchor_num
-            new_line = re.sub(r"""<a name=['"].*['"]></a>""", anchor_string, line)
-            new_html_string += line
+            new_line = re.sub(r"""<a name=['"].*?['"]></a>""", anchor_string, line)
+            new_html_string += new_line + "\n"
+
+            anchor_num += 1
+
+            #print("line:    ", line)
+            #print("new line:", new_line)
 
         else:
-            new_html_string += line
+            new_html_string += line + "\n"
+
+    print("len new_html_string: ", len(new_html_string))
 
     toc_string += "</div>\n"
     toc_string += "<hr />\n"
 
+    print("len toc + new_html: ", len(toc_string + new_html_string))
+
     # SHOULD RETURN NEW_HTML_STRING
-    #return toc_string + new_html_string
+    return toc_string + new_html_string
 
     new_html_string = ''
     for line in html_string.split("\n"):
@@ -54,6 +65,19 @@ def add_contents(html_string):
 
     #return new_html_string
     return html_string
+
+
+def add_intro(html_string):
+    # Add an intro to html_string, before adding any exercises.
+    intro_string  = '<div class="text_cell_render border-box-sizing rendered_html">\n'
+    intro_string += '<h1>All Exercises and Challenges</h1>\n'
+    intro_string += '<p>This page pulls together all of the exercises and challenges from throughout <a href="http://introtopython.org">introtopython.org</a>.</p>\n'
+    intro_string += '<p>Each set of exercises has a link to the relevant section that explains what you need to know to complete those exercises. If you are struggling with an exercise, try reading through the linked material, and see if it helps you solve the exercise you are working on.</p>\n'
+    intro_string += '<p>Exercises are short, specific tasks that ask you to apply a certain concept in a specific way. Challenges are longer, and they ask you to combine different ideas you have been working with. Challenges also ask you to be a little more creative in the programs you are starting to write.</p>\n'
+
+    intro_string += '</div>\n'
+    intro_string += '<hr />\n'
+    return intro_string + html_string
 
 
 def get_h1_label(line):
@@ -98,19 +122,6 @@ def get_new_notebook_header(filename, lines):
     header_html += "<h1><a href='%s'>%s</a></h1>\n" % (link, page_title)
     header_html += "</div>\n"
     return header_html
-
-
-def add_intro(html_string):
-    # Add an intro to html_string, before adding any exercises.
-    intro_string  = '<div class="text_cell_render border-box-sizing rendered_html">\n'
-    intro_string += '<h1>All Exercises and Challenges</h1>\n'
-    intro_string += '<p>This page pulls together all of the exercises and challenges from throughout <a href="http://introtopython.org">introtopython.org</a>.</p>\n'
-    intro_string += '<p>Each set of exercises has a link to the relevant section that explains what you need to know to complete those exercises. If you are struggling with an exercise, try reading through the linked material, and see if it helps you solve the exercise you are working on.</p>\n'
-    intro_string += '<p>Exercises are short, specific tasks that ask you to apply a certain concept in a specific way. Challenges are longer, and they ask you to combine different ideas you have been working with. Challenges also ask you to be a little more creative in the programs you are starting to write.</p>\n'
-
-    intro_string += '</div>\n'
-    intro_string += '<hr />\n'
-    return intro_string + html_string
 
 
 def rebuild_anchor_links(filename, line):
@@ -218,8 +229,15 @@ for filename in filenames:
 
 # Pages have been scraped; build contents from html_string.
 html_string = add_contents(html_string)
+print("len html_string after: ", len(html_string))
+
 # Add an intro.
 html_string = add_intro(html_string)
+print("len html_string after 2: ", len(html_string))
+
+f = open('/home/ehmatthes/Desktop/html_string.html', 'wb')
+f.write(html_string.encode('utf-8'))
+f.close()
 
 # Read in all_exercises_challenges.html
 f = open(path_to_notebooks + 'all_exercises_challenges.html', 'r')
@@ -233,8 +251,11 @@ f = open(path_to_notebooks + 'all_exercises_challenges.html', 'wb')
 for line in lines: 
     if '<body>' in line:
         # Write line, then html_string
+        #f.write('HERE_0\n\n\n'.encode('utf-8'))
         f.write(line.encode('utf-8'))
+        #f.write('HERE_1\n\n\n'.encode('utf-8'))
         f.write(html_string.encode('utf-8'))
+        #f.write('HERE_2\n\n\n'.encode('utf-8'))
         # Don't write this line twice.
         continue
     # Need to write each line back to the file.
