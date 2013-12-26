@@ -25,8 +25,6 @@ def add_contents(html_string):
     toc_string = '<div class="text_cell_render border-box-sizing rendered_html">\n'
     toc_string += "<h1>Contents</h1>\n"
 
-    print("len html_string: ", len(html_string))
-
     new_html_string = ''
     anchor_num = 0
     for line in html_string.split("\n"):
@@ -43,28 +41,13 @@ def add_contents(html_string):
 
             anchor_num += 1
 
-            #print("line:    ", line)
-            #print("new line:", new_line)
-
         else:
             new_html_string += line + "\n"
-
-    print("len new_html_string: ", len(new_html_string))
 
     toc_string += "</div>\n"
     toc_string += "<hr />\n"
 
-    print("len toc + new_html: ", len(toc_string + new_html_string))
-
-    # SHOULD RETURN NEW_HTML_STRING
     return toc_string + new_html_string
-
-    new_html_string = ''
-    for line in html_string.split("\n"):
-        new_html_string += line
-
-    #return new_html_string
-    return html_string
 
 
 def add_intro(html_string):
@@ -229,15 +212,8 @@ for filename in filenames:
 
 # Pages have been scraped; build contents from html_string.
 html_string = add_contents(html_string)
-print("len html_string after: ", len(html_string))
-
 # Add an intro.
 html_string = add_intro(html_string)
-print("len html_string after 2: ", len(html_string))
-
-f = open('/home/ehmatthes/Desktop/html_string.html', 'wb')
-f.write(html_string.encode('utf-8'))
-f.close()
 
 # Read in all_exercises_challenges.html
 f = open(path_to_notebooks + 'all_exercises_challenges.html', 'r')
@@ -251,11 +227,8 @@ f = open(path_to_notebooks + 'all_exercises_challenges.html', 'wb')
 for line in lines: 
     if '<body>' in line:
         # Write line, then html_string
-        #f.write('HERE_0\n\n\n'.encode('utf-8'))
         f.write(line.encode('utf-8'))
-        #f.write('HERE_1\n\n\n'.encode('utf-8'))
         f.write(html_string.encode('utf-8'))
-        #f.write('HERE_2\n\n\n'.encode('utf-8'))
         # Don't write this line twice.
         continue
     # Need to write each line back to the file.
