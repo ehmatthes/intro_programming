@@ -60,7 +60,7 @@ def add_contents(html_string):
             p = re.compile(ex_ch_re)
             m = p.match(line)
             if m:
-                toc_string += '<h3><a href="#ex_ch_%d">%s</a></h3>\n' % (ex_ch_num, m.group(1) + m.group(2))
+                toc_string += '<h3>%s<a href="#ex_ch_%d">%s</a></h3>\n' % (m.group(1), ex_ch_num, m.group(2))
 
             ex_ch_num += 1
 
