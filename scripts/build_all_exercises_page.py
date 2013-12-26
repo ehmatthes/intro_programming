@@ -113,7 +113,7 @@ def anchor_exercises(html_string):
             anchor = m.group(1)
             name = m.group(2)
             if anchor in anchors:
-                print("Repeated anchor: ", anchor)
+                #print("Repeated anchor: ", anchor)
                 new_anchor = anchor
                 append_num = 1
                 while new_anchor in anchors:
@@ -124,13 +124,14 @@ def anchor_exercises(html_string):
             # Rewrite line to include anchor tag, and to link to this
             #  anchor tag.
             anchor_tag = '<a name="%s"></a>' % anchor
-            new_line = anchor_tag + line
+            #new_line = anchor_tag + line
+            new_line = '%s<h4 id="%s"><a href="#%s">%s</a></h4>\n' % (anchor_tag, anchor, anchor, name)
             new_html_string += new_line
             print("new line:", new_line)
         else:
-            new_html_string += line
+            new_html_string += line + "\n"
 
-    #return new_html_string
+    return new_html_string
     return html_string
 
 
