@@ -95,6 +95,46 @@ def add_contents(html_string):
             new_html_string += line + "\n"
 
 
+def anchor_exercises(html_string):
+    # Add an anchor link to each exercise, so people can share any
+    #  individual exercise.
+    # Use name of exercise as anchor, but watch for repeated names.
+    #  If repeated name, add a number to anchor.
+    anchors = []
+    new_html_string = ''
+    for line in html_string.split("\n"):
+        if '<h4 id="' in line:
+            pass#print(line)
+
+        ex_ch_re = """<h4 id="(.*?)">(.*?)</h4>"""
+        p = re.compile(ex_ch_re)
+        m = p.match(line)
+        if m:
+            anchor = m.group(1)
+            name = m.group(2)
+            if anchor in anchors:
+                #print("Repeated anchor: ", anchor)
+                new_anchor = anchor
+                append_num = 1
+                while new_anchor in anchors:
+                    new_anchor = anchor + '_%d' % append_num
+                    append_num += 1
+                anchor = new_anchor
+
+            # Rewrite line to include anchor tag, and to link to this
+            #  anchor tag.
+            anchor_tag = '<a name="%s"></a>' % anchor
+            #new_line = anchor_tag + line
+            new_line = '%s<h4 id="%s"><a href="#%s">%s</a></h4>\n' % (anchor_tag, anchor, anchor, name)
+            new_html_string += new_line
+            print("new line:", new_line)
+        else:
+            new_html_string += line + "\n"
+
+    return new_html_string
+    return html_string
+
+
 
 def add_intro(html_string):
     # Add an intro to html_string, before adding any exercises.
@@ -260,6 +300,8 @@ for filename in filenames:
 html_string = add_contents(html_string)
 # Add an intro.
 html_string = add_intro(html_string)
+# Add anchor links to each exercise.
+html_string = anchor_exercises(html_string)
 
 # Read in all_exercises_challenges.html
 f = open(path_to_notebooks + 'all_exercises_challenges.html', 'r')
