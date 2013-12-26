@@ -26,29 +26,49 @@ def add_contents(html_string):
     toc_string += "<h1>Contents</h1>\n"
 
     new_html_string = ''
-    anchor_num = 0
+    section_num = 0
+    ex_ch_num = 0
     for line in html_string.split("\n"):
         if '<h1>' in line:
 
             # Rewrite the html_string line to have id that I want.
-            #  Pull out page title from line.
-            anchor_string = '<a name="section_%d"></a>' % anchor_num
-            new_line = line.replace('<h1>', '<h1>%s' % anchor_string)
+            #  Pull out section title from line.
+            section_anchor = '<a name="section_%d"></a>' % section_num
+            new_line = line.replace('<h1>', '<h1>%s' % section_anchor)
             new_html_string += new_line + "\n"
 
             section_re = """(<h1.*>)(.*)(</a></h1>)"""
             p = re.compile(section_re)
             m = p.match(line)
             if m:
-                toc_string += '<h2><a href="#section_%d">%s</a></h2>' % (anchor_num, m.group(2))
+                toc_string += '<h2><a href="#section_%d">%s</a></h2>\n' % (section_num, m.group(2))
 
-            anchor_num += 1
+            section_num += 1
+
+        elif ('id="exercises' in line 
+            or 'id="challenges' in line
+            or 'id="overall-exercises' in line
+            or 'id="overall-challenges' in line):
+
+            # Rewrite the html_string line to have id that I want.
+            #  Pull out page title from line.
+            ex_ch_anchor = '<a name="ex_ch_%d"></a>' % ex_ch_num
+            new_line = re.sub(r"""<a name=['"].*?['"]></a>""", ex_ch_anchor, line)
+            new_html_string += new_line + "\n"
+
+            ex_ch_re = """<.*/a>(.*)<a href.*>(.*)</a>"""
+            p = re.compile(ex_ch_re)
+            m = p.match(line)
+            if m:
+                toc_string += '<h3 class="contents_level_two">%s<a href="#ex_ch_%d">%s</a></h3>\n' % (m.group(1), ex_ch_num, m.group(2))
+
+            ex_ch_num += 1
 
         else:
             new_html_string += line + "\n"
 
     toc_string += "</div>\n"
-    toc_string += "<hr />\n"
+    toc_string += "<hr />\n\n"
 
     return toc_string + new_html_string
 
