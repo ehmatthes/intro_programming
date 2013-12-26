@@ -73,28 +73,6 @@ def add_contents(html_string):
     return toc_string + new_html_string
 
 
-    for line in html_string.split("\n"):
-        if ('id="exercises' in line 
-            or 'id="challenges' in line
-            or 'id="overall-exercises' in line
-            or 'id="overall-challenges' in line):
-
-            # Rewrite the html_string line to have id that I want.
-            #  Pull out page title from line.
-            anchor_string = '<a name="ex_ch_%d"></a>' % anchor_num
-            new_line = re.sub(r"""<a name=['"].*?['"]></a>""", anchor_string, line)
-            new_html_string += new_line + "\n"
-
-            print("line: ", line)
-            if '<h1>' in line:
-                print("h1 line: ", line)
-
-            anchor_num += 1
-
-        else:
-            new_html_string += line + "\n"
-
-
 def anchor_exercises(html_string):
     # Add an anchor link to each exercise, so people can share any
     #  individual exercise.
@@ -103,9 +81,6 @@ def anchor_exercises(html_string):
     anchors = []
     new_html_string = ''
     for line in html_string.split("\n"):
-        if '<h4 id="' in line:
-            pass#print(line)
-
         ex_ch_re = """<h4 id="(.*?)">(.*?)</h4>"""
         p = re.compile(ex_ch_re)
         m = p.match(line)
@@ -113,7 +88,6 @@ def anchor_exercises(html_string):
             anchor = m.group(1)
             name = m.group(2)
             if anchor in anchors:
-                #print("Repeated anchor: ", anchor)
                 new_anchor = anchor
                 append_num = 1
                 while new_anchor in anchors:
@@ -124,16 +98,12 @@ def anchor_exercises(html_string):
             # Rewrite line to include anchor tag, and to link to this
             #  anchor tag.
             anchor_tag = '<a name="%s"></a>' % anchor
-            #new_line = anchor_tag + line
             new_line = '%s<h4 id="%s"><a href="#%s">%s</a></h4>\n' % (anchor_tag, anchor, anchor, name)
             new_html_string += new_line
-            print("new line:", new_line)
         else:
             new_html_string += line + "\n"
 
     return new_html_string
-    return html_string
-
 
 
 def add_intro(html_string):
