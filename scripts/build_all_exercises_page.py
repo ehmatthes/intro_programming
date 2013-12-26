@@ -98,7 +98,7 @@ def anchor_exercises(html_string):
             # Rewrite line to include anchor tag, and to link to this
             #  anchor tag.
             anchor_tag = '<a name="%s"></a>' % anchor
-            new_line = '%s<h4 id="%s"><a href="#%s">%s</a></h4>\n' % (anchor_tag, anchor, anchor, name)
+            new_line = '%s<h4 id="%s"><a href="http://introtopython.org/all_exercises_challenges.html#%s">%s</a></h4>\n' % (anchor_tag, anchor, anchor, name)
             new_html_string += new_line
         else:
             new_html_string += line + "\n"
