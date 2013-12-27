@@ -98,7 +98,7 @@ def anchor_exercises(html_string):
             # Rewrite line to include anchor tag, and to link to this
             #  anchor tag.
             anchor_tag = '<a name="%s"></a>' % anchor
-            new_line = '%s<h4 id="%s"><a href="http://introtopython.org/all_exercises_challenges.html#%s">%s</a></h4>\n' % (anchor_tag, anchor, anchor, name)
+            new_line = '%s<h4 id="%s"><a href="all_exercises_challenges.html#%s">%s</a></h4>\n' % (anchor_tag, anchor, anchor, name)
             new_html_string += new_line
         else:
             new_html_string += line + "\n"
@@ -136,7 +136,7 @@ def get_h1_link(filename, line):
     p = re.compile(link_re)
     m = p.match(line)
     if m:
-        link = "http://introtopython.org/%s#%s" % (filename, m.group(3))
+        link = "%s#%s" % (filename, m.group(3))
         return link
 
 
@@ -156,7 +156,7 @@ def get_new_notebook_header(filename, lines):
     # Creates an html string for a header for each notebook
     #  being scraped.
     page_title = get_page_title(filename)
-    link = "http://introtopython.org/%s" % filename
+    link = "%s" % filename
     header_html = '<div class="text_cell_render border-box-sizing rendered_html">\n'
     header_html += "<h1><a href='%s'>%s</a></h1>\n" % (link, page_title)
     header_html += "</div>\n"
@@ -172,7 +172,7 @@ def rebuild_anchor_links(filename, line):
     m = p.match(line)
     if m:
         anchor_link = m.group(1)
-        new_link = "http://introtopython.org/%s%s" % (filename, anchor_link)
+        new_link = "%s%s" % (filename, anchor_link)
         return line.replace(anchor_link, new_link)
     else:
         return line
@@ -219,7 +219,7 @@ for filename in filenames:
             #  link to the notebook not the last h1 section.
             # Naming inconsistency; still calling these pieces ...h1...
             if 'verall' in line:
-                current_h1_link = "http://introtopython.org/%s" % filename
+                current_h1_link = "%s" % filename
                 current_h1_label = get_page_title(filename)
                 h1_label_linked = "<a href='%s'>%s</a>" % (current_h1_link, current_h1_label)
 
