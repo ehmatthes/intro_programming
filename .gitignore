@@ -4,3 +4,5 @@ ignored_resources/*
 *.ipynb_checkpoints
 *#
 notebooks/*.html*
+notebooks/__pycache__
+
