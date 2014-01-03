@@ -20,3 +20,12 @@ class Rocket():
         #  and returns that value.
         distance = sqrt((self.x-other_rocket.x)**2+(self.y-other_rocket.y)**2)
         return distance
+
+
+class Shuttle(Rocket):
+    # Shuttle simulates a space shuttle, which is really
+    #  just a reusable rocket.
+    
+    def __init__(self, x=0, y=0, flights_completed=0):
+        Rocket.__init__(self, x, y)
+        self.flights_completed = flights_completed
