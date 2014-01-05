@@ -27,5 +27,5 @@ class Shuttle(Rocket):
     #  just a reusable rocket.
     
     def __init__(self, x=0, y=0, flights_completed=0):
-        Rocket.__init__(self, x, y)
+        super().__init__(x, y)
         self.flights_completed = flights_completed
