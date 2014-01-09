@@ -112,6 +112,10 @@ wait
 python "$prefix"highlight_code.py
 wait
 
+# Highlight inline blocks of code.
+source "$prefix"highlight_inline_code.sh
+wait
+
 # Strip input references from code cells.
 python "$prefix"remove_input_references.py
 wait
