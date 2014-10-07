@@ -12,7 +12,8 @@ path_to_notebooks = '/srv/projects/intro_programming/intro_programming/notebooks
 filenames = ['var_string_num.html', 'lists_tuples.html',
              'introducing_functions.html', 'if_statements.html',
              'while_input.html', 'terminal_apps.html',
-             'dictionaries.html', 'classes.html',
+             'dictionaries.html', 'more_functions.html',
+             'classes.html',
              ]
 
 # one file for testing:
