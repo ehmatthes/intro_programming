@@ -54,7 +54,7 @@ printf "\n  Removed files."
 ###   Then I can remove some of the other build scripts, and
 ###   diagnose changes in styling issues.
 printf "\nConverting raw .ipynb files to raw .html files...\n"
-cd "$path_to_notebooks" && ipython nbconvert --template my_templates/my_base.tpl *.ipynb
+cd "$path_to_notebooks" && ipython nbconvert --template my_templates/intro_python_base.tpl *.ipynb
 printf "\n  Converted files.\n"
 
 # Go through each html file, changing all internal links so they point to these

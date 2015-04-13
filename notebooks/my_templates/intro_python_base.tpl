@@ -3,16 +3,14 @@
 
 
 {%- block header -%}
-<!DOCTYPE html>
-<html>
-<head>
+	 <!DOCTYPE html>
+	 <html>
+	 <head>
 
-<meta charset="utf-8" />
+	 	 <meta charset="utf-8" />
+		 <title>Introduction to Python</title>
 
-<!-- Loading mathjax macro -->
-{{ mathjax() }}
-
-</head>
+	 </head>
 {%- endblock header -%}
 
 {% block body %}
