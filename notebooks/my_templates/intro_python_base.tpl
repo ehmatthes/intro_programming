@@ -15,6 +15,11 @@
 		 <link rel='stylesheet' href='css/nb_overrides.css'>
 		 <link rel='stylesheet' href='css/site_styles.css'>
 
+		 <link href='css/bootstrap.css' rel='stylesheet' media='screen'>
+		 <link href='css/non-responsive.css' rel='stylesheet'>
+		 <link href='css/bootstrap_overrides.css' rel='stylesheet'>
+
+
 		 <script src='js/jquery.js'></script>
 		 <!-- necessary?
 		 		 <script src='https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS_HTML' type='text/javascript'></script>
