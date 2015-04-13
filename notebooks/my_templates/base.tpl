@@ -1,6 +1,5 @@
 {%- extends 'display_priority.tpl' -%}
 
-
 {% block codecell %}
 <div class="cell border-box-sizing code_cell rendered">
 {{ super() }}

@@ -53,8 +53,8 @@ printf "\n  Removed files."
 ### DEV: This is where templates should be introduced.
 ###   Then I can remove some of the other build scripts, and
 ###   diagnose changes in styling issues.
-printf "\nConverting raw .ipynb files to raw .html files..."
-cd "$path_to_notebooks" && ipython nbconvert --template my_templates/base.tpl *.ipynb
+printf "\nConverting raw .ipynb files to raw .html files...\n"
+cd "$path_to_notebooks" && ipython nbconvert --template my_templates/my_base.tpl *.ipynb
 printf "\n  Converted files.\n"
 
 # Go through each html file, changing all internal links so they point to these
