@@ -40,5 +40,5 @@ printf "\n\nCreating empty all_exercises_challenges.html file..."
 touch "$path_to_notebooks"/all_exercises_challenges.html
 ### DEV: This can probably be removed.
 #echo "<br>" > "$prefix"/all_exercises_challenges.html
-printf "\nCreated empty all_exercises_challenges.html file.\n\n"
+printf "\n  Created empty all_exercises_challenges.html file.\n\n"
 wait
