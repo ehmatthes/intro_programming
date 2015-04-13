@@ -42,3 +42,14 @@ touch "$path_to_notebooks"/all_exercises_challenges.html
 #echo "<br>" > "$prefix"/all_exercises_challenges.html
 printf "\n  Created empty all_exercises_challenges.html file.\n\n"
 wait
+
+# Add stylesheet to make output display initially on Mapping Global Earthquake Activity.
+# DEV: How do I use $prefix in the sed command?
+before_string="<link rel='stylesheet' href='css\/site_styles.css'>"
+css_js_link_string="<link rel='stylesheet' href='css\/show_all_style.css'>\n"
+if [ -e "../notebooks/" ]
+then
+    sed -i "s/$before_string/$before_string\n\n$css_js_link_string\n/" "../notebooks/visualization_earthquakes.html"
+else
+    sed -i "s/$before_string/$before_string\n\n$css_js_link_string\n/" "notebooks/visualization_earthquakes.html"
+fi
