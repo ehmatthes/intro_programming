@@ -70,6 +70,9 @@ if [ -e ../notebooks ] ; then
     printf "\n  Removed files."
 
     # Convert raw .ipynb files to raw .html files.
+	 ### DEV: This is where templates should be introduced.
+	 ###   Then I can remove some of the other build scripts, and
+	 ###   diagnose changes in styling issues.
     printf "\nConverting raw .ipynb files to raw .html files..."
 	 if [ $run_full_conversion ]
 		  then
