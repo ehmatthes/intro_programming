@@ -83,3 +83,7 @@ printf "\nBuilding index page...\n"
 python "$prefix"build_index.py
 wait
 printf "  Built index page.\n"
+
+#  Build all exercises page.
+python "$prefix"build_all_exercises_page.py
+wait
