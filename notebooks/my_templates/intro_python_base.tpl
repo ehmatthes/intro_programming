@@ -27,6 +27,7 @@
 		 <script type='text/javascript' src='js/nbconvert_js.js'></script>
 		 <script type='text/javascript' src='js/show_hide_output.js'></script>
 
+		 {% include "my_templates/ignored_templates/ga.tpl" ignore missing %}
 	 </head>
 {%- endblock header -%}
 
