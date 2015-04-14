@@ -33,11 +33,9 @@
 {% block body %}
 <body>
   {% include "my_templates/navbar.html" %}
-  <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 {{ super() }}
     </div>
-  </div>
 </body>
 {%- endblock body %}
 
