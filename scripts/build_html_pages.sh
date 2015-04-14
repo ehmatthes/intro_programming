@@ -46,11 +46,18 @@ printf "\n\nCreating empty all_exercises_challenges.html file..."
 touch "$path_to_notebooks/all_exercises_challenges.html"
 ### DEV: This can probably be removed.
 #echo "<br>" > "$path_to_scripts"/all_exercises_challenges.html
-printf "\n  Created empty all_exercises_challenges.html file.\n\n"
+printf "\n  Created empty all_exercises_challenges.html file.\n"
 wait
 
 # Add stylesheet to make output display initially on Mapping Global Earthquake Activity.
-# DEV: How do I use $prefix in the sed command?
+printf "\n\nMake output display by default on specified notebooks..."
 before_string="<link rel='stylesheet' href='css\/site_styles.css'>"
 css_js_link_string="<link rel='stylesheet' href='css\/show_all_style.css'>\n"
 sed -i "s/$before_string/$before_string\n\n$css_js_link_string\n/" "$path_to_notebooks/visualization_earthquakes.html"
+printf "\n  Finished.\n\n"
+
+# Add elements to toggle output on each page.
+printf "Adding ability to toggle output on each page...\n"
+python "$prefix"show_hide_output.py
+wait
+printf "  Added toggling ability.\n\n"
