@@ -61,3 +61,7 @@ printf "Adding ability to toggle output on each page...\n"
 python "$prefix"show_hide_output.py
 wait
 printf "  Added toggling ability.\n\n"
+
+# Convert index.html links to ./
+source "$prefix"convert_home_links.sh
+wait
