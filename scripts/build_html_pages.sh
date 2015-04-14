@@ -69,3 +69,7 @@ wait
 # Highlight lines of code.
 python "$prefix"highlight_code.py
 wait
+
+# Highlight inline blocks of code.
+source "$prefix"highlight_inline_code.sh
+wait
