@@ -65,3 +65,7 @@ printf "  Added toggling ability.\n\n"
 # Convert index.html links to ./
 source "$prefix"convert_home_links.sh
 wait
+
+# Highlight lines of code.
+python "$prefix"highlight_code.py
+wait
