@@ -77,3 +77,9 @@ wait
 # Strip input references from code cells.
 python "$prefix"remove_input_references.py
 wait
+
+# Build index page.
+printf "\nBuilding index page...\n"
+python "$prefix"build_index.py
+wait
+printf "  Built index page.\n"

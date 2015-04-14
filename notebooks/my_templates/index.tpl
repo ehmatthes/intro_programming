@@ -5,8 +5,7 @@
 {% block body %}
 <body>
   {% include "navbar.html" %}
-    <div class="container" id="notebook-container">
-    </div>
+  {% include "index_body.html" %}
 </body>
 {%- endblock body %}
 

@@ -9,7 +9,6 @@ env = Environment(loader=my_loader)
 
 index_template = my_loader.load(env, 'index.tpl')
 
-#print(index_template.render())
 # Render template to file.
 notebooks_path = '/srv/projects/intro_programming/intro_programming/notebooks/'
 filepath = notebooks_path + 'index.html'
