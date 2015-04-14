@@ -40,5 +40,6 @@
 {%- endblock body %}
 
 {% block footer %}
+{% include "my_templates/include_jquery.html" %}
 </html>
 {% endblock footer %}
