@@ -85,5 +85,7 @@ wait
 printf "  Built index page.\n"
 
 #  Build all exercises page.
-python "$prefix"build_all_exercises_page.py
-wait
+# DEV: Holding off on this until project is more mature,
+#        but don't want to lose sight of it.
+#python "$prefix"build_all_exercises_page.py
+#wait
