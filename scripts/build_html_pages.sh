@@ -39,16 +39,6 @@ printf "\npath to notebooks: $path_to_notebooks\n"
 source "$path_to_scripts"create_common_html.sh
 wait
 
-# Create empty all_exercises_challenges page;
-#   (Next scripts require a non-empty file at this point.)
-# DEV: Just build this straight from a template, as I'm doing for index?
-printf "\n\nCreating empty all_exercises_challenges.html file..."
-touch "$path_to_notebooks/all_exercises_challenges.html"
-### DEV: This can probably be removed.
-#echo "<br>" > "$path_to_scripts"/all_exercises_challenges.html
-printf "\n  Created empty all_exercises_challenges.html file.\n"
-wait
-
 # Add stylesheet to make output display initially on Mapping Global Earthquake Activity.
 printf "\n\nMake output display by default on specified notebooks..."
 before_string="<link rel='stylesheet' href='css\/site_styles.css'>"
