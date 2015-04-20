@@ -4,7 +4,7 @@
 #  Inline code blocks are much easier to recognize when they are highlighted,
 #  in a manner similar to stackoverflow.
 
-printf "Highlighting inline code blocks...\n"
+printf "\nHighlighting inline code blocks...\n"
 
 old_string='<code>'
 new_string='<code class="inline_code">'
@@ -17,4 +17,4 @@ else
 fi
 
 
-printf "Highlighted inline code blocks."
+printf "  Highlighted inline code blocks.\n"

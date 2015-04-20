@@ -20,7 +20,6 @@
 #
 # All html files are ignored by git.
 
-
 # Sometimes this file is run on its own (from this directory),
 #  sometimes from a post-commit hook (from another directory).
 #  The if structure lets it run either way.
@@ -28,96 +27,42 @@
 #  an if clause, and then running the code.
 #
 
-# Arguments
-#  --full, -f
-#      The script assumes you have the css files pulled out separately,
-#        so that it can just write out basic html files.
-#      This flag makes the script write out the full html file using
-#        nbconvert. The first time you run this file, use this flag.
-#        Then pull the css into a separate folder, and run the
-#        modify_custom_html.sh script, so that it writes a header that 
-#        includes a link to your css file.
-
-for var in $@
-do
-    if [ $var == '--full' ] || [ $var == '-f' ]
-    then
-		  run_full_conversion=true
-    fi
-done
-
-if [ $run_full_conversion ]
-then
-	 printf "\nRunning full conversion to html...\n"
-else
-	 printf "\nRunning basic conversion to html...\n"
-fi
-
+printf "\nRunning initial conversion to html...\n"
 
 # Store current path, to return to at end of script
 execution_path=$PWD
 
-
-printf "\nConverting internal links to html..."
-if [ -e ../notebooks ] ; then
-
-    # Must be running directly, use ../notebooks path.
-    printf "\nUsing ../notebooks path.\n"
-
-    # Remove old html files.
-    printf "\nRemoving old html files..."
-    rm ../notebooks/*.html
-    printf "\n  Removed files."
-
-    # Convert raw .ipynb files to raw .html files.
-    printf "\nConverting raw .ipynb files to raw .html files..."
-	 if [ $run_full_conversion ]
-		  then
-		      cd ../notebooks && ipython nbconvert *.ipynb
-		  else
-		      cd ../notebooks && ipython nbconvert --template basic *.ipynb
-	 fi
-
-    printf "\n  Converted files.\n"
-
-    # Go through each html file, changing all internal links so they point to these
-    #  raw html files, rather than IPython Notebook Viewer files.
-    printf "\nConverting internal links to point to html files..."
-    find ../notebooks -iname '*.html' | xargs sed -i 's/http:\/\/nbviewer.ipython.org\/urls\/raw.github.com\/ehmatthes\/intro_programming\/master\/notebooks\///g'
-    find ../notebooks -iname '*.html' | xargs sed -i 's/.ipynb/.html/g'
-    printf "\n  Converted links.\n"
-
+# Set correct path:
+if [ -e ../notebooks ]
+then
+	 # Must be running directly from /scripts directory.
+	 path_to_notebooks="../notebooks"
 else
-
-    # Must be running from a post-commit hook, which has a different path
-    #  to the notebooks directory for some commands.
-    printf "\nUsing notebooks path.\n"
-
-    # Remove old html versions
-    printf "\nRemoving old html files..."
-    rm notebooks/*.html
-    printf "\n  Removed files.\n."
-
-    # Convert raw .ipynb files to raw .html files.
-    printf "\nConverting raw .ipynb files to raw .html files..."
-	 if [ $run_full_conversion ]
-		  then
-		      cd notebooks && ipython nbconvert *.ipynb
-		  else
-		      cd notebooks && ipython nbconvert --template basic *.ipynb
-	 fi
-
-    printf "\n  Converted files.\n"
-
-    # Go through each html file, changing all internal links so they point to these
-    #  raw html files, rather than IPython Notebook Viewer files.
-    printf "\nConverting internal links to point to html files..."
-    find ../notebooks -iname '*.html' | xargs sed -i 's/http:\/\/nbviewer.ipython.org\/urls\/raw.github.com\/ehmatthes\/intro_programming\/master\/notebooks\///g'
-    find ../notebooks -iname '*.html' | xargs sed -i 's/.ipynb/.html/g'
-    printf "\nConverted links.\n"
-
+	 # Probably running from a post-commit hook, probably from
+	 #  root project directory.
+	 path_to_notebooks="notebooks"
 fi
 
+# Remove old html files.
+printf "\nRemoving old html files..."
+rm "$path_to_notebooks"/*.html
+printf "$path_to_notebooks"/*.html
+printf "\n  Removed files."
+
+# Convert raw .ipynb files to raw .html files.
+### DEV: This is where templates should be introduced.
+###   Then I can remove some of the other build scripts, and
+###   diagnose changes in styling issues.
+printf "\nConverting raw .ipynb files to raw .html files...\n"
+cd "$path_to_notebooks" && ipython nbconvert --template my_templates/intro_python_base.tpl *.ipynb
+printf "\n  Converted files.\n"
+
+# Go through each html file, changing all internal links so they point to these
+#  raw html files, rather than IPython Notebook Viewer files.
+printf "\nConverting internal links to point to html files..."
+find "$path_to_notebooks" -iname '*.html' | xargs sed -i 's/http:\/\/nbviewer.ipython.org\/urls\/raw.github.com\/ehmatthes\/intro_programming\/master\/notebooks\///g'
+find "$path_to_notebooks" -iname '*.html' | xargs sed -i 's/.ipynb/.html/g'
+printf "\n  Converted links.\n"
 
 # Return to original directory, so calling script's working dir does not change.
 cd $execution_path

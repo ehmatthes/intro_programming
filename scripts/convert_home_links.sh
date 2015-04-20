@@ -6,7 +6,7 @@
 #  Calling index.html leads user to end up using two names for the index page,
 #   which is confusing for tracking.
 
-printf "Converting home links to ./ now...\n"
+printf "\nConverting home links to ./ now...\n"
 
 old_string="href='index.html'"
 old_string_2='href="index.html"'
@@ -21,5 +21,4 @@ else
     find notebooks -iname '*.html' | xargs sed -i "s/$old_string_2/$new_string/"
 fi
 
-
-printf "Converted home links.\n"
+printf "  Converted home links.\n"

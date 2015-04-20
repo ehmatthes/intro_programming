@@ -6,7 +6,7 @@
 import os
 import sys
 
-print("Stripping input reference numbers from code cells...")
+print("\nStripping input reference numbers from code cells...")
 
 # Find all files to work with.
 path_to_notebooks = '/srv/projects/intro_programming/intro_programming/notebooks/'
@@ -25,28 +25,18 @@ for filename in filenames:
     f.close()
 
     f = open(path_to_notebooks + filename, 'wb')
-    in_input_prompt = False
-    skipped_lines = 0
     for line in lines: 
-        if '<div class="prompt input_prompt">' in line:
-            # Don't write this line, or the next two lines.
-            in_input_prompt = True
-            skipped_lines = 1
+        # Unwanted lines have opening and closing div on same line,
+        #  with input reference number between them.
+        if ('<div class="prompt input_prompt">' in line 
+                and '</div>' in line):
+            # Don't write this line.
             continue
-        elif in_input_prompt:
-            # Run this block exactly twice.
-            skipped_lines += 1
-            if skipped_lines > 3:
-                # Write current line, and reset relevant flags.
-                f.write(line.encode('utf-8'))
-                in_input_prompt = False
-                skipped_lines = 0
         else:
             # Regular line, write it.
             f.write(line.encode('utf-8'))
                 
     f.close()
 
-
-print("Stripped input reference numbers.\n")
+print("  Stripped input reference numbers.\n")
 

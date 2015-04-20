@@ -9,6 +9,7 @@ button.hide_output {
 
 button.hide_output, button.show_output {
 	 width: 100px;
+	 margin: 5px 0px 0px 0px;
 }
 
 button.show_output_all {
@@ -21,25 +22,18 @@ div.output {
 }
 
 
-/* Twitter button */
+/* Twitter share button */
 div.twitter-share-button {
 	 float: right;
 	 margin-top: 14px;
 	 margin-right: -40px;
 }
 
-/* Facebook button */
-div.fb-like {
-	 float: right;
-	 margin-top: 12px;
-	 margin-right: 15px;
-}
-
 /* Twitter follow button */
 div.twitter-follow-button {
     float: right;
     margin-top: 14px;
-    margin-right: -335px;
+    margin-right: 15px;
     border: solid 0px black;
 }
 

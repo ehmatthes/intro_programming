@@ -16,7 +16,6 @@ for filename in os.listdir(path_to_notebooks):
 #filenames = ['hello_world.html']
 
 
-
 def generate_button(id_number):
     # Generate the button code to place before each div.output
     button_string =  "<div class='text-right'>\n"
@@ -40,12 +39,11 @@ for filename in filenames:
     lines = f.readlines()
     f.close()
 
-    target_string = '<div class="output '
+    target_string = '<div class="output'
     for line in lines:
         if target_string in line:
             files_with_output.append(filename)
             break
-
 
 # Find all div.output, and add an id to each.
 #  Add show/ hide buttons to each output
@@ -57,7 +55,7 @@ for filename in files_with_output:
     lines = f.readlines()
     f.close()
 
-    target_string = '<div class="output '
+    target_string = '<div class="output"'
     f = open(path_to_notebooks + filename, 'wb')
     replacement_num = 0
     for line in lines:
@@ -68,14 +66,16 @@ for filename in files_with_output:
             f.write(line.encode('utf-8'))
             if container_number == 2:
                 f.write(generate_show_hide_all_buttons().encode('utf-8'))
+
         elif target_string in line:
             # If this line has a div.output, add an id
-            replacement_string = '<div id="output_%d" class="output ' % replacement_num
+            replacement_string = '<div id="output_%d" class="output"' % replacement_num
             
             # Add a pair of show/ hide buttons right before div.output
             f.write(generate_button(replacement_num).encode('utf-8'))
             f.write(line.replace(target_string, replacement_string).encode('utf-8'))
             replacement_num += 1
+
         else:
             # Otherwise, rewrite the line.
             f.write(line.encode('utf-8'))

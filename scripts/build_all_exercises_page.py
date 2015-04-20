@@ -4,7 +4,7 @@
 
 import os, sys, re
 
-print("Building all_exercises_challenges.html...")
+print("\nBuilding all_exercises_challenges.html...")
 
 path_to_notebooks = '/srv/projects/intro_programming/intro_programming/notebooks/'
 
@@ -279,6 +279,24 @@ f = open(path_to_notebooks + 'all_exercises_challenges.html', 'r')
 lines = f.readlines()
 f.close()
 
+
+# DEV
+# Write headers.
+header_lines = ''
+with open(path_to_notebooks + 'my_templates/intro_python_header.html') as f:
+    header_lines = f.read()
+
+# Write string as it is.
+# DEV: This should be done with Jinja templates.
+#  Yes! Writing from template writes template tags to the screen.
+with open(path_to_notebooks + 'all_exercises_challenges.html', 'wb') as f:
+    f.write(header_lines.encode('utf-8'))
+    f.write(html_string.encode('utf-8'))
+print("  Built all_exercises_challenges.html.")
+
+
+sys.exit()
+
 # Write html to all_exercises_challenges.html
 f = open(path_to_notebooks + 'all_exercises_challenges.html', 'wb')
 
@@ -296,4 +314,4 @@ for line in lines:
 f.close()
 
 
-print("Built all_exercises_challenges.html...")
+print("  Built all_exercises_challenges.html.")

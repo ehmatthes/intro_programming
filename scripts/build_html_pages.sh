@@ -8,8 +8,10 @@
 #  right now, but it would be good to automate this and create a flag such as 
 #  '--initial'.
 #
-# Starts by running 'ipython nbconvert --template basic'.
-#   Then adds header sections and appropriate html page tags.
+# Core of script involves running
+#    'ipython nbconvert --template intro_python_base.tpl'
+#   Then adds appropriate sections through other templates, and scripting.
+#     Also modifies some styles for better static html output.
 #   Script is meant to be fairly straightforward to modify, so users can 
 #   build the static pages they care to make from the core notebooks.
 #
@@ -23,89 +25,35 @@
 if [ -e scripts/ ]
 then
 	 # Probably running as a commit hook.
-    prefix="scripts/"
+    path_to_scripts="scripts/"
+	 path_to_notebooks="notebooks/"
 else
 	 # Probably running directly from /scripts directory.
-	 prefix=""
+	 path_to_scripts=""
+	 path_to_notebooks="../notebooks/"
 fi
-
+printf "\npath to scripts: $path_to_scripts"
+printf "\npath to notebooks: $path_to_notebooks\n"
 
 # Build basic pages.
-source "$prefix"create_common_html.sh
+source "$path_to_scripts"create_common_html.sh
 wait
 
-# Create empty all_exercises_challenges page.
-# Next scripts require a non-empty file at this point.
-echo "Creating empty all_exercises_challenges.html file..."
-if [ -e notebooks/ ]
-then
-	 touch notebooks/all_exercises_challenges.html
-	 echo "<br>" > notebooks/all_exercises_challenges.html
-else
-	 touch ../notebooks/all_exercises_challenges.html
-	 echo "<br>" > ../notebooks/all_exercises_challenges.html
-fi
-echo "Created empty all_exercises_challenges.html file."
-wait
-
-# Add opening tags
-source "$prefix"add_opening_tags.sh
-wait
-
-# Add title tag
-source "$prefix"add_title.sh
-wait
-
-# Add css and js links, and favicon link
-source "$prefix"add_css_js_links.sh
-wait
-
-# Close head and open body
-source "$prefix"close_head_open_body.sh
-wait
-
-# Close body and html tags.
-source "$prefix"close_body_html.sh
-wait
-
-# Create page containing all exercises and challenges.
-#  This page needs to be created before bootstrap is added.
-python "$prefix"build_all_exercises_page.py
-wait
-
-# Add bootstrap.
-source "$prefix"add_bootstrap.sh
-wait
-
-# If custom index file exists, overwrite index just created.
-source "$prefix"copy_custom_index.sh
-wait
-
-# Customize all pages to use bootstrap
-#  Also adds navbar from index to all pages
-printf "Customizing all styles to use bootstrap...\n"
-python "$prefix"add_bootstrap.py
-wait
-printf "Customized styles.\n\n"
+# Add stylesheet to make output display initially on Mapping Global Earthquake Activity.
+printf "\n\nMake output display by default on specified notebooks..."
+before_string="<link rel='stylesheet' href='css\/site_styles.css'>"
+css_js_link_string="<link rel='stylesheet' href='css\/show_all_style.css'>\n"
+sed -i "s/$before_string/$before_string\n\n$css_js_link_string\n/" "$path_to_notebooks/visualization_earthquakes.html"
+printf "\n  Finished.\n\n"
 
 # Add elements to toggle output on each page.
 printf "Adding ability to toggle output on each page...\n"
 python "$prefix"show_hide_output.py
 wait
-printf "Added toggling ability.\n\n"
+printf "  Added toggling ability.\n\n"
 
 # Convert index.html links to ./
 source "$prefix"convert_home_links.sh
-wait
-
-# Add fb button.
-source "$prefix"add_facebook.sh
-wait
-python "$prefix"modify_facebook_urls.py
-wait
-
-# Convert image links from ipynb format to html.
-source "$prefix"convert_image_links.sh
 wait
 
 # Highlight lines of code.
@@ -120,10 +68,14 @@ wait
 python "$prefix"remove_input_references.py
 wait
 
-# Insert Google Analytics code.
-#  This should happen last, so that ga code is just before
-#  closing head tag.
-source "$prefix"insert_google_analytics.sh
+# Build index page.
+printf "\nBuilding index page...\n"
+python "$prefix"build_index.py
 wait
+printf "  Built index page.\n"
 
-printf "\n\n"
+#  Build all exercises page.
+# DEV: Holding off on this until project is more mature,
+#        but don't want to lose sight of it.
+#python "$prefix"build_all_exercises_page.py
+#wait

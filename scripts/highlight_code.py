@@ -122,4 +122,4 @@ for filename in filenames:
 
     f.close()
 
-print("Highlighted code.\n")
+print("  Highlighted code.\n")
