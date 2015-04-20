@@ -55,7 +55,7 @@ for filename in files_with_output:
     lines = f.readlines()
     f.close()
 
-    target_string = '<div class="output '
+    target_string = '<div class="output"'
     f = open(path_to_notebooks + filename, 'wb')
     replacement_num = 0
     for line in lines:
@@ -69,7 +69,7 @@ for filename in files_with_output:
 
         elif target_string in line:
             # If this line has a div.output, add an id
-            replacement_string = '<div id="output_%d" class="output ' % replacement_num
+            replacement_string = '<div id="output_%d" class="output"' % replacement_num
             
             # Add a pair of show/ hide buttons right before div.output
             f.write(generate_button(replacement_num).encode('utf-8'))

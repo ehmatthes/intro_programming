@@ -9,6 +9,7 @@ button.hide_output {
 
 button.hide_output, button.show_output {
 	 width: 100px;
+	 margin: 5px 0px 0px 0px;
 }
 
 button.show_output_all {
