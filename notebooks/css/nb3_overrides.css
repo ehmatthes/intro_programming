@@ -30,3 +30,8 @@ div.prompt {
 	 min-width: 0ex;
 	 padding: 0em;
 }
+
+/* Most relevant on earthquake visualization now. */
+img {
+	 max-width: 100%;
+}

@@ -45,7 +45,7 @@ div.highlighted_code_line {
 
 code.inline_code {
 	 background-color: #f0f0f0;
-	 padding: 1px;
+	 padding: 2px;
 	 margin: 1px;
 }
 
@@ -54,4 +54,9 @@ code.inline_code {
 h3.contents_level_two {
 	 margin-left: 20px;
 	 margin-bottom: 0px;
+}
+
+pre code {
+	 display: block;
+	 border-radius: 4px;
 }
