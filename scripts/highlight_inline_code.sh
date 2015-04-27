@@ -11,9 +11,9 @@ new_string='<code class="inline_code">'
 
 if [ -e "../notebooks/" ]
 then
-    find ../notebooks -iname '*.html' | xargs sed -i "s/$old_string/$new_string/"
+    find ../notebooks -iname '*.html' | xargs sed -i "s/$old_string/$new_string/g"
 else
-    find notebooks -iname '*.html' | xargs sed -i "s/$old_string/$new_string/"
+    find notebooks -iname '*.html' | xargs sed -i "s/$old_string/$new_string/g"
 fi
 
 
