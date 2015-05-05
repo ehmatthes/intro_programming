@@ -68,7 +68,7 @@ Now we'll set up the virtualenv:
     (venv)intro_programming$ git clone https://github.com/ehmatthes/intro_programming
 
     # Required to access the notebooks:
-    (venv)intro_programming$ pip install ipython[all]==3
+    (venv)intro_programming$ pip install ipython[all]==3 jsonschema
 
     # Required for testing links within the project:
     (venv)intro_programming$ pip install requests==2.0.0
