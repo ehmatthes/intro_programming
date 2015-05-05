@@ -11,28 +11,31 @@ Contents
 - [Contributing - Brief](#contributing)
     - [Using Miniconda to set up a development environment](#miniconda)
     - [Using virtualenv to set up a development environment](#virtualenv)
-	 - [Open the notebooks](#open_notebooks)
+    - [Open the notebooks](#open_notebooks)
     - [Creating html versions of the notebooks](#html)
     - [Editing Python 2.7 examples](#python2.7)
+    - [Questions](#questions)
 
 <a name='goals'></a>Goals:
 ---
 - Introduce students as quickly as possible to the basics of programming, and then help them choose an interesting project that they're capable of completing.
 - Introduce best practice as early as possible, while remaining accessible to students with no background in programming at all.
-- Make it easy for teachers who know little about programming to start teaching Python to their students.
+- Help teachers who know little about programming start teaching Python to their students.
 - Make it easy for experienced Python programmers to conduct a code review of the project.
 
 <a name='contributing'></a>Contributing - Brief:
 ---
-Contributing to this project requires IPython version 3.0 or greater. These instructions are written based on setting up a development environment on Ubuntu 14.04, but they should be fairly adaptable to any modern system with a Python environment already set up. If you have any questions about getting your development environment set up for contributing to this project, please drop a note in [Issue 11](https://github.com/ehmatthes/intro_programming/issues/11), or get in touch with me directly. I can be reached by email, ehmatthes at gmail, or on twitter [@ehmatthes](https://twitter.com/ehmatthes).
+Contributing to this project requires IPython version 3.0 or higher. These instructions are written based on setting up a development environment on Ubuntu 14.04, but they should be adaptable to any modern system with a Python environment already set up. If you have any questions about getting your development environment set up for contributing to this project, please drop a note in [Issue 11](https://github.com/ehmatthes/intro_programming/issues/11), or get in touch with me directly. I can be reached by email, ehmatthes at gmail, or on twitter [@ehmatthes](https://twitter.com/ehmatthes).
 
 If you would like to start contributing and aren't sure what to do, there is a list of places to start in [Issue 17](https://github.com/ehmatthes/intro_programming/issues/17).
 
-These notebooks are written primarily in Python 3. If the default Python on your system is Python 3, then you will have a simpler time contributing to the project. If you only have Python 2, you might want to consider adding Python 3 to your system. You can contribute to the project using Python 2, since there is so much overlap between the two versions of Python, especially when working on the more basic notebooks. To fully contribute to the project, you will need to have both Python 2 and Python 3 available.
+These notebooks are written primarily in Python 3. If the default Python on your system is Python 3, then you'll have a simpler time contributing to the project. If you only have Python 2, you might want to consider adding Python 3 to your system. You can contribute to the project using Python 2, since there is so much overlap between the two versions of Python, especially when working on the more basic notebooks. To fully contribute to the project, you will need to have both Python 2 and Python 3 available.
 
 ### <a name="miniconda"></a>Using Miniconda to set up a development environment
 
-The first visualization project ([Mapping Global Earthquake Activity](http://introtopython.org/visualization_earthquakes)) uses packages that are most conveniently installed using Conda. The easiest way to do this is using Miniconda. Go to the [Miniconda home page](http://conda.pydata.org/miniconda.html). Download and run the appropriate installer for your system. The following commands will get conda set up on a 32-bit Linux system:
+The first visualization project ([Mapping Global Earthquake Activity](http://introtopython.org/visualization_earthquakes)) uses packages that are most conveniently installed using Conda.
+
+The easiest way to do this is using Miniconda. Go to the [Miniconda home page](http://conda.pydata.org/miniconda.html). Download and run the appropriate installer for your system. The following commands will get conda set up on a 32-bit Linux system:
 
     ~$ wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86.sh
     ~$ bash Miniconda3-latest-Linux-x86.sh
@@ -49,7 +52,7 @@ Once you've got conda installed, use it to make an environment for this project.
 
 From this point, the project works the same as using virtualenv. Skip ahead to [Open the notebooks](#open_notebooks)
 
-### <a name='virtualenv'></a>Using virtualenv with IPython
+### <a name='virtualenv'></a>Using virtualenv to set up a development environment
 You can also use virtualenv to set up a development environment.
 
 #### Install pandoc
@@ -58,6 +61,7 @@ Pandoc is used by IPython Notebook to convert from the *.ipynb* format to *.html
     $ sudo apt-get install pandoc
 
 Now we'll set up the virtualenv:
+
     $ mkdir intro_programming && cd intro_programming
     intro_programming$ virtualenv -p python3 venv
     intro_programming$ source venv/bin/activate
@@ -102,6 +106,9 @@ becomes
     $ mkdir intro_programming2.7 && cd intro_programming2.7
     intro_programming2.7$ virtualenv -p python2.7 venv
 
-There may be a bit more involved in a full setup, depending on which versions of Python you have on your system, but that should get you up and running. If you have any questions about getting the project running locally, drop a note in [Issue 11](https://github.com/ehmatthes/intro_programming/issues/11), or get in touch with me directly. I can be reached by email, ehmatthes at gmail, or on twitter [@ehmatthes](https://twitter.com/ehmatthes).
+There may be a bit more involved in a full setup, depending on which versions of Python you have on your system, but that should get you up and running.
+
+### <a name="questions"></a>Questions
+If you have any questions about getting the project running locally, drop a note in [Issue 11](https://github.com/ehmatthes/intro_programming/issues/11), or get in touch with me directly. I can be reached by email, ehmatthes at gmail, or on twitter [@ehmatthes](https://twitter.com/ehmatthes).
 
 Thanks for looking!
