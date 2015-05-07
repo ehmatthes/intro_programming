@@ -35,3 +35,24 @@ div.prompt {
 img {
 	 max-width: 100%;
 }
+
+/* Use bootstrap-style headings. */
+div.rendered_html h1 {
+	 font-weight: 500;
+	 font-size: 36px;
+}
+
+div.rendered_html h2 {
+	 font-weight: 500;
+	 font-size: 30px;
+}
+
+div.rendered_html h3 {
+	 font-weight: 500;
+	 font-size: 24px;
+}
+
+div.rendered_html h4 {
+	 font-weight: 500;
+	 font-size: 18px;
+}
