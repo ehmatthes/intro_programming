@@ -1,0 +1,62 @@
+/* Styles for the overall site.
+	These styles are unrelated to bootstrap, etc. */
+
+/* --- Show/ Hide output --- */
+/* Start out with hide buttons not displayed. */
+button.hide_output {
+	 display: none;
+}
+
+button.hide_output, button.show_output {
+	 width: 100px;
+	 margin: 5px 0px 0px 0px;
+}
+
+button.show_output_all {
+	 margin-right: 10px;
+}
+
+/* Start out with output hidden. */
+div.output {
+	 display: none;
+}
+
+
+/* Twitter share button */
+div.twitter-share-button {
+	 float: right;
+	 margin-top: 14px;
+	 margin-right: -40px;
+}
+
+/* Twitter follow button */
+div.twitter-follow-button {
+    float: right;
+    margin-top: 14px;
+    margin-right: 15px;
+    border: solid 0px black;
+}
+
+
+/* Highlighting code */
+div.highlighted_code_line {
+	 background-color: #e3e3e3;
+}
+
+code.inline_code {
+	 background-color: #f0f0f0;
+	 padding: 2px;
+	 margin: 1px;
+}
+
+
+/* all_exercises_challenges */
+h3.contents_level_two {
+	 margin-left: 20px;
+	 margin-bottom: 0px;
+}
+
+pre code {
+	 display: block;
+	 border-radius: 4px;
+}

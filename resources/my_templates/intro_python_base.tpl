@@ -3,12 +3,12 @@
 
 
 {%- block header -%}
-  {% include "my_templates/intro_python_header.html" %}
+  {% include "resources/my_templates/intro_python_header.html" %}
 {%- endblock header -%}
 
 {% block body %}
   <body>
-   {% include "my_templates/navbar.html" %}
+   {% include "resources/my_templates/navbar.html" %}
       <div class="container" id="notebook-container">
         {{ super() }}
       </div>
@@ -16,6 +16,6 @@
 {%- endblock body %}
 
 {% block footer %}
-  {% include "my_templates/include_jquery.html" %}
+  {% include "resources/my_templates/include_jquery.html" %}
   </html>
 {% endblock footer %}

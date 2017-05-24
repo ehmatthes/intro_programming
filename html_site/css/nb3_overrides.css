@@ -1,0 +1,58 @@
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
+}
+
+div#notebook {
+  overflow: visible;
+  border-top: none;
+}
+
+@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+}
+
+/* Site doesn't use input or output prompts. */
+
+div.prompt {
+	 min-width: 0ex;
+	 padding: 0em;
+}
+
+/* Most relevant on earthquake visualization now. */
+img {
+	 max-width: 100%;
+}
+
+/* Use bootstrap-style headings. */
+div.rendered_html h1 {
+	 font-weight: 500;
+	 font-size: 36px;
+}
+
+div.rendered_html h2 {
+	 font-weight: 500;
+	 font-size: 30px;
+}
+
+div.rendered_html h3 {
+	 font-weight: 500;
+	 font-size: 24px;
+}
+
+div.rendered_html h4 {
+	 font-weight: 500;
+	 font-size: 18px;
+}
