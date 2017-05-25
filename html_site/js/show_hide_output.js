@@ -2,7 +2,7 @@
 $(document).ready(function(){
 	 $("button.show_output_all").click(function(){
 		  // Make all output visible
-		  $("div.output").show();
+		  $("div.output_stdout").show();
 		  // Make sure all buttons toggled to 'hide output'
 		  $("button.show_output").hide();
 		  $("button.hide_output").show();
@@ -13,7 +13,7 @@ $(document).ready(function(){
 $(document).ready(function(){
 	 $("button.hide_output_all").click(function(){
 		  // Hide all output
-		  $("div.output").hide();
+		  $("div.output_stdout").hide();
 		  // Make sure all buttons toggled to 'show output'
 		  $("button.show_output").show();
 		  $("button.hide_output").hide();

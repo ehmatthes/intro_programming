@@ -17,7 +17,7 @@ button.show_output_all {
 }
 
 /* Start out with output hidden. */
-div.output {
+div.output_stdout {
 	 display: none;
 }
 

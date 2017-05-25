@@ -6,6 +6,12 @@
   {% include "resources/my_templates/intro_python_header.html" %}
 {%- endblock header -%}
 
+{% block output %} {# outputs works, but hidden by output #}
+  <button id='show_output_0' class='btn btn-success btn-xs show_output' target='0'>show output</button>
+  <button id='hide_output_0' class='btn btn-success btn-xs hide_output' target='0'>hide output</button>
+  {{ super() }}
+{% endblock output %}
+
 {% block body %}
   <body>
    {% include "resources/my_templates/navbar.html" %}
@@ -16,7 +22,7 @@
         </div>
 
         {{ super() }}
-        
+
       </div>
   </body>
 {%- endblock body %}
