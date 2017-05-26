@@ -24,7 +24,7 @@ $(document).ready(function(){
 $(document).ready(function(){
 	 $("button.show_output").click(function(){
 		  var id_num = $(this).attr('target')
-		  $("#output_"+id_num).show();
+		  $("#output_stdout_"+id_num).show();
 		  $("button#show_output_"+id_num).hide();
 		  $("button#hide_output_"+id_num).show();
 	 });
@@ -34,7 +34,7 @@ $(document).ready(function(){
 $(document).ready(function(){
 	 $("button.hide_output").click(function(){
 		  var id_num = $(this).attr('target')
-		  $("#output_"+id_num).hide();
+		  $("#output_stdout_"+id_num).hide();
 		  $("button#hide_output_"+id_num).hide();
 		  $("button#show_output_"+id_num).show();
 	 });
