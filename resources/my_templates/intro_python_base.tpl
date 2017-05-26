@@ -25,15 +25,17 @@
 {# Will these blocks (output, stream_stdout) always match 1:1?
     If there's a stream_stdout block, it's inside an output block,
     so we should be able to use the cell_count, maybe -1 to match value before increment?
+   Can't use indentation in this next block, because output uses <pre> tag, which will
+    keep the whitespace from template indentation.
     #}
 {% block stream_stdout %}
-  {% for line in super().split('\n') %}
-    {% if '<div class="output_subarea output_stream output_stdout output_text">' in line %}
-      <div id="output_stdout_{{ cell_count|length }}" class="output_subarea output_stream output_stdout output_text">
-    {%- else -%}
-      {{ line }}
-    {%- endif -%}
-  {% endfor %}
+{% for line in super().split('\n') %}
+{% if '<div class="output_subarea output_stream output_stdout output_text">' in line %}
+<div id="output_stdout_{{ cell_count|length }}" class="output_subarea output_stream output_stdout output_text">
+{%- else -%}
+{{ line }}
+{%- endif -%}
+{% endfor %}
 {% endblock stream_stdout %}
 
 
