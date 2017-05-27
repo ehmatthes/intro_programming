@@ -23,5 +23,5 @@ run(["python3.6", "-m", "nbconvert", "notebooks/python_essentials/hello_world.ip
 run(["python3.6", "-m", "nbconvert", "notebooks/python_essentials/var_string_num.ipynb", "--template=resources/my_templates/intro_python_base.tpl",
         "--FilesWriter.build_directory='html_site'"])
 
-run(["python3.6", "-m", "nbconvert", "notebooks/python_essentials/if_statements.ipynb", "--template=resources/my_templates/intro_python_base.tpl",
-        "--FilesWriter.build_directory='html_site'"])
+# run(["python3.6", "-m", "nbconvert", "notebooks/python_essentials/if_statements.ipynb", "--template=resources/my_templates/intro_python_base.tpl",
+#         "--FilesWriter.build_directory='html_site'"])
