@@ -2,7 +2,7 @@
 $(document).ready(function(){
 	 $("button.show_output_all").click(function(){
 		  // Make all output visible
-		  $("div.output_stdout").show();
+		  $("div.output_subarea").show();
 		  // Make sure all buttons toggled to 'hide output'
 		  $("button.show_output").hide();
 		  $("button.hide_output").show();
@@ -13,7 +13,7 @@ $(document).ready(function(){
 $(document).ready(function(){
 	 $("button.hide_output_all").click(function(){
 		  // Hide all output
-		  $("div.output_stdout").hide();
+		  $("div.output_subarea").hide();
 		  // Make sure all buttons toggled to 'show output'
 		  $("button.show_output").show();
 		  $("button.hide_output").hide();
@@ -24,7 +24,7 @@ $(document).ready(function(){
 $(document).ready(function(){
 	 $("button.show_output").click(function(){
 		  var id_num = $(this).attr('target')
-		  $("#output_stdout_"+id_num).show();
+		  $("#output_subarea_"+id_num).show();
 		  $("button#show_output_"+id_num).hide();
 		  $("button#hide_output_"+id_num).show();
 	 });
@@ -34,7 +34,7 @@ $(document).ready(function(){
 $(document).ready(function(){
 	 $("button.hide_output").click(function(){
 		  var id_num = $(this).attr('target')
-		  $("#output_stdout_"+id_num).hide();
+		  $("#output_subarea_"+id_num).hide();
 		  $("button#hide_output_"+id_num).hide();
 		  $("button#show_output_"+id_num).show();
 	 });

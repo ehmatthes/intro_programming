@@ -31,16 +31,27 @@
     so we should be able to use the cell_count, maybe -1 to match value before increment?
    Can't use indentation in this next block, because output uses <pre> tag, which will
     keep the whitespace from template indentation.
-    #}
+   Also applying this to stream_stderr because some blocks focus on errors.
+	#}
 {% block stream_stdout %}
 {% for line in super().split('\n') %}
 {% if '<div class="output_subarea output_stream output_stdout output_text">' in line %}
-<div id="output_stdout_{{ cell_count|length }}" class="output_subarea output_stream output_stdout output_text">
+<div id="output_subarea_{{ cell_count|length }}" class="output_subarea output_stream output_stdout output_text">
 {%- else -%}
 {{ line }}
 {%- endif -%}
 {% endfor %}
 {% endblock stream_stdout %}
+
+{% block error %}
+{% for line in super().split('\n') %}
+{% if '<div class="output_subarea output_text output_error">' in line %}
+<div id="output_subarea_{{ cell_count|length }}" class="output_subarea output_text output_error">
+{%- else -%}
+{{ line }}
+{%- endif -%}
+{% endfor %}
+{% endblock error %}
 
 
 {% block body %}
