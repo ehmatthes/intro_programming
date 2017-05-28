@@ -19,7 +19,7 @@ new_dirs = []
 ipynb_files  = {}
 for root, dirs, files in os.walk("notebooks"):
     for file in files:
-        if '.ipynb' in file:
+        if file.endswith('.ipynb'):
             ipynb_files[root] = file
             
             new_dir = root.replace('notebooks', 'html_site')
@@ -39,17 +39,15 @@ sys.exit()
 #  ie, respond to any cell metadata or tags?
 #  can remove cells that are tagged "invisible"
 
-# This command is a little fragile. It needs to be modified to match how the user
-#  runs python commands on their system. Could say python by default, but accept
-#  a command line argument if the user has a different python command on their system.
-#  For example, one of my machines uses the command python3.6 instead of python.
-#  python for system python, python3.6 for latest version.
+# This gets the command used to run this script. If the user calls with python,
+#  it uses that command, if they use python3.6, it uses that command.
+python_caller = os.environ['_']
 
-run(["python3.6", "-m", "nbconvert", "notebooks/python_essentials/hello_world.ipynb", "--template=resources/my_templates/intro_python_base.tpl",
+run([python_caller, "-m", "nbconvert", "notebooks/python_essentials/hello_world.ipynb", "--template=resources/my_templates/intro_python_base.tpl",
         "--FilesWriter.build_directory='html_site'"])
 
-run(["python3.6", "-m", "nbconvert", "notebooks/python_essentials/var_string_num.ipynb", "--template=resources/my_templates/intro_python_base.tpl",
+run([python_caller, "-m", "nbconvert", "notebooks/python_essentials/var_string_num.ipynb", "--template=resources/my_templates/intro_python_base.tpl",
         "--FilesWriter.build_directory='html_site'"])
 
-# run(["python3.6", "-m", "nbconvert", "notebooks/python_essentials/if_statements.ipynb", "--template=resources/my_templates/intro_python_base.tpl",
+# run([python_caller, "-m", "nbconvert", "notebooks/python_essentials/if_statements.ipynb", "--template=resources/my_templates/intro_python_base.tpl",
 #         "--FilesWriter.build_directory='html_site'"])
