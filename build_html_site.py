@@ -2,12 +2,6 @@
 # Find all ipynb files in notebooks/, then convert each.
 #  It should also preserve the directory structure found in notebooks/
 
-# This could be made more efficient with a cli argument to only process
-#  new or modified notebooks. For now it usually needs to process all,
-#  because the conversion script itself is changing often. But once the
-#  conversion process is stable, that kind of flag might be useful.
-#  (move this to an issue)
-
 # DEV:
 #  Also need to copy resources such as images over to html_site?
 #   But not .py files.
@@ -15,13 +9,14 @@
 import os, sys
 
 from subprocess import run
+from shutil import rmtree
 
 
 print("Converting all ipynb files in notebooks/ to html.")
-print("cwd:", os.getcwd())
+print("  cwd:", os.getcwd())
 
 new_dirs = []
-#pynb_files{path:filename}
+# dict structure: ipynb_files{path:filename}
 ipynb_files  = {}
 for root, dirs, files in os.walk("notebooks"):
     for file in files:
@@ -32,10 +27,19 @@ for root, dirs, files in os.walk("notebooks"):
             if new_dir not in new_dirs:
                 new_dirs.append(new_dir)
 
+# Delete html_site, or empty it. Copy js and css resources to the directory.
+print("\nDeleting current html_site directory...")
+try:
+    rmtree('html_site')
+    print("  Deleted html_site.")
+except FileNotFoundError:
+    print("  No html_site directory found.")
+
 # Create any directory in html_site, including root, that doesn't already exist.
-#  Should this clear out js and css from html_site, and all other dirs?
+print("\nBuilding new html_site directory...")
 for new_dir in new_dirs:
     os.makedirs(new_dir, exist_ok=True)
+print("  Built html_site directory.")
 
 sys.exit()
 
