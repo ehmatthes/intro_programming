@@ -2,6 +2,12 @@
 # Find all ipynb files in notebooks/, then convert each.
 #  It should also preserve the directory structure found in notebooks/
 
+# This could be made more efficient with a cli argument to only process
+#  new or modified notebooks. For now it usually needs to process all,
+#  because the conversion script itself is changing often. But once the
+#  conversion process is stable, that kind of flag might be useful.
+#  (move this to an issue)
+
 # DEV:
 #  Also need to copy resources such as images over to html_site?
 #   But not .py files.

@@ -17,7 +17,8 @@ button.show_output_all {
 }
 
 /* Start out with output hidden. */
-div.output {
+/*  This includes stdout, and error outputs. */
+div.output_subarea {
 	 display: none;
 }
 
