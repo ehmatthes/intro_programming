@@ -2,9 +2,11 @@ notes/*
 *~
 *.ipynb_checkpoints
 *#
+
+ignored_resources/
+
 notebooks/*.html*
 notebooks/__pycache__
-notebooks/my_templates/ignored_templates
 
 html_site/
 
