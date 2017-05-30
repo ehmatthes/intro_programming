@@ -14,12 +14,12 @@ print("Converting all ipynb files in notebooks/ to html.")
 print("  cwd:", os.getcwd())
 
 new_dirs = []
-# dict structure: ipynb_files{path:filename}
+# dict structure: ipynb_files{filename:path}
 ipynb_files  = {}
 for root, dirs, files in os.walk("notebooks"):
     for file in files:
         if file.endswith('.ipynb'):
-            ipynb_files[root] = file
+            ipynb_files[file] = root
             
             new_dir = root.replace('notebooks', 'html_site')
             if new_dir not in new_dirs:
@@ -48,20 +48,32 @@ dir_util.copy_tree('resources/css', 'html_site/css')
 print("  Created html_site, and copied js and css resources.")
 
 
-
-sys.exit()
-
-
-
 # Need to run any pre-processing on raw .ipynb files?
 #  ie, respond to any cell metadata or tags?
-#  can remove cells that are tagged "invisible"
 
 # DEV: may need to copy images and some other resources, but not .py files.
 
 # This gets the command used to run this script. If the user calls with python,
 #  it uses that command, if they use python3.6, it uses that command.
 python_caller = os.environ['_']
+
+print("\nConverting all notebooks...")
+for ipynb_file, path in ipynb_files.items():
+    nb_filepath = os.path.join(path, ipynb_file)
+    print("  converting:", nb_filepath)
+
+    build_directory = path.replace('notebooks/', 'html_site/')
+
+    run([python_caller, "-m", "nbconvert", os.path.join(path, ipynb_file),
+         "--template=resources/my_templates/intro_python_base.tpl",
+         "--FilesWriter.build_directory='{0}'".format(build_directory)])
+
+
+sys.exit()
+
+
+
+
 
 run([python_caller, "-m", "nbconvert", "notebooks/python_essentials/hello_world.ipynb", "--template=resources/my_templates/intro_python_base.tpl",
         "--FilesWriter.build_directory='html_site'"])
