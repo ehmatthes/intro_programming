@@ -47,6 +47,11 @@ dir_util.copy_tree('resources/js', 'html_site/js')
 dir_util.copy_tree('resources/css', 'html_site/css')
 print("  Created html_site, and copied js and css resources.")
 
+# Copy index file to html_site.
+print("Copying index file into html_site...")
+shutil.copy2('resources/html_resources/index.html', 'html_site/index.html')
+print("  Copied index file.")
+sys.exit()
 
 # Need to run any pre-processing on raw .ipynb files?
 #  ie, respond to any cell metadata or tags?
@@ -69,17 +74,3 @@ for ipynb_file, path in ipynb_files.items():
          "--FilesWriter.build_directory='{0}'".format(build_directory)])
 
 
-sys.exit()
-
-
-
-
-
-run([python_caller, "-m", "nbconvert", "notebooks/python_essentials/hello_world.ipynb", "--template=resources/my_templates/intro_python_base.tpl",
-        "--FilesWriter.build_directory='html_site'"])
-
-run([python_caller, "-m", "nbconvert", "notebooks/python_essentials/var_string_num.ipynb", "--template=resources/my_templates/intro_python_base.tpl",
-        "--FilesWriter.build_directory='html_site'"])
-
-# run([python_caller, "-m", "nbconvert", "notebooks/python_essentials/if_statements.ipynb", "--template=resources/my_templates/intro_python_base.tpl",
-#         "--FilesWriter.build_directory='html_site'"])
