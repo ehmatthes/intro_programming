@@ -63,15 +63,16 @@ for ipynb_file, path in ipynb_files.items():
     print("  converting:", nb_filepath)
 
     build_directory = path.replace('notebooks', 'html_site')
-    print("  bd:", build_directory)
+
     if ipynb_file == 'index.ipynb':
         template = 'resources/my_templates/intro_python_index.tpl'
     else:
         template = 'resources/my_templates/intro_python_default.tpl'
-    print("  using template:", template)
 
     run([python_caller, "-m", "nbconvert", os.path.join(path, ipynb_file),
          "--template={0}".format(template),
-         "--FilesWriter.build_directory='{0}'".format(build_directory)])
+         "--FilesWriter.build_directory='{0}'".format(build_directory),
+         "--TemplateExporter.exclude_input_prompt=True",
+         ])
 
 

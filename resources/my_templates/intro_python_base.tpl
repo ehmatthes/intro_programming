@@ -7,13 +7,6 @@
 {%- endblock header -%}
 
 
-{% block in_prompt %}
-  {# Blank; we're removing the input prompt. #}
-  {# This can be done with a config setting for nbconvert.
-     TemplateExporter.exclude_input_prompt : Bool
-	  #}
-{% endblock %}
-
 {# Need a unique identifier for each output cell, to toggle individual cells' visbility.
     Make an empty list, and add to the list each time an output block is rendered.
     Use the length of the list as the unique identifier.
