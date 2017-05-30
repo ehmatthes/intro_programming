@@ -75,4 +75,4 @@ for ipynb_file, path in ipynb_files.items():
          "--TemplateExporter.exclude_input_prompt=True",
          ])
 
-
+    break
