@@ -9,6 +9,9 @@
 
 {% block in_prompt %}
   {# Blank; we're removing the input prompt. #}
+  {# This can be done with a config setting for nbconvert.
+     TemplateExporter.exclude_input_prompt : Bool
+	  #}
 {% endblock %}
 
 {# Need a unique identifier for each output cell, to toggle individual cells' visbility.
@@ -54,20 +57,8 @@
 {% endblock error %}
 
 
-{% block body %}
-  <body>
-   {% include "resources/my_templates/navbar.html" %}
-      <div class="container" id="notebook-container">
-        <div class='text-right'>
-          <button id='show_output_all' class='btn btn-success btn-xs show_output_all'>Show all output</button>
-          <button id='hide_output_all' class='btn btn-success btn-xs hide_output_all'>Hide all output</button>
-        </div>
+{# Body block is defined by intro_python_index, or intro_python_default. #}
 
-        {{ super() }}
-
-      </div>
-  </body>
-{%- endblock body %}
 
 {% block footer %}
   {% include "resources/my_templates/include_jquery.html" %}
