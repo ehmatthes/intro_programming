@@ -64,6 +64,10 @@ for ipynb_file, path in ipynb_files.items():
 
     build_directory = path.replace('notebooks', 'html_site')
 
+    # This is manually determining which notebooks get show/hide all output buttons.
+    #  Might be better to scrape the files, look for output cells, and only place
+    #  show/hide all buttons on notebooks with output cells. Can this be done
+    #  in the template?
     if ipynb_file == 'index.ipynb':
         template = 'resources/my_templates/intro_python_index.tpl'
     else:
