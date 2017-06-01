@@ -18,7 +18,7 @@ new_dirs = []
 ipynb_files  = {}
 for root, dirs, files in os.walk("notebooks"):
     for file in files:
-        if file.endswith('.ipynb'):
+        if file.endswith('.ipynb') and '.ipynb_checkpoints' not in root:
             ipynb_files[file] = root
             
             new_dir = root.replace('notebooks', 'html_site')
@@ -79,4 +79,48 @@ for ipynb_file, path in ipynb_files.items():
          "--TemplateExporter.exclude_input_prompt=True",
          ])
 
-    break
+
+
+# Post-processing of html files.
+#   Some customization is not straightforward, or not possible through
+#     nbconvert alone. For these steps, we work directly with the html files
+#     in html_site/.
+#   Ideally all of these steps will be replaced by more nuanced use of nbconvert
+#     and templates.
+
+# Modify css and js links to match directory level.
+#   An html file in html_site/python_essentials/ needs to link to
+#     ../css/site_styles.css, etc.
+#   Find all html files in html_site, get nesting level from path structure,
+#     and convert links appropriately.
+#   This approach is almost identical to what's used above in finding
+#     all ipynb files; may be appropriate to refactor this. Not necessary
+#     if some or all of this can be done with nbconvert.
+
+# Find all html files.
+html_files  = {}
+for root, dirs, files in os.walk("html_site"):
+    for file in files:
+        if file.endswith('.html'):
+            print(root, file, root.count('/'))
+
+
+
+            # May be easier to do the work here, rather than just storing
+            #  the html files found and then processing them?
+#            html_files[file] = root
+
+
+
+
+sys.exit()
+
+# Replace links in each file depending on length of path.
+print("\nModifying links to css and js resources...")
+for html_file, path in html_files.items():
+    html_filepath = os.path.join(path, html_file)
+    # Nesting level is number of steps in path, equivalent to
+    #  number of slashes minus 1. html_site/ doesn't count.
+    nesting_level = html_filepath.count('/') - 1
+    prefix = '../' * nesting_level
+    
