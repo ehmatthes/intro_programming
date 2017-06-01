@@ -5,6 +5,7 @@
 import os, sys
 import shutil
 from distutils import dir_util
+import re
 
 from subprocess import run
 
@@ -102,14 +103,26 @@ html_files  = {}
 for root, dirs, files in os.walk("html_site"):
     for file in files:
         if file.endswith('.html'):
-            print(root, file, root.count('/'))
+            # Determine nesting level of file, modify all css and js links in file.
+            prefix = '../' * root.count('/')
+            html_filepath = os.path.join(root, file)
+
+            css_re = r'<link href="css'
+            # Open file, copy text, make substition, rewrite file.
+            with open(html_filepath) as f:
+                file_text = f.read()
+            new_css_link = '<link href="{0}css'.format(prefix)
+            new_file_text = re.sub(css_re, new_css_link, file_text)
+            with open(html_filepath, 'w') as f:
+                f.write(new_file_text)
+                    
 
 
 
             # May be easier to do the work here, rather than just storing
             #  the html files found and then processing them?
 #            html_files[file] = root
-
+# No, break this into steps.
 
 
 
