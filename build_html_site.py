@@ -65,6 +65,9 @@ for ipynb_file, path in ipynb_files.items():
 
     build_directory = path.replace('notebooks', 'html_site')
 
+    # Calculate prefix for path to css and js, set as env var.
+    os.environ['CSS_JS_PREFIX'] = build_directory.count('/') * '../'
+
     # This is manually determining which notebooks get show/hide all output buttons.
     #  Might be better to scrape the files, look for output cells, and only place
     #  show/hide all buttons on notebooks with output cells. Can this be done
@@ -77,10 +80,11 @@ for ipynb_file, path in ipynb_files.items():
     run([python_caller, "-m", "nbconvert", os.path.join(path, ipynb_file),
          "--template={0}".format(template),
          "--FilesWriter.build_directory='{0}'".format(build_directory),
+         "--to", "scripts.css_js_exporter.CssJsExporter",
          "--TemplateExporter.exclude_input_prompt=True",
          ])
 
-
+sys.exit()
 
 # Post-processing of html files.
 #   Some customization is not straightforward, or not possible through

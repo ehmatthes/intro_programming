@@ -11,18 +11,18 @@
 		 <link rel="shortcut icon" href="images/favicon.png">
 
 		 <!-- css from IPython 3 -->
-		 <link href="css/nbconvert3_styles.css" rel="stylesheet">
-		 <link href="css/nb3_overrides.css" rel="stylesheet">
+		 <link href="{{ css_js_prefix }}css/nbconvert3_styles.css" rel="stylesheet">
+		 <link href="{{ css_js_prefix }}css/nb3_overrides.css" rel="stylesheet">
 
 		 <!-- Bootstrap core CSS -->
-		 <link href="css/bootstrap.css" rel="stylesheet">
+		 <link href="{{ css_js_prefix }}css/bootstrap.css" rel="stylesheet">
 
 		 <!-- Custom styles for this template -->
-		 <link href="css/non-responsive.css" rel="stylesheet">
+		 <link href="{{ css_js_prefix }}css/non-responsive.css" rel="stylesheet">
 
 		 <!-- My overrides -->
-		 <link href="css/bootstrap_overrides.css" rel="stylesheet">
-		 <link href="css/site_styles.css" rel="stylesheet">
+		 <link href="{{ css_js_prefix }}css/bootstrap_overrides.css" rel="stylesheet">
+		 <link href="{{ css_js_prefix }}css/site_styles.css" rel="stylesheet">
 
 		 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		 <!--[if lt IE 9]>
@@ -30,13 +30,13 @@
 			  <script src="../../assets/js/respond.min.js"></script>
 		 <![endif]-->
 		 
-		 <script src="js/jquery.js"></script>
+		 <script src="{{ css_js_prefix }}js/jquery.js"></script>
 		 <!-- necessary?
 		 		 <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
 		 -->
 
-		 <script type="text/javascript" src="js/nbconvert_js.js"></script>
-		 <script type="text/javascript" src="js/show_hide_output.js"></script>
+		 <script type="text/javascript" src="{{ css_js_prefix }}js/nbconvert_js.js"></script>
+		 <script type="text/javascript" src="{{ css_js_prefix }}js/show_hide_output.js"></script>
 
 		 {% include "ignored_resources/ga_code.txt" ignore missing %}
 	 </head>
