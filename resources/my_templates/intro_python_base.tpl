@@ -6,6 +6,29 @@
   {% include "resources/my_templates/intro_python_header.html" %}
 {%- endblock header -%}
 
+{%- block input -%}
+  {% set marker_tags=[] %}
+  {% set line_count=[] %}
+
+  {% for line in super().split('\n') %}
+    {# Pick out the lines that need highlighting, and set style appropriately. #}
+
+	 {% if '<pre>' in line %}
+	   {% set _ = marker_tags.append('<pre>') %}
+	 {% elif '</pre>' in line %}
+	   {% set _ = marker_tags.append('</pre>') %}
+	 {% endif %}
+
+	 {% if '<pre>' in marker_tags and '</pre>' not in marker_tags %}
+	   {% set _ = line_count.append(1) %}
+	   {{ line_count|length }}<div class="highlighted_code_line">{{ line }}</div>
+	 {% else %}
+	   {{ line }}
+	 {% endif %}
+
+  {% endfor %}
+
+{%- endblock input -%}
 
 {# Need a unique identifier for each output cell, to toggle individual cells' visbility.
     Make an empty list, and add to the list each time an output block is rendered.

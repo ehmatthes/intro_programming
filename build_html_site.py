@@ -88,3 +88,6 @@ for ipynb_file, path in ipynb_files.items():
          "--to", "scripts.css_js_exporter.CssJsExporter",
          "--TemplateExporter.exclude_input_prompt=True",
          ])
+
+    if 'var_string_num' in ipynb_file:
+        break
