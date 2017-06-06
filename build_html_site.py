@@ -1,6 +1,11 @@
 """Script to run conversion from ipynb to html."""
 # Find all ipynb files in notebooks/, then convert each.
-#  It should also preserve the directory structure found in notebooks/
+#   It should also preserve the directory structure found in notebooks/
+
+# For development work, run this command from root directory:
+#    $ cd html_site/ && python3.6 -m http.server && cd ..
+# If you just run the server from html_site, you need to restart it
+#   every time you run this script because html_site gets rebuilt.
 
 import os, sys
 import shutil
