@@ -13,27 +13,26 @@
   {%- set marker_tags=[] -%}
   {%- set line_count=[] -%}
 
-  {%- for line in super().split('\n') -%}
-    {# Pick out the lines that need highlighting, and set style appropriately. #}
+{%- for line in super().split('\n') -%}
+{# Pick out the lines that need highlighting, and set style appropriately. #}
 
-	 {%- if '<pre>' in line -%}
-	   {%- set _ = marker_tags.append('<pre>') -%}
-	 {%- elif '</pre>' in line -%}
-	   {%- set _ = marker_tags.append('</pre>') -%}
-	 {%- endif -%}
+{%- if '<pre>' in line -%}
+{%- set _ = marker_tags.append('<pre>') -%}
+{%- elif '</pre>' in line -%}
+{%- set _ = marker_tags.append('</pre>') -%}
+{%- endif -%}
+{%- if '<pre>' in marker_tags and '</pre>' not in marker_tags -%}
+{%- set _ = line_count.append(1) -%}
+{%- if line_count|length in cell.metadata['highlight_lines'] -%}
+<div class="highlighted_code_line">{{ line }}</div>
+{%- else -%}
+{{ line }}
+{% endif -%}
+{%- else -%}
+{{ line }}
+{%- endif -%}
 
-	 {%- if '<pre>' in marker_tags and '</pre>' not in marker_tags -%}
-	   {%- set _ = line_count.append(1) -%}
-		{%- if line_count|length > 1 -%}
-		  <div class="highlighted_code_line">{{ line }}</div>
-		{%- else -%}
-		  {{ line }}
-		{%- endif -%}
-	 {%- else -%}
-	   {{ line }}
-	 {%- endif -%}
-
-  {%- endfor -%}
+{%- endfor -%}
 
 {%- endblock input -%}
 
