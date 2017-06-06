@@ -7,20 +7,21 @@
 {%- endblock header -%}
 
 
-
-
 {%- block input -%}
   {%- set marker_tags=[] -%}
   {%- set line_count=[] -%}
 
-{%- for line in super().split('\n') -%}
 {# Pick out the lines that need highlighting, and set style appropriately. #}
+{%- for line in super().split('\n') -%}
 
+{# Look for beginning and end of actual lines of code. #}
 {%- if '<pre>' in line -%}
 {%- set _ = marker_tags.append('<pre>') -%}
 {%- elif '</pre>' in line -%}
 {%- set _ = marker_tags.append('</pre>') -%}
 {%- endif -%}
+
+{# Highlight any lines in cell metadata highlight_lines. #}
 {%- if '<pre>' in marker_tags and '</pre>' not in marker_tags -%}
 {%- set _ = line_count.append(1) -%}
 {%- if line_count|length in cell.metadata['highlight_lines'] -%}
@@ -28,6 +29,7 @@
 {%- else -%}
 {{ line }}
 {% endif -%}
+
 {%- else -%}
 {{ line }}
 {%- endif -%}
@@ -35,8 +37,6 @@
 {%- endfor -%}
 
 {%- endblock input -%}
-
-
 
 
 {# Need a unique identifier for each output cell, to toggle individual cells' visbility.
