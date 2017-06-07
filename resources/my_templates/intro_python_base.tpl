@@ -26,7 +26,12 @@
 {%- set _ = line_count.append(1) -%}
 {# use a {}.get() here, to deal with missing metadata #}
 {%- if line_count|length in cell.metadata.get('highlight_lines',None)|expand_highlight_lines -%}
+{%- if line_count|length > 1 -%}
 <div class="highlighted_code_line">{{ line }}</div>
+{%- else -%}
+{# Need to treat the placement of highlighted line different for first line. #}
+{{ line|replace('<pre>', '<pre><div class="highlighted_code_line">') }}</div>
+{%- endif -%}
 {%- else -%}
 {{ line }}
 {% endif -%}
