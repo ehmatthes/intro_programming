@@ -3,8 +3,9 @@ def expand_highlight_lines(highlight_string):
     and returns list [5, 6, 8, 9, 10].
     """
 
-    print("\n --- hello template world! ---\n")
-    print('highlight_string:', highlight_string)
+    # Some cells have no metadata.
+    if not highlight_string:
+        return []
 
     expanded_lines = []
     for term in highlight_string.split(','):
