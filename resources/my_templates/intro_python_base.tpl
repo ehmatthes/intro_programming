@@ -24,7 +24,8 @@
 {# Highlight any lines in cell metadata highlight_lines. #}
 {%- if '<pre>' in marker_tags and '</pre>' not in marker_tags -%}
 {%- set _ = line_count.append(1) -%}
-{%- if line_count|length in cell.metadata['highlight_lines'] -%}
+{# use a {}.get() here, to deal with missing metadata #}
+{%- if line_count|length in cell.metadata['highlight_lines']|expand_highlight_lines -%}
 <div class="highlighted_code_line">{{ line }}</div>
 {%- else -%}
 {{ line }}

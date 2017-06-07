@@ -15,7 +15,6 @@ import re
 from subprocess import run
 
 
-
 print("Converting all ipynb files in notebooks/ to html.")
 print("  cwd:", os.getcwd())
 
@@ -83,6 +82,7 @@ for ipynb_file, path in ipynb_files.items():
         template = 'resources/my_templates/intro_python_default.tpl'
 
     run([python_caller, "-m", "nbconvert", os.path.join(path, ipynb_file),
+         "--config", "scripts/my_config.py",
          "--template={0}".format(template),
          "--FilesWriter.build_directory='{0}'".format(build_directory),
          "--to", "scripts.css_js_exporter.CssJsExporter",
