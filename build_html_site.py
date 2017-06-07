@@ -89,5 +89,5 @@ for ipynb_file, path in ipynb_files.items():
          "--TemplateExporter.exclude_input_prompt=True",
          ])
 
-    if 'var_string_num' in ipynb_file:
+    if 'var_string_num_processed' in ipynb_file:
         break

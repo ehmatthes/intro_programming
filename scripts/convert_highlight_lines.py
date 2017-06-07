@@ -39,6 +39,8 @@ for cell in nb_json['cells']:
             #  that held the old highlight string.
             old_highlight_string = code_lines.pop(0)
             new_highlight_string = old_highlight_string[14:-2]
+            correct_line_nums = [int(line_num) - 1 for line_num in new_highlight_string.split(',')]
+            new_highlight_string = ','.join([str(line_num) for line_num in correct_line_nums])
 
             print('  ohs:', old_highlight_string)
             print('  nhs:', new_highlight_string)
