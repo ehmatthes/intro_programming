@@ -14,8 +14,6 @@ import re
 
 from subprocess import run
 
-import scripts.convert_highlight_lines as chl
-
 
 print("Converting all ipynb files in notebooks/ to html.")
 print("  cwd:", os.getcwd())
@@ -69,12 +67,6 @@ for ipynb_file, path in ipynb_files.items():
     nb_filepath = os.path.join(path, ipynb_file)
     print("  converting:", nb_filepath)
 
-    # For this run only, converting all notebooks to new highlight lines format.
-    #  These lines should only be in this commit of build_html_site.py.
-    #  After that, this old format should never be an issue again.
-    chl.convert_file(nb_filepath)
-
-
     build_directory = path.replace('notebooks', 'html_site')
 
     # Calculate prefix for path to css and js, set as env var.
@@ -97,5 +89,5 @@ for ipynb_file, path in ipynb_files.items():
          "--TemplateExporter.exclude_input_prompt=True",
          ])
 
-    if 'var_string_num_processed' in ipynb_file:
+    if 'var_string_num' in ipynb_file:
         break
