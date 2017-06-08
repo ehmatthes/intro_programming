@@ -88,6 +88,11 @@
 {% endblock error %}
 
 
+{% block markdowncell %}
+{{ super()|replace('<code>', '<code class="inline_code">') }}
+{% endblock markdowncell %}
+
+
 {# Body block is defined by intro_python_index, or intro_python_default. #}
 
 
