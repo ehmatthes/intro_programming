@@ -90,4 +90,4 @@ for ipynb_file, path in ipynb_files.items():
          ])
 
     if 'var_string_num' in ipynb_file:
-        break
+        pass#break
