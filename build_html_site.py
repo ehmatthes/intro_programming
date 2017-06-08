@@ -81,6 +81,11 @@ for ipynb_file, path in ipynb_files.items():
     else:
         template = 'resources/my_templates/intro_python_default.tpl'
 
+    # This is using the command line version of nbconvert, because that's how I first
+    #   learned to use it. But it's a bit awkward from here. Since we're in a Python
+    #   script, it would be better to use nbconvert as a library. That might reduce need
+    #   for separate files like scripts/my_config.py.
+    # See: http://nbconvert.readthedocs.io/en/latest/nbconvert_library.html
     run([python_caller, "-m", "nbconvert", os.path.join(path, ipynb_file),
          "--config", "scripts/my_config.py",
          "--template={0}".format(template),
