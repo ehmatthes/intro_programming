@@ -18,9 +18,15 @@ from subprocess import run
 print("Converting all ipynb files in notebooks/ to html.")
 print("  cwd:", os.getcwd())
 
+# Need to recreate dir structure from notebooks/ to html_site/.
+#   Walk notebooks/, note the dir structure, and keep track of ipynb files.
+#   Also note any resources/ dirs, because they'll be copied to html_site/ as well.
+# Store any new directories found, to recreate directory structure in html_site.
 new_dirs = []
 # dict structure: ipynb_files{filename:path}
 ipynb_files  = {}
+# Store a list of resource dirs to copy from once new html_site created.
+resource_dirs = []
 for root, dirs, files in os.walk("notebooks"):
     for file in files:
         if file.endswith('.ipynb') and '.ipynb_checkpoints' not in root:
@@ -30,7 +36,28 @@ for root, dirs, files in os.walk("notebooks"):
             if new_dir not in new_dirs:
                 new_dirs.append(new_dir)
 
+        # Look for resources/, keep if any non-.py files.
+        print(root, '--', dirs, '--', file)
+        current_dir = root.split('/')[-1]
+        if current_dir == 'resources':
+            # Check if any non-.py files in here.
+            for root, dirs, files in os.walk(root):
+                res_files = [file for file in files if not file.endswith('.py')]
+                for res_file in res_files:
+                    if not res_file.endswith('.py'):
+                        # Add to new_dirs, also to resource_dirs.
+                        new_dir = root.replace('notebooks', 'html_site')
+                        if new_dir not in new_dirs:
+                            new_dirs.append(new_dir)
+                            resource_dirs.append(root)
+
+            
+print(resource_dirs)
+
+
 # Delete existing html_site.
+# DEV: Could do this before walking notebooks/, then create new html_site/
+#   directly in os.walk loop. Could also copy resources then as well.
 print("\nDeleting current html_site directory...")
 try:
     shutil.rmtree('html_site')
@@ -52,6 +79,19 @@ dir_util.copy_tree('resources/js', 'html_site/js')
 dir_util.copy_tree('resources/css', 'html_site/css')
 print("  Created html_site, and copied js and css resources.")
 
+# Copy non-.py resources to html_site.
+print("\nCopying non-.py resources into html_site...")
+for res_dir in resource_dirs:
+    for root, dir, files in os.walk(res_dir):
+        for res_file in files:
+            if not res_file.endswith('.py'):
+                # Copy file to html_site.
+                orig_file = os.path.join(root, res_file)
+                html_root = root.replace('notebooks', 'html_site')
+                print(shutil.copy2(orig_file, html_root))
+
+
+
 
 # Need to run any pre-processing on raw .ipynb files?
 #  ie, respond to any cell metadata or tags?
@@ -68,8 +108,8 @@ for ipynb_file, path in ipynb_files.items():
     print("  converting:", nb_filepath)
 
     # For development purposes, it's often helpful to convert just one notebook.
-    if 'earthquake' not in nb_filepath:
-        continue
+    # if 'earthquake' not in nb_filepath:
+    #     continue
 
     build_directory = path.replace('notebooks', 'html_site')
 

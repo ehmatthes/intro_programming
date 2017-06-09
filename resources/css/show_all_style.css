@@ -15,3 +15,8 @@ button.hide_output {
 div.output {
 	 display: inline;
 }
+
+/* Also need to override output_subarea from site_styles.css. */
+div.output_subarea {
+	 display: inline;
+}
