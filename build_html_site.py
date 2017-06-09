@@ -67,6 +67,10 @@ for ipynb_file, path in ipynb_files.items():
     nb_filepath = os.path.join(path, ipynb_file)
     print("  converting:", nb_filepath)
 
+    # For development purposes, it's often helpful to convert just one notebook.
+    if 'earthquake' not in nb_filepath:
+        continue
+
     build_directory = path.replace('notebooks', 'html_site')
 
     # Calculate prefix for path to css and js, set as env var.
@@ -94,5 +98,3 @@ for ipynb_file, path in ipynb_files.items():
          "--TemplateExporter.exclude_input_prompt=True",
          ])
 
-    if 'var_string_num' in ipynb_file:
-        pass#break
