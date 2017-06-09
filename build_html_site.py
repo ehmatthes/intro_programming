@@ -2,10 +2,13 @@
 # Find all ipynb files in notebooks/, then convert each.
 #   It should also preserve the directory structure found in notebooks/
 
-# For development work, run this command from root directory:
-#    $ cd html_site/ && python3.6 -m http.server && cd ..
-# If you just run the server from html_site, you need to restart it
+# If you just run a server from html_site, you'll need to restart it
 #   every time you run this script because html_site gets rebuilt.
+# For development work, run this command from root directory:
+#     $ python build_html_site.py && cd html_site/ && python3.6 -m http.server && cd ..
+#   Then each time you modify build_html_site.py, ctrl-c the running server process
+#   and rerun the command.
+
 
 import os, sys
 import shutil
@@ -18,46 +21,7 @@ from subprocess import run
 print("Converting all ipynb files in notebooks/ to html.")
 print("  cwd:", os.getcwd())
 
-# Need to recreate dir structure from notebooks/ to html_site/.
-#   Walk notebooks/, note the dir structure, and keep track of ipynb files.
-#   Also note any resources/ dirs, because they'll be copied to html_site/ as well.
-# Store any new directories found, to recreate directory structure in html_site.
-new_dirs = []
-# dict structure: ipynb_files{filename:path}
-ipynb_files  = {}
-# Store a list of resource dirs to copy from once new html_site created.
-resource_dirs = []
-for root, dirs, files in os.walk("notebooks"):
-    for file in files:
-        if file.endswith('.ipynb') and '.ipynb_checkpoints' not in root:
-            ipynb_files[file] = root
-            
-            new_dir = root.replace('notebooks', 'html_site')
-            if new_dir not in new_dirs:
-                new_dirs.append(new_dir)
-
-        # Look for resources/, keep if any non-.py files.
-        print(root, '--', dirs, '--', file)
-        current_dir = root.split('/')[-1]
-        if current_dir == 'resources':
-            # Check if any non-.py files in here.
-            for root, dirs, files in os.walk(root):
-                res_files = [file for file in files if not file.endswith('.py')]
-                for res_file in res_files:
-                    if not res_file.endswith('.py'):
-                        # Add to new_dirs, also to resource_dirs.
-                        new_dir = root.replace('notebooks', 'html_site')
-                        if new_dir not in new_dirs:
-                            new_dirs.append(new_dir)
-                            resource_dirs.append(root)
-
-            
-print(resource_dirs)
-
-
 # Delete existing html_site.
-# DEV: Could do this before walking notebooks/, then create new html_site/
-#   directly in os.walk loop. Could also copy resources then as well.
 print("\nDeleting current html_site directory...")
 try:
     shutil.rmtree('html_site')
@@ -65,11 +29,39 @@ try:
 except FileNotFoundError:
     print("  No html_site directory found.")
 
-# Create any directory in html_site, including root, that doesn't already exist.
-print("\nBuilding new html_site directory...")
-for new_dir in new_dirs:
-    os.makedirs(new_dir, exist_ok=True)
-print("  Built html_site directory.")
+
+# Need to recreate dir structure from notebooks/ to html_site/.
+#   Walk notebooks/, note the dir structure, and keep track of ipynb files
+#     for further processing.
+#   Also build any needed dirs in html_site, and copy any non-.py resources
+#     to html_site.
+
+# dict structure: ipynb_files{filename:path}
+print("\nBuilding html_site directories, and copying non-.py resources...")
+ipynb_files  = {}
+for root, dirs, files in os.walk("notebooks"):
+    for file in files:
+        if file.endswith('.ipynb') and '.ipynb_checkpoints' not in root:
+            # Store ipynb file, and build directory if doesn't exist.
+            ipynb_files[file] = root
+            
+            new_dir = root.replace('notebooks', 'html_site')
+            os.makedirs(new_dir, exist_ok=True)
+
+        # Look for resources/, keep if any non-.py files.
+        current_dir = root.split('/')[-1]
+        if current_dir == 'resources':
+            # Check if any non-.py files in here.
+            for root, dirs, files in os.walk(root):
+                res_files = [file for file in files if not file.endswith('.py')]
+                for res_file in res_files:
+                    # Create directory if needed, and copy file to html_site.
+                    src = os.path.join(root, res_file)
+                    dst = root.replace('notebooks', 'html_site')
+                    os.makedirs(dst, exist_ok=True)
+                    shutil.copy2(src, dst)
+print("  Built html_site directory, and copied non-.py resource files.")
+
 
 # Copy js and css resources into html_site.
 #  Note this is distutils.dir_util.copy_tree, not shutils.copytree.
@@ -79,24 +71,9 @@ dir_util.copy_tree('resources/js', 'html_site/js')
 dir_util.copy_tree('resources/css', 'html_site/css')
 print("  Created html_site, and copied js and css resources.")
 
-# Copy non-.py resources to html_site.
-print("\nCopying non-.py resources into html_site...")
-for res_dir in resource_dirs:
-    for root, dir, files in os.walk(res_dir):
-        for res_file in files:
-            if not res_file.endswith('.py'):
-                # Copy file to html_site.
-                orig_file = os.path.join(root, res_file)
-                html_root = root.replace('notebooks', 'html_site')
-                print(shutil.copy2(orig_file, html_root))
-
-
-
 
 # Need to run any pre-processing on raw .ipynb files?
 #  ie, respond to any cell metadata or tags?
-
-# DEV: may need to copy images and some other resources, but not .py files.
 
 # This gets the command used to run this script. If the user calls with python,
 #  it uses that command, if they use python3.6, it uses that command.
@@ -120,6 +97,7 @@ for ipynb_file, path in ipynb_files.items():
     #  Might be better to scrape the files, look for output cells, and only place
     #  show/hide all buttons on notebooks with output cells. Can this be done
     #  in the template?
+    # DEV This should be replaced with a notebook metadata entry.
     if ipynb_file == 'index.ipynb':
         template = 'resources/my_templates/intro_python_index.tpl'
     else:
