@@ -82,11 +82,8 @@
 {# Show/ hide png output. #}
 {% block display_data %}
 {% for line in super().split('\n') %}
-{% if '<div class="output_png output_subarea ">' in line %}
-<div id="output_subarea_{{ cell_count|length }}" class="output_png output_subarea ">
-{%- else -%}
-{{ line }}
-{%- endif -%}
+{{ line|replace('<div class="output_png output_subarea ">', '<div id="output_subarea_' ~ cell_count|length ~ '" class="output_png output_subarea ">') }}
+
 {% endfor %}
 {% endblock display_data %}
 
