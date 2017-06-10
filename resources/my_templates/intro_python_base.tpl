@@ -85,11 +85,7 @@
 
 {% block error %}
 {% for line in super().split('\n') %}
-{% if '<div class="output_subarea output_text output_error">' in line %}
-<div id="output_subarea_{{ cell_count|length }}" class="output_subarea output_text output_error">
-{%- else -%}
-{{ line }}
-{%- endif -%}
+{{ line|replace('<div class="output_subarea output_text output_error">', '<div id="output_subarea_' ~ cell_count|length ~ '" class="output_subarea output_text output_error">') }}
 {% endfor %}
 {% endblock error %}
 

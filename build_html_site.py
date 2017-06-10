@@ -85,7 +85,7 @@ for ipynb_file, path in ipynb_files.items():
     print("  converting:", nb_filepath)
 
     # For development purposes, it's often helpful to convert just one notebook.
-    if 'earthquake' not in nb_filepath:
+    if 'var_string' not in nb_filepath:
         continue
 
     build_directory = path.replace('notebooks', 'html_site')
