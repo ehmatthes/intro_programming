@@ -60,6 +60,7 @@
   {% set _ = cell_count.append(1) %}
 {% endblock output %}
 
+
 {# Will these blocks (output, stream_stdout) always match 1:1?
     If there's a stream_stdout block, it's inside an output block,
     so we should be able to use the cell_count, maybe -1 to match value before increment?
@@ -67,26 +68,19 @@
     keep the whitespace from template indentation.
    Also applying this to stream_stderr because some blocks focus on errors.
 	#}
-{% block stream_stdout %}
-{% for line in super().split('\n') %}
-{% if '<div class="output_subarea output_stream output_stdout output_text">' in line %}
-<div id="output_subarea_{{ cell_count|length }}" class="output_subarea output_stream output_stdout output_text">
-{%- else -%}
-{{ line }}
-{%- endif -%}
-{% endfor %}
-{% endblock stream_stdout %}
-
+{%- block stream_stdout -%}
+{%- for line in super().split('\n') %}
+{{ line|replace('<div class="output_subarea output_stream output_stdout output_text">', '<div id="output_subarea_' ~ cell_count|length ~ '" class="output_subarea output_stream output_stdout output_text">') }}
+{%- endfor -%}
+{%- endblock stream_stdout -%}
 
 
 {# Show/ hide png output. #}
 {% block display_data %}
 {% for line in super().split('\n') %}
 {{ line|replace('<div class="output_png output_subarea ">', '<div id="output_subarea_' ~ cell_count|length ~ '" class="output_png output_subarea ">') }}
-
 {% endfor %}
 {% endblock display_data %}
-
 
 
 {% block error %}
