@@ -77,6 +77,21 @@
 {% endfor %}
 {% endblock stream_stdout %}
 
+
+
+{# Show/ hide png output. #}
+{% block display_data %}
+{% for line in super().split('\n') %}
+{% if '<div class="output_png output_subarea ">' in line %}
+<div id="output_subarea_{{ cell_count|length }}" class="output_png output_subarea ">
+{%- else -%}
+{{ line }}
+{%- endif -%}
+{% endfor %}
+{% endblock display_data %}
+
+
+
 {% block error %}
 {% for line in super().split('\n') %}
 {% if '<div class="output_subarea output_text output_error">' in line %}
