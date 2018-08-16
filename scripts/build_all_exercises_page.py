@@ -6,7 +6,7 @@ import os, sys, re
 
 print("\nBuilding all_exercises_challenges.html...")
 
-path_to_notebooks = '/srv/projects/intro_programming/intro_programming/notebooks/'
+path_to_notebooks = '../notebooks/'
 
 # Work through notebooks in the order listed here.
 filenames = ['var_string_num.html', 'lists_tuples.html',

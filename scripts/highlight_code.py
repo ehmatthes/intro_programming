@@ -33,11 +33,12 @@
 import os, sys
 import ast
 
+
 print("\nHighlighting code...")
 
 # Find all files to work with.
 #  Replace with your path.
-path_to_notebooks = '/srv/projects/intro_programming/intro_programming/notebooks/'
+path_to_notebooks = '../notebooks/'
 
 filenames = []
 for filename in os.listdir(path_to_notebooks):
@@ -52,7 +53,7 @@ for filename in os.listdir(path_to_notebooks):
 for filename in filenames:
 
     # Grab the lines from this html file.
-    f = open(path_to_notebooks + filename, 'r')
+    f = open(path_to_notebooks + filename, 'r', encoding='utf8')
     lines = f.readlines()
     f.close()
 
