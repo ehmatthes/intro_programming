@@ -33,7 +33,6 @@
 import os, sys
 import ast
 
-
 print("\nHighlighting code...")
 
 # Find all files to work with.

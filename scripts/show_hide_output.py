@@ -5,7 +5,6 @@ import os
 import re
 import sys
 
-
 # Find all files to work with.
 path_to_notebooks = '../notebooks/'
 filenames = []

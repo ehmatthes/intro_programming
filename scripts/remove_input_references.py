@@ -6,7 +6,6 @@
 import os
 import sys
 
-
 print("\nStripping input reference numbers from code cells...")
 
 # Find all files to work with.
