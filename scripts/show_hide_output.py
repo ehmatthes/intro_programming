@@ -6,7 +6,7 @@ import re
 import sys
 
 # Find all files to work with.
-path_to_notebooks = '/srv/projects/intro_programming/intro_programming/notebooks/'
+path_to_notebooks = '../notebooks/'
 filenames = []
 for filename in os.listdir(path_to_notebooks):
     if '.html' in filename and filename != 'index.html':
@@ -35,7 +35,7 @@ def generate_show_hide_all_buttons():
 # Determine which files have output. Only add buttons to files with output.
 files_with_output = []
 for filename in filenames:
-    f = open(path_to_notebooks + filename, 'r')
+    f = open(path_to_notebooks + filename, 'r', encoding='utf8')
     lines = f.readlines()
     f.close()
 
@@ -51,7 +51,7 @@ for filename in filenames:
 #    This is after second div.container element
 for filename in files_with_output:
     container_number = 0
-    f = open(path_to_notebooks + filename, 'r')
+    f = open(path_to_notebooks + filename, 'r', encoding='utf-8')
     lines = f.readlines()
     f.close()
 
