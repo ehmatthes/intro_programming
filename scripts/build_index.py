@@ -3,7 +3,7 @@ from jinja2 import Environment, FileSystemLoader
 # Load index template.
 my_template_path = '../notebooks/my_templates'
 my_template_base_path = '../notebooks'
-ipython_template_path = '../../virtual/lib/python3.4/site-packages/IPython/nbconvert/templates/html'
+ipython_template_path = '../../venv/lib/python3.4/site-packages/IPython/nbconvert/templates/html'
 
 my_loader = FileSystemLoader(
     [my_template_path, my_template_base_path, ipython_template_path])
