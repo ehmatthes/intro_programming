@@ -24,7 +24,7 @@
 # The script assumes all html files are not nested, in a directory called
 #  'notebooks'.
 
-# You will need to specificy path_to_notebooks.
+# You will need to specify path_to_notebooks.
 # I'm happy to hear feedback, and accept improvements:
 # https://github.com/ehmatthes/intro_programming
 # ehmatthes@gmail.com, @ehmatthes

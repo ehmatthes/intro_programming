@@ -10,7 +10,7 @@ class Rocket():
         self.y = y
         
     def move_rocket(self, x_increment=0, y_increment=1):
-        # Move the rocket according to the paremeters given.
+        # Move the rocket according to the parameters given.
         #  Default behavior is to move the rocket up one unit.
         self.x += x_increment
         self.y += y_increment
